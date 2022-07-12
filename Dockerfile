@@ -1,14 +1,14 @@
 FROM node:16.15.0-alpine 
 
-WORKDIR /app
-COPY package.json /app
-COPY package-lock.json /app
+WORKDIR /test
+COPY package.json /test
+COPY package-lock.json /test
 
 
 
 RUN npm install
 
-COPY / /app
+COPY / /test
 
 RUN npm run build
 
