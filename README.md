@@ -1,1 +1,1 @@
-# dnd-7th-9-frontend
+DND 7기 9조 프론트엔드
