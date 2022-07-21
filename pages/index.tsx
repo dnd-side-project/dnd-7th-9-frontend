@@ -1,12 +1,16 @@
 import type { NextPage } from 'next';
-import useStore from '../src/store/store';
+import Router from 'next/router';
+import KAKAO_AUTH_URL from '../src/app.feature/sign/constant/KakaoAuthUrl';
 
 const Home: NextPage = () => {
+	const handleKakoSignIn = () => {
+		Router.push(KAKAO_AUTH_URL);
+	};
 	return (
 		<div className="w-full">
 			<ul className=" w-1/5 mx-auto">
 				<li className="bg-yellow-400 text-black py-1.5 rounded mt-2">
-					<button type="button" className="w-full relative">
+					<button type="button" className="w-full relative" onClick={handleKakoSignIn}>
 						<div className="absolute left-3">K</div>
 						<span className="text-center font-semibold">카카오 로그인</span>
 					</button>
