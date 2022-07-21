@@ -1,5 +1,8 @@
 const CLIENT_ID = 'CLIENT_ID';
-const REDIRECT_URI = 'REDIRECT_URI';
+
+// TO DO : 서버 환경 / 로컬 환경 도메인 셋팅
+const environment = 'http://localhost:3000';
+const REDIRECT_URI = `${environment}/oauth/kakao`;
 
 // Redirect_URI
 // 프런트엔드 주소로 넣어주면, GET params로 인가 코드가 넘어오고,

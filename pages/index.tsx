@@ -6,6 +6,7 @@ const Home: NextPage = () => {
 	const handleKakoSignIn = () => {
 		Router.push(KAKAO_AUTH_URL);
 	};
+
 	return (
 		<div className="w-full">
 			<ul className=" w-1/5 mx-auto">
