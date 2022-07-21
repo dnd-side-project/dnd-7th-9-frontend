@@ -22,7 +22,7 @@ client.interceptors.response.use(
 			);
 			// 토큰 갱신
 			const { accessToken: newAccessToken } = data;
-			await localStorage.set('TEST_TOKEN', newAccessToken);
+			localStorage.set('TEST_TOKEN', newAccessToken);
 			axios.defaults.headers.common.Authorization = `Bearer ${newAccessToken}`;
 			originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
 			// 401로 요청 실패했던 요청 새로운 accessToken으로 재요청
