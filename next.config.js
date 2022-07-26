@@ -4,9 +4,7 @@ const nextConfig = {
 	swcMinify: true,
 
 	env: {
-		LOCALHOST_URL: 'http://localhost:3000', // 개발 환경
-		KAKAO_CLIENT_ID: 'd7023277c33425eb5d2540210b77250c', // REST API 키
-		API_URL: '',
+		API_URL: 'http://ec2-3-38-222-97.ap-northeast-2.compute.amazonaws.com:8080',
 	},
 };
 
