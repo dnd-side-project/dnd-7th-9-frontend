@@ -5,11 +5,14 @@ import { useEffect } from 'react';
 const Login: NextPage = () => {
 	useEffect(() => {
 		const params = new URL(document.location.toString()).searchParams;
-		const token: string = params.get('token') || ''; // 토큰
+		const isSuccess: boolean = params.get('success') === 'success';
 
-		if (token === '백이랑 정한 에러 메시지') Router.push('/'); // 로그인 에러 페이지로 이동
+		if (!isSuccess) Router.push('/'); // TO DO : 로그인 에러 페이지로 이동
 
-		localStorage.setItem('TEST_TOKEN', token);
+		const accessToken: string = params.get('token') || '';
+		const refreshToken: string = params.get('refresh') || ''; // TO DO : 리프레시 토큰 쿠키 저장
+
+		localStorage.setItem('TEST_TOKEN', accessToken);
 		Router.push('/');
 	}, []);
 
