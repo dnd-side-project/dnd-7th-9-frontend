@@ -1,6 +1,7 @@
 import type { NextPage } from 'next';
 import Router from 'next/router';
 import { useEffect } from 'react';
+import { setCookie } from '../../src/app.modules/cookie/cookie';
 
 const Login: NextPage = () => {
 	useEffect(() => {
@@ -9,10 +10,12 @@ const Login: NextPage = () => {
 
 		if (!isSuccess) Router.push('/'); // TO DO : 로그인 에러 페이지로 이동
 
-		const accessToken = params.get('token') || '';
-		const refreshToken = params.get('refresh') || ''; // TO DO : 리프레시 토큰 쿠키 저장
+		const accessToken = params.get('token') ?? '';
+		const refreshToken = params.get('refresh') ?? '';
 
 		localStorage.setItem('TEST_TOKEN', accessToken);
+		setCookie('REFRESH_TOKEN', refreshToken, { path: '/', secure: true, sameSite: 'none' });
+
 		Router.push('/');
 	}, []);
 
