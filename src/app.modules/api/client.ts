@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 
 const client = axios.create({
 	baseURL: process.env.API_URL,
@@ -14,18 +14,22 @@ client.interceptors.response.use(
 			response: { status },
 		} = error;
 		if (status === 401) {
-			const originalRequest = config;
-			// token refresh 요청
-			const { data } = await client.post(
-				'' // token refresh api
-			);
-			// 토큰 갱신
-			const { accessToken: newAccessToken } = data;
-			localStorage.setItem('TEST_TOKEN', newAccessToken);
-			client.defaults.headers.common.Authorization = `Bearer ${newAccessToken}`;
-			originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
-			// 401로 요청 실패했던 요청 새로운 accessToken으로 재요청
-			return client(originalRequest);
+			try {
+				const originalRequest = config;
+				// token refresh 요청
+				const { data } = await client.post(
+					'/auth/token/reissue' // token refresh api
+				);
+				// 토큰 갱신
+				const { accessToken: newAccessToken } = data;
+				localStorage.setItem('TEST_TOKEN', newAccessToken);
+				client.defaults.headers.common.Authorization = `Bearer ${newAccessToken}`;
+				originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+				// 401로 요청 실패했던 요청 새로운 accessToken으로 재요청
+				return client(originalRequest);
+			} catch (refreshError) {
+				return Promise.reject(refreshError); // refresh token 문제로 access 토큰 갱신 실패, 로그인화면으로 이동
+			}
 		}
 		return Promise.reject(error);
 	}
