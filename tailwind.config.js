@@ -7,6 +7,12 @@ module.exports = {
 			colors: {
 				main: '#24CD88',
 				sub: '#FF8300',
+				primaryBlack: { 400: '#191F28', 500: '#000000' },
+				primarySlate: '#677A90',
+				primaryBrown: '#7C7268',
+				primaryGray: '#CCCCCC',
+				primaryGreen: { 100: '#24CD88', 200: '#24CD88' },
+
 				// effect
 				'effect-gradation-start': '#00C883',
 				'effect-gradation-end': '#01AEB7',
