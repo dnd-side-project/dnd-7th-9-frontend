@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 
 module.exports = {
-	content: ['./src/**/*.{js,jsx,ts,tsx}', './pages/**/*.{js,jsx,ts,tsx}', './pages/*.{js,jsx,ts,tsx}'],
+	content: ['./src/**/*.{js,jsx,ts,tsx}', './pages/**/*.{js,jsx,ts,tsx}'],
 	theme: {
 		extend: {
 			colors: {
@@ -32,6 +32,22 @@ module.exports = {
 				white: '0px 0px 7px rgba(139, 149, 161, 0.25)',
 				colored: '0px 0px 7px rgba(0, 0, 0, 0.25)',
 			},
+		},
+		fontWeight: {
+			light: 300,
+			regular: 400,
+			medium: 500,
+			bold: 700,
+		},
+		fontSize: {
+			title1: '28px',
+			title2: '24px',
+			headline: '20px',
+			body1: '18px',
+			body2: '16px',
+			small: '14px',
+			caption: '12px',
+			overline: '10px',
 		},
 	},
 	plugins: [],

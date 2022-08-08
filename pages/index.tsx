@@ -16,13 +16,13 @@ const Home: NextPage = () => {
 				<li className="bg-green-500 text-white py-1.5 rounded  mt-2">
 					<button type="button" className="w-full relative" onClick={() => Router.push(NAVER_AUTH_URL)}>
 						<div className="absolute left-3">N</div>
-						<span className="text-center font-semibold">네이버 로그인</span>
+						<span className="text-center font-medium text-xl">네이버 로그인</span>
 					</button>
 				</li>
 				<li className="bg-red-500 text-white py-1.5 rounded  mt-2">
 					<button type="button" className="w-full relative" onClick={() => Router.push(GOOGLE_AUTH_URL)}>
 						<div className="absolute left-3">G</div>
-						<span className="text-center font-semibold">구글 로그인</span>
+						<span className="text-center font-bold text-2xl">구글 로그인</span>
 					</button>
 				</li>
 				<li className="bg-gray-500 text-white py-1.5 rounded  mt-2">
