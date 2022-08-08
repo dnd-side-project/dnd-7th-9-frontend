@@ -1,5 +1,6 @@
 import type { NextPage } from 'next';
 import Router from 'next/router';
+import ProgressBar from '../src/app.component/progressBar';
 import { KAKAO_AUTH_URL, NAVER_AUTH_URL, GOOGLE_AUTH_URL } from '../src/app.feature/sign/constant/SocialAuthUrl';
 
 const Home: NextPage = () => {
@@ -31,6 +32,7 @@ const Home: NextPage = () => {
 					</button>
 				</li>
 			</ul>
+			<ProgressBar progress={40} />
 		</div>
 	);
 };
