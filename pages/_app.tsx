@@ -1,9 +1,10 @@
 import React from 'react';
-import '../styles/globals.css';
+import '@styles/globals.css';
 import type { AppProps } from 'next/app';
 import { CookiesProvider } from 'react-cookie';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
+import Layout from '@app.component/layout';
 
 function MyApp({ Component, pageProps }: AppProps) {
 	const queryClient = new QueryClient();
