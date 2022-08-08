@@ -4,7 +4,7 @@ import type { AppProps } from 'next/app';
 import { CookiesProvider } from 'react-cookie';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
-import Layout from '../src/app.component/Layout';
+import Layout from '../src/app.component/layout';
 
 function MyApp({ Component, pageProps }: AppProps) {
 	const queryClient = new QueryClient();
