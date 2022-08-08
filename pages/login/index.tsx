@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import Router from 'next/router';
 import { useEffect } from 'react';
-import { setCookie } from '../../src/app.modules/cookie/cookie';
+import { setCookie } from '@app.modules/cookie/cookie';
 
 const Login: NextPage = () => {
 	useEffect(() => {
