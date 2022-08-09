@@ -4,11 +4,8 @@ const path = require('path');
 const nextConfig = {
 	reactStrictMode: true,
 	swcMinify: true,
+
 	webpack(config) {
-		config.module.rules.push({
-			test: /\.svg$/,
-			use: ['@svgr/webpack'],
-		});
 		// eslint-disable-next-line no-param-reassign
 		config.resolve = {
 			alias: {
@@ -25,6 +22,7 @@ const nextConfig = {
 			test: /\.svg$/,
 			use: ['@svgr/webpack'],
 		});
+
 		return config;
 	},
 
