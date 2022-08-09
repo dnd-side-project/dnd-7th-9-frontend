@@ -12,7 +12,9 @@ function MyApp({ Component, pageProps }: AppProps) {
 		<CookiesProvider>
 			<QueryClientProvider client={queryClient}>
 				<ReactQueryDevtools initialIsOpen={false} /> {/* 왼쪽 하단 devtools */}
-				<Component {...pageProps} />
+				<Layout>
+					<Component {...pageProps} />
+				</Layout>
 			</QueryClientProvider>
 		</CookiesProvider>
 	);

@@ -10,7 +10,8 @@ const Home: NextPage = () => {
 				<li className="bg-yellow-400 text-black py-1.5 rounded mt-2">
 					<button type="button" className="w-full relative" onClick={() => Router.push(KAKAO_AUTH_URL)}>
 						<div className="absolute left-3">K</div>
-						<span className="text-center font-regular text-xs">카카오 로그인</span>
+
+						<span className="text-center font-regular text-caption">카카오 로그인</span>
 					</button>
 				</li>
 				<li className="bg-green-500 text-white py-1.5 rounded  mt-2">
@@ -27,7 +28,7 @@ const Home: NextPage = () => {
 				</li>
 				<li className="bg-gray-500 text-white py-1.5 rounded  mt-2">
 					<button type="button" className="w-full relative">
-						<span className="text-center font-bold text-3xl">로그아웃</span>
+						<span className="text-center font-bold text-title1">로그아웃</span>
 					</button>
 				</li>
 			</ul>
