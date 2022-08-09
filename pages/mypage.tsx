@@ -1,7 +1,5 @@
-import type { NextPage } from 'next';
+import React from 'react';
 
-const MyPage: NextPage = () => {
-	return <div className="w-full">my page</div>;
-};
-
-export default MyPage;
+export default function mypage() {
+	return <div>mypage</div>;
+}

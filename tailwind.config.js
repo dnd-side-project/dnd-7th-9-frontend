@@ -7,11 +7,11 @@ module.exports = {
 			colors: {
 				main: '#24CD88',
 				sub: '#FF8300',
-				primaryBlack: { 400: '#191F28', 500: '#000000' },
-				primarySlate: '#677A90',
-				primaryBrown: '#7C7268',
-				primaryGray: '#CCCCCC',
-				primaryGreen: { 100: '#24CD88', 200: '#24CD88' },
+				black: { 400: '#191F28', 500: '#000000' },
+				slate: '#677A90',
+				brown: '#7C7268',
+				gray: '#CCCCCC',
+				green: { 100: '#24CD88', 200: '#24CD88' },
 
 				// effect
 				'effect-gradation-start': '#00C883',
