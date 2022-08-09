@@ -3,6 +3,7 @@ import Router from 'next/router';
 
 import { KAKAO_AUTH_URL, NAVER_AUTH_URL, GOOGLE_AUTH_URL } from '@app.feature/sign/constant/SocialAuthUrl';
 
+
 const Home: NextPage = () => {
 	return (
 		<div className="w-full">
@@ -32,6 +33,7 @@ const Home: NextPage = () => {
 					</button>
 				</li>
 			</ul>
+		
 		</div>
 	);
 };
