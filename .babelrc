@@ -1,0 +1,24 @@
+{
+  "presets": [
+    "next/babel"
+  ],
+  "plugins": [
+    //...
+    [
+      "module-resolver",
+      {
+        "root": [
+          "./src"
+        ],
+        "alias": {
+          "@assets": "./src/assets",
+          "@app.component": "./src/app.component",
+          "@app.feature": "./src/app.feature",
+          "@app.modules": "./src/app.modules",
+          "@stories":"./src/stories",
+          "@styles":"./styles"
+        }
+      }
+    ]
+  ]
+}
