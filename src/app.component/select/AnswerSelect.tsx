@@ -1,13 +1,13 @@
 import React, { MouseEventHandler } from 'react';
 
-interface IProps {
+interface Props {
 	isChecked: boolean;
 	width?: string;
 	text: string;
 	onClick?: MouseEventHandler<HTMLInputElement>;
 }
 
-function AnswerSelect({ isChecked, text, width, onClick, ...props }: IProps) {
+export default function AnswerSelect({ isChecked, text, width, onClick, ...props }: Props) {
 	return (
 		<input
 			className={`${
@@ -20,5 +20,3 @@ function AnswerSelect({ isChecked, text, width, onClick, ...props }: IProps) {
 		/>
 	);
 }
-
-export default AnswerSelect;
