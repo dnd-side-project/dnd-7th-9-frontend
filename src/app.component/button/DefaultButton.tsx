@@ -1,13 +1,13 @@
 import React, { MouseEventHandler } from 'react';
 
-interface IProps {
+interface Props {
 	type?: 'close' | 'default'; // TO DO : '끝내기' 가 버튼 컴포넌트인지 확인해야할 것 같음
 	width?: string;
 	text: string;
 	onClick?: MouseEventHandler<HTMLInputElement>;
 }
 
-function DefaultButton({ type, text, width, onClick, ...props }: IProps) {
+export default function DefaultButton({ type, text, width, onClick, ...props }: Props) {
 	return (
 		<input
 			className={`${
@@ -22,5 +22,3 @@ function DefaultButton({ type, text, width, onClick, ...props }: IProps) {
 		/>
 	);
 }
-
-export default DefaultButton;

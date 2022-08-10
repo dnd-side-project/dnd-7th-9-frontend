@@ -1,12 +1,12 @@
 import React, { MouseEventHandler } from 'react';
 
-interface IProps {
+interface Props {
 	isActive: boolean;
 	pageTo: 'before' | 'next';
 	onClick?: MouseEventHandler<HTMLInputElement>;
 }
 
-function PageTransitionButton({ isActive, pageTo, onClick, ...props }: IProps) {
+export default function PageTransitionButton({ isActive, pageTo, onClick, ...props }: Props) {
 	const imgPath = `/img/${pageTo}_${isActive ? 'active' : 'inactive'}.png`;
 
 	return (
@@ -20,5 +20,3 @@ function PageTransitionButton({ isActive, pageTo, onClick, ...props }: IProps) {
 		/>
 	);
 }
-
-export default PageTransitionButton;

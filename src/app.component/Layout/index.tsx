@@ -7,7 +7,7 @@ interface Props {
 export default function Layout({ children }: Props) {
 	return (
 		<>
-			<main>{children}</main>
+			<main className="px-4">{children}</main>
 			<FooterNav />
 		</>
 	);
