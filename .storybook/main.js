@@ -19,4 +19,13 @@ module.exports = {
 	core: {
 		builder: '@storybook/builder-webpack5',
 	},
+	webpackFinal: async (config) => {
+		config.module.rules[config.module.rules.length - 2].test =
+			/\.(ico|jpg|jpeg|png|apng|gif|eot|otf|webp|ttf|woff|woff2|cur|ani|pdf)(\?.*)?$/;
+		config.module.rules.unshift({
+			test: /\.svg$/,
+			use: ['@svgr/webpack'],
+		});
+		return config;
+	},
 };

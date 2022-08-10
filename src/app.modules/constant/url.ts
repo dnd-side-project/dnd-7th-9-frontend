@@ -1,7 +1,7 @@
 const Url = {
 	home: '/',
+	updatedQuizzes: '/updated-quizzes',
 	mypage: '/mypage',
-	myGoal: '/my-goal',
 };
 
 export default Url;
