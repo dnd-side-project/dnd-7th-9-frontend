@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import FooterNav from '../navigation/FooterNav';
 
 interface Props {
@@ -5,10 +6,11 @@ interface Props {
 }
 
 export default function Layout({ children }: Props) {
+	const router = useRouter();
 	return (
 		<>
 			<main className="px-4">{children}</main>
-			<FooterNav />
+			<FooterNav curUrl={router.pathname} />
 		</>
 	);
 }

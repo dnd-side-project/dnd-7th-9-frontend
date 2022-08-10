@@ -1,5 +1,7 @@
 /* eslint-disable func-names */
+import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
+import Url from '@app.modules/constant/url';
 import FooterNav from './FooterNav';
 
 export default {
@@ -7,18 +9,19 @@ export default {
 	title: 'component/navigation/FooterNav',
 } as ComponentMeta<typeof FooterNav>;
 
-const Template: ComponentStory<typeof FooterNav> = function () {
-	/* eslint-disable-next-line react/jsx-props-no-spreading */
-	return <FooterNav />;
+const Template: ComponentStory<typeof FooterNav> = (args) => <FooterNav {...args} />;
+
+export const Default = Template.bind({});
+Default.args = {
+	curUrl: Url.home,
 };
 
-Template.story = {
-	parameters: {
-		nextRouter: {
-			path: '/mypage',
-		},
-	},
+export const UpdatedQuizzes = Template.bind({});
+UpdatedQuizzes.args = {
+	curUrl: Url.updatedQuizzes,
 };
 
-export const base = Template.bind({});
-base.args = {};
+export const Mypage = Template.bind({});
+Mypage.args = {
+	curUrl: Url.mypage,
+};
