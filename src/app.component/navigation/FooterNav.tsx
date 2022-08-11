@@ -15,7 +15,7 @@ export default function FooterNav({ curUrl }: Props) {
 		{
 			iconUrl: Url.updatedQuizzes,
 			Icon: <QuizIcon fill={fillColor(Url.updatedQuizzes)} />,
-			name: 'MY 목표',
+			name: '실시간 문제지',
 		},
 		{ iconUrl: Url.mypage, Icon: <UserIcon fill={fillColor(Url.mypage)} />, name: 'MY' },
 	];

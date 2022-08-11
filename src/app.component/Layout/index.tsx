@@ -9,8 +9,8 @@ export default function Layout({ children }: Props) {
 	const router = useRouter();
 	return (
 		<>
-			<main className="px-4">{children}</main>
-			<FooterNav curUrl={router.pathname} />
+			<main className="px-[20px]">{children}</main>
+			<FooterNav />
 		</>
 	);
 }

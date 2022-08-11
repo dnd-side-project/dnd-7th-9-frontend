@@ -1,6 +1,17 @@
 import type { NextPage } from 'next';
+
 import QuestionIcon from '@assets/home/eva_question-mark-outline.svg';
 import DefaultButton from '@app.component/button/DefaultButton';
+
+import HomeScreen from '@app.feature/home/screen/HomeScreen';
+
+const Home: NextPage = () => {
+	return <HomeScreen />;
+};
+
+export default Home;
+/*
+
 
 const Home: NextPage = () => {
 	return (
