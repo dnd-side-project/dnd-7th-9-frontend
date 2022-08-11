@@ -2,9 +2,9 @@ import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { setCookie } from '@app.modules/cookie/cookie';
-import SignScreen from '@app.feature/sign/screen/SignScreen';
+import LoginScreen from '@app.feature/login/screen/LoginScreen';
 
-const Sign: NextPage = () => {
+const Login: NextPage = () => {
 	const router = useRouter();
 	useEffect(() => {
 		const params = new URL(document.location.toString()).searchParams;
@@ -18,8 +18,8 @@ const Sign: NextPage = () => {
 		router.push('/');
 	}, [router]);
 
-	return <SignScreen />;
+	return <LoginScreen />;
 };
 
-export default Sign;
+export default Login;
 // <div style={{ display: 'none' }}>토큰 GET 용 URL</div>;

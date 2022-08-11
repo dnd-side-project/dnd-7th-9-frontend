@@ -1,12 +1,12 @@
 import React from 'react';
 import RunusIcon from '@assets/brand/runus_icon.svg';
 
-import { KAKAO_AUTH_URL, NAVER_AUTH_URL, GOOGLE_AUTH_URL } from '@app.feature/sign/constant/SocialAuthUrl';
+import { KAKAO_AUTH_URL, NAVER_AUTH_URL, GOOGLE_AUTH_URL } from '@app.feature/login/constant/SocialAuthUrl';
 
-import OauthButton from '@app.feature/sign/component/OauthButton';
+import OauthButton from '@app.feature/login/component/OauthButton';
 import Router from 'next/router';
 
-export default function SignScreen() {
+export default function LoginScreen() {
 	return (
 		<div className="w-full  flex flex-col items-center">
 			<div className="mt-[94px]">
