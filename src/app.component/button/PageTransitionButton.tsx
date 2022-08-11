@@ -11,21 +11,11 @@ interface Props {
 }
 
 export default function PageTransitionButton({ isActive, pageTo, onClick, ...props }: Props) {
-	const baseStyle = 'm-auto';
-
 	const getPageTransformIcon = () => {
 		if (isActive) {
-			return pageTo === 'before' ? (
-				<LeftArrowAbleIcon className={baseStyle} />
-			) : (
-				<RightArrowAbleIcon className={baseStyle} />
-			);
+			return pageTo === 'before' ? <LeftArrowAbleIcon /> : <RightArrowAbleIcon />;
 		}
-		return pageTo === 'before' ? (
-			<LeftArrowDisableIcon className={baseStyle} />
-		) : (
-			<RightArrowDisableIcon className={baseStyle} />
-		);
+		return pageTo === 'before' ? <LeftArrowDisableIcon /> : <RightArrowDisableIcon />;
 	};
 
 	const PageTransformIcon = getPageTransformIcon();
@@ -33,7 +23,7 @@ export default function PageTransitionButton({ isActive, pageTo, onClick, ...pro
 	return (
 		<div
 			role="button"
-			className="bg-background-white rounded w-[56px] h-[56px] py-4 drop-shadow-white"
+			className="bg-background-white drop-shadow-white rounded w-[56px] h-[56px] py-[0.9rem] text-center"
 			onClick={onClick}
 			onKeyPress={undefined}
 			tabIndex={0}
