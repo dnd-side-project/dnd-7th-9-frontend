@@ -1,7 +1,8 @@
 import type { NextPage } from 'next';
+import UpdatedQuizScreen from '@app.feature/quiz/screen/UpdatedQuizScreen';
 
-const MyGoal: NextPage = () => {
-	return <div className="w-full">my goal</div>;
+const UpdatedQuizzes: NextPage = () => {
+	return <UpdatedQuizScreen />;
 };
 
-export default MyGoal;
+export default UpdatedQuizzes;
