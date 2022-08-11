@@ -1,5 +1,5 @@
 import React from 'react';
-import lineBreak from '@app.modules/util';
+import { lineBreak } from '@app.modules/util';
 
 interface Props {
 	title: string;
