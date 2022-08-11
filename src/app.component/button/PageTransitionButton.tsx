@@ -23,7 +23,7 @@ export default function PageTransitionButton({ isActive, pageTo, onClick, ...pro
 	return (
 		<div
 			role="button"
-			className="bg-background-white drop-shadow-white rounded w-[56px] h-[56px] py-[0.9rem] text-center"
+			className="grid place-items-center bg-background-white drop-shadow-white rounded w-[56px] h-[56px] py-[0.9rem] text-center"
 			onClick={onClick}
 			onKeyPress={undefined}
 			tabIndex={0}
