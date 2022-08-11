@@ -8,9 +8,14 @@ import Url from '@app.modules/constant/url';
 interface Props {
 	curUrl: string;
 }
+interface ILink {
+	iconUrl: string;
+	Icon: JSX.Element;
+	name: string;
+}
 export default function FooterNav({ curUrl }: Props) {
 	const fillColor = (iconUrl: string) => (curUrl === iconUrl ? '#24cd88' : '#677A90');
-	const Links = [
+	const LINKS: ILink[] = [
 		{ iconUrl: Url.home, Icon: <HomeIcon fill={fillColor(Url.home)} />, name: '홈' },
 		{
 			iconUrl: Url.updatedQuizzes,
@@ -23,7 +28,7 @@ export default function FooterNav({ curUrl }: Props) {
 	return (
 		<div className="fixed bottom-0 w-full h-[77px]  bg-background-white  drop-shadow-white">
 			<ul className="flex justify-between items-center px-[26px] my-[10px] ">
-				{Links.map(({ iconUrl, Icon, name }) => (
+				{LINKS.map(({ iconUrl, Icon, name }) => (
 					<Link href={iconUrl} key={iconUrl}>
 						<li className="flex flex-col items-center text-primarySlate cursor-pointer">
 							{Icon}

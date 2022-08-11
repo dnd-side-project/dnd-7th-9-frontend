@@ -10,7 +10,7 @@ export default function Layout({ children }: Props) {
 	const router = useRouter();
 	return (
 		<>
-			<main className="px-4">{children}</main>
+			<main className="px-[20px]">{children}</main>
 			{!notHasNav.includes(router.pathname) && <FooterNav curUrl={router.pathname} />}
 		</>
 	);
