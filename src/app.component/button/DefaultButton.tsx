@@ -1,7 +1,7 @@
 import React, { MouseEventHandler } from 'react';
 
 interface Props {
-	className: string;
+	className?: string;
 	type?: 'close' | 'default'; // TO DO : '끝내기' 가 버튼 컴포넌트인지 확인해야할 것 같음
 	width?: string;
 	text: string;
