@@ -7,7 +7,7 @@ const initQuiz = {
 	choices: [{ id: 0, content: '', isAnswer: false }],
 };
 
-interface IQuiz {
+export interface IQuiz {
 	question: string;
 	choices: { id: number; content: string; isAnswer: boolean }[];
 }
@@ -33,7 +33,7 @@ const useCreateQuizStore = create<State>((set) => ({
 		set((state) => {
 			const prevQuizzes = state.quizzes.slice(0, quizIdx);
 			const nextQuizzes = state.quizzes.slice(quizIdx + 1);
-			const newQuiz = { ...state.quizzes[quizIdx], question: newQuestion };
+			const newQuiz: IQuiz = { ...state.quizzes[quizIdx], question: newQuestion };
 			return { quizzes: [...prevQuizzes, newQuiz, ...nextQuizzes] };
 		}),
 	editChoice: (newChoiceContent: string, quizIdx: number, choiceId: number) =>
@@ -41,13 +41,13 @@ const useCreateQuizStore = create<State>((set) => ({
 			const prevQuizzes = state.quizzes.slice(0, quizIdx);
 			const nextQuizzes = state.quizzes.slice(quizIdx + 1);
 
-			const newQuiz = {
+			const newQuiz: IQuiz = {
 				...state.quizzes[quizIdx],
 				choices: state.quizzes[quizIdx].choices.map((choice) => {
 					if (choice.id === choiceId) return { ...choice, content: newChoiceContent };
 					return choice;
 				}),
-			} as IQuiz;
+			};
 			return { quizzes: [...prevQuizzes, newQuiz, ...nextQuizzes] };
 		}),
 	addChoice: (quizIdx: number) =>
@@ -55,13 +55,13 @@ const useCreateQuizStore = create<State>((set) => ({
 			if (state.quizzes[quizIdx].choices.length >= 5) return { quizzes: state.quizzes };
 			const prevQuizzes = state.quizzes.slice(0, quizIdx);
 			const nextQuizzes = state.quizzes.slice(quizIdx + 1);
-			const newQuiz = {
+			const newQuiz: IQuiz = {
 				...state.quizzes[quizIdx],
 				choices: [
 					...state.quizzes[quizIdx].choices,
 					{ id: state.quizzes[quizIdx].choices.length, content: '', isAnswer: false },
 				],
-			} as IQuiz;
+			};
 			return { quizzes: [...prevQuizzes, newQuiz, ...nextQuizzes] };
 		}),
 	checkAnswer: (quizIdx: number, choiceId: number) =>
@@ -69,13 +69,13 @@ const useCreateQuizStore = create<State>((set) => ({
 			const prevQuizzes = state.quizzes.slice(0, quizIdx);
 			const nextQuizzes = state.quizzes.slice(quizIdx + 1);
 
-			const newQuiz = {
+			const newQuiz: IQuiz = {
 				...state.quizzes[quizIdx],
 				choices: state.quizzes[quizIdx].choices.map((choice) => {
 					if (choice.id === choiceId) return { ...choice, isAnswer: !choice.isAnswer };
 					return choice;
 				}),
-			} as IQuiz;
+			};
 			return { quizzes: [...prevQuizzes, newQuiz, ...nextQuizzes] };
 		}),
 	deleteChoice: (quizIdx: number, choiceId: number) =>
@@ -83,10 +83,10 @@ const useCreateQuizStore = create<State>((set) => ({
 			const prevQuizzes = state.quizzes.slice(0, quizIdx);
 			const nextQuizzes = state.quizzes.slice(quizIdx + 1);
 
-			const newQuiz = {
+			const newQuiz: IQuiz = {
 				...state.quizzes[quizIdx],
 				choices: state.quizzes[quizIdx].choices.filter((choice) => choice.id !== choiceId),
-			} as IQuiz;
+			};
 			return { quizzes: [...prevQuizzes, newQuiz, ...nextQuizzes] };
 		}),
 	initQuizzes: () =>
