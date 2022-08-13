@@ -23,7 +23,7 @@ export default function CreateQuiz() {
 			{router.query.id && (
 				<div>
 					<div className="fixed top-0 left-0 right-0  ">
-						<ProgressBar progress={20} />
+						<ProgressBar progress={(+router.query.id / quizzes.length) * 100} />
 					</div>
 					<div className="flex items-center justify-between mt-[13px] ">
 						<span className="text-slate text-small2 font-bold">1주차 목표</span>
