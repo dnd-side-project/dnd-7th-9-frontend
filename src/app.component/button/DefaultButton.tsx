@@ -12,9 +12,9 @@ export default function DefaultButton({ className, type, text, width, onClick, .
 	return (
 		<input
 			className={`${
-				type === 'close' ? 'bg-white text-[#999999]' : 'bg-main border-solid border border-[#1CB576] text-white'
+				type === 'close' ? 'bg-[#9999990] text-[#999999]' : 'bg-main border-solid border border-[#1CB576] text-white'
 			}
-			${width ?? 'w-full'} px-[14px] py-[14px] text-body1 font-medium rounded ${className}`}
+			${width ?? 'w-full'} px-[14px] py-[14px] cursor-pointer text-body1 font-medium rounded ${className}`}
 			type="button"
 			value={text}
 			onClick={onClick}
