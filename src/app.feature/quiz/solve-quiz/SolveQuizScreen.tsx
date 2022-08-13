@@ -56,7 +56,7 @@ export default function CreateQuizScreen({ quizIdx, submitQuizHandler }: Props) 
 			<div className="fixed top-0 left-0 right-0  ">
 				<ProgressBar progress={(QUIZ_PAGE / quizzes.length) * 100} />
 			</div>
-			<QuizHeader />
+			<QuizHeader quizPage={QUIZ_PAGE} quizzesLength={quizzes.length} />
 			<div className="mt-[80px] mb-[120.07px]">
 				<span className="block mb-[40px] text-headline text-black-400 font-medium">{quizzes[quizIdx].question}</span>
 				{quizzes[quizIdx].choices.map((choice) => (

@@ -6,6 +6,7 @@ import PageTransitionButton from '@app.component/button/PageTransitionButton';
 import ProgressBar from '@app.component/progressBar';
 import ChoiceContainer from '../component/ChoiceContainer';
 import AnswerCheckButton from '../component/AnswerCheckButton';
+import QuizHeader from '../component/QuizHeader';
 
 interface Props {
 	quizIdx: number;
@@ -46,13 +47,7 @@ export default function CreateQuizScreen({ quizIdx, submitQuizHandler }: Props) 
 			<div className="fixed top-0 left-0 right-0  ">
 				<ProgressBar progress={(QUIZ_PAGE / quizzes.length) * 100} />
 			</div>
-			<div className="flex items-center justify-between mt-[13px] ">
-				<span className="text-slate text-small2 font-bold">1주차 목표</span>
-				<span className="text-[#089A76] text-small1 font-regular">
-					{QUIZ_PAGE}/{quizzes.length}
-				</span>
-			</div>
-			<span className="mt-[4px] text-slate text-small1 font-regular">기본 동사 20개 암기하기</span>
+			<QuizHeader quizPage={QUIZ_PAGE} quizzesLength={quizzes.length} />
 			<div>
 				<input
 					placeholder="문제를 적어주세요"
