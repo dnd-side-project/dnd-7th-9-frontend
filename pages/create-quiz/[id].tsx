@@ -17,11 +17,30 @@ export default function CreateQuiz() {
 		if (quizzes.length === 5) return;
 		setInitQuizzes(5);
 	}, [router]);
+	const toPrevHandler = () => {
+		if (!router.query.id) return;
+		if (+router.query.id <= 1) return;
+		router.push(`/create-quiz/${+router.query.id - 1}`);
+	};
+	const toNextHandler = () => {
+		if (!router.query.id) return;
+		if (+router.query.id >= quizzes.length) return;
+		if (!quizzes[+router.query.id - 1].question.trim()) {
+			alert('문제를 작성해 주세요.');
+			return;
+		}
+		const validChoices = quizzes[+router.query.id - 1].choices.filter((choice) => choice.content.trim());
+		if (validChoices.length < 2) {
+			alert('최소 2개의 답안을 작성해 주세요.');
+			return;
+		}
 
+		router.push(`/create-quiz/${+router.query.id + 1}`);
+	};
 	console.log(quizzes);
 	return (
 		<div>
-			{router.query.id && (
+			{router?.query?.id && (
 				<div>
 					<div className="fixed top-0 left-0 right-0  ">
 						<ProgressBar progress={(+router.query.id / quizzes.length) * 100} />
@@ -85,7 +104,7 @@ export default function CreateQuiz() {
 							text="선택 답안 추가"
 							onClick={() => {
 								if (quizzes[+router.query.id - 1].choices.length >= quizzes.length) {
-									alert('답안의 최대 개수는 quizLength개입니다.');
+									alert('답안의 최대 개수는 5개입니다.');
 									return;
 								}
 								addChoice(+router.query.id - 1);
@@ -98,10 +117,7 @@ export default function CreateQuiz() {
 							<PageTransitionButton
 								pageTo="before"
 								isActive={false}
-								onClick={() => {
-									if (+router.query.id <= 1) return;
-									router.push(`/create-quiz/${+router.query.id - 1}`);
-								}}
+								onClick={toPrevHandler}
 								isActive={+router.query.id > 1}
 							/>
 						</div>
@@ -113,14 +129,7 @@ export default function CreateQuiz() {
 							) : (
 								<PageTransitionButton
 									pageTo="next"
-									onClick={() => {
-										if (+router.query.id >= quizzes.length) return;
-										if (quizzes[+router.query.id - 1].choices.length < 2) {
-											alert('최소 2개의 답안을 작성해 주세요.');
-											return;
-										}
-										router.push(`/create-quiz/${+router.query.id + 1}`);
-									}}
+									onClick={toNextHandler}
 									isActive={+router.query.id < quizzes.length}
 								/>
 							)}
