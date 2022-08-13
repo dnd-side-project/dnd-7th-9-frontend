@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 import useCreateQuizStore from '@app.modules/store/createQuiz';
 import { useRouter } from 'next/router';
-import CreateQuizScreen from '@app.feature/create-quiz/CreateQuizScreen';
+import CreateQuizScreen from '@app.feature/quiz/create-quiz/CreateQuizScreen';
 
 // 임시로 5문제 만들기로 설정
 export default function CreateQuiz() {
