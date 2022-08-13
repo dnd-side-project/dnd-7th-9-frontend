@@ -2,7 +2,7 @@ import create from 'zustand';
 
 // temp
 
-interface IQuiz {
+export interface IQuiz {
 	question: string;
 	choices: { id: number; content: string; isAnswer: boolean }[];
 }
