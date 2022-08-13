@@ -24,6 +24,7 @@ export default function CreateQuiz() {
 		}
 		addChoice(+router.query.id - 1);
 	};
+	const deleteChoiceHandler = (choiceId: number) => deleteChoice(+router.query.id - 1, choiceId);
 	const toPrevHandler = () => {
 		if (!router.query.id) return;
 		if (+router.query.id <= 1) return;
@@ -97,7 +98,7 @@ export default function CreateQuiz() {
 										/>
 									</button>
 									<button
-										onClick={() => deleteChoice(+router.query.id - 1, choice.id)}
+										onClick={() => deleteChoiceHandler(choice.id)}
 										type="button"
 										className="ml-[16.69px] mr-[4px] mt-[6.26px] mb-[33.74px]"
 									>
