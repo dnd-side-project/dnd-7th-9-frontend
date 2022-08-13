@@ -9,7 +9,8 @@ import { useRouter } from 'next/router';
 // 임시로 5문제 만들기로 설정
 export default function CreateQuiz() {
 	const router = useRouter();
-	const { quizzes, addChoice, deleteChoice, checkAnswer, setInitQuizzes } = useCreateQuizStore();
+	const { quizzes, addChoice, deleteChoice, checkAnswer, editQuestion, editChoice, setInitQuizzes } =
+		useCreateQuizStore();
 
 	useEffect(() => {
 		if (router.query.id && +router.query.id !== 0) return;
@@ -35,6 +36,10 @@ export default function CreateQuiz() {
 					<div>
 						<input
 							placeholder="문제를 적어주세요"
+							value={quizzes[+router.query.id - 1].question}
+							onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+								editQuestion(event.target.value, +router.query.id - 1)
+							}
 							className="w-full mt-[43px] h-[88px]  px-[22.09px] outline-none rounded text-headline  font-medium drop-shadow-white"
 						/>
 						<span className="block mt-[22.02px] mb-[8.98px] text-slate text-small2 font-bold">
@@ -49,6 +54,10 @@ export default function CreateQuiz() {
 								<input
 									placeholder="답안을 작성해주세요."
 									className="w-full   ml-[22.09px] outline-none text-body1 font-medium"
+									value={choice.content}
+									onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+										editChoice(event.target.value, +router.query.id - 1, choice.id)
+									}
 								/>
 
 								<div className="flex   justify-center  ">
