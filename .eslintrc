@@ -17,6 +17,7 @@
     "react/function-component-definition": "off",
     "import/extensions": "off",
     "react/no-unescaped-entities": "off",
-    "prettier/prettier":"off"
-  }
+    "prettier/prettier":"off",
+    "react-hooks/exhaustive-deps":"off" 
+   }
 }
