@@ -2,7 +2,12 @@ import create from 'zustand';
 
 // temp
 
-export interface IQuiz {
+const initQuiz = {
+	question: '',
+	choices: [{ id: 0, content: '', isAnswer: false }],
+};
+
+interface IQuiz {
 	question: string;
 	choices: { id: number; content: string; isAnswer: boolean }[];
 }
@@ -12,20 +17,12 @@ interface State {
 }
 const useCreateQuizStore = create<State>((set) => ({
 	quizLength: 1,
-	quizzes: [
-		{
-			question: '',
-			choices: [{ id: 0, content: '', isAnswer: false }],
-		},
-	],
+	quizzes: [initQuiz],
 	setInitQuizzes: (quizLength: number) =>
 		set(() => ({
-			quizzes: Array.from({ length: quizLength }, () => ({
-				question: '',
-				choices: [{ id: 0, content: '', isAnswer: false }],
-			})),
+			quizzes: Array.from({ length: quizLength }, () => initQuiz),
 		})),
-	pushQuiz: (newQuiz: IQuiz) => set((state) => ({ quizzes: [...state.quizzes, newQuiz] })),
+
 	editQuiz: (newQuiz: IQuiz, quizIdx: number) =>
 		set((state) => {
 			const prevQuizzes = state.quizzes.slice(0, quizIdx);
@@ -94,12 +91,7 @@ const useCreateQuizStore = create<State>((set) => ({
 		}),
 	initQuizzes: () =>
 		set({
-			quizzes: [
-				{
-					question: '',
-					choices: [{ id: 0, content: '', isAnswer: false }],
-				},
-			],
+			quizzes: [initQuiz],
 		}),
 }));
 
