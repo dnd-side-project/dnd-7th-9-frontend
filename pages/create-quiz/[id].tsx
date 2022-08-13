@@ -17,6 +17,13 @@ export default function CreateQuiz() {
 		if (quizzes.length === 5) return;
 		setInitQuizzes(5);
 	}, [router]);
+	const addChoicHandler = () => {
+		if (quizzes[+router.query.id - 1].choices.length >= quizzes.length) {
+			alert('답안의 최대 개수는 5개입니다.');
+			return;
+		}
+		addChoice(+router.query.id - 1);
+	};
 	const toPrevHandler = () => {
 		if (!router.query.id) return;
 		if (+router.query.id <= 1) return;
@@ -100,16 +107,7 @@ export default function CreateQuiz() {
 							</div>
 						))}
 
-						<DefaultButton
-							text="선택 답안 추가"
-							onClick={() => {
-								if (quizzes[+router.query.id - 1].choices.length >= quizzes.length) {
-									alert('답안의 최대 개수는 5개입니다.');
-									return;
-								}
-								addChoice(+router.query.id - 1);
-							}}
-						/>
+						<DefaultButton text="선택 답안 추가" onClick={addChoicHandler} />
 						<div className="mt-[120.07px]" />
 					</div>
 					<div className="flex justify-between items-center">
