@@ -1,46 +1,41 @@
 import create from 'zustand';
 
 // temp
+export interface IQuiz {
+	question: string;
+	choices: { id: number; content: string; isAnswer: boolean }[];
+}
+
+const tempFunc = (curQuizzes: IQuiz[], quizIdx: number) => {
+	const prevQuizzes = curQuizzes.slice(0, quizIdx);
+	const nextQuizzes = curQuizzes.slice(quizIdx + 1);
+	return [prevQuizzes, nextQuizzes];
+};
 
 const initQuiz = {
 	question: '',
 	choices: [{ id: 0, content: '', isAnswer: false }],
 };
 
-export interface IQuiz {
-	question: string;
-	choices: { id: number; content: string; isAnswer: boolean }[];
-}
 interface State {
-	quizLength: number;
 	quizzes: IQuiz[];
 }
 const useCreateQuizStore = create<State>((set) => ({
-	quizLength: 1,
 	quizzes: [initQuiz],
 	setInitQuizzes: (quizLength: number) =>
 		set(() => ({
 			quizzes: Array.from({ length: quizLength }, () => initQuiz),
 		})),
 
-	editQuiz: (newQuiz: IQuiz, quizIdx: number) =>
-		set((state) => {
-			const prevQuizzes = state.quizzes.slice(0, quizIdx);
-			const nextQuizzes = state.quizzes.slice(quizIdx + 1);
-			return { quizzes: [...prevQuizzes, newQuiz, ...nextQuizzes] };
-		}),
 	editQuestion: (newQuestion: string, quizIdx: number) =>
 		set((state) => {
-			const prevQuizzes = state.quizzes.slice(0, quizIdx);
-			const nextQuizzes = state.quizzes.slice(quizIdx + 1);
+			const [prevQuizzes, nextQuizzes] = tempFunc(state.quizzes, quizIdx);
 			const newQuiz: IQuiz = { ...state.quizzes[quizIdx], question: newQuestion };
 			return { quizzes: [...prevQuizzes, newQuiz, ...nextQuizzes] };
 		}),
 	editChoice: (newChoiceContent: string, quizIdx: number, choiceId: number) =>
 		set((state) => {
-			const prevQuizzes = state.quizzes.slice(0, quizIdx);
-			const nextQuizzes = state.quizzes.slice(quizIdx + 1);
-
+			const [prevQuizzes, nextQuizzes] = tempFunc(state.quizzes, quizIdx);
 			const newQuiz: IQuiz = {
 				...state.quizzes[quizIdx],
 				choices: state.quizzes[quizIdx].choices.map((choice) => {
@@ -53,8 +48,7 @@ const useCreateQuizStore = create<State>((set) => ({
 	addChoice: (quizIdx: number) =>
 		set((state) => {
 			if (state.quizzes[quizIdx].choices.length >= 5) return { quizzes: state.quizzes };
-			const prevQuizzes = state.quizzes.slice(0, quizIdx);
-			const nextQuizzes = state.quizzes.slice(quizIdx + 1);
+			const [prevQuizzes, nextQuizzes] = tempFunc(state.quizzes, quizIdx);
 			const newQuiz: IQuiz = {
 				...state.quizzes[quizIdx],
 				choices: [
@@ -66,9 +60,7 @@ const useCreateQuizStore = create<State>((set) => ({
 		}),
 	checkAnswer: (quizIdx: number, choiceId: number) =>
 		set((state) => {
-			const prevQuizzes = state.quizzes.slice(0, quizIdx);
-			const nextQuizzes = state.quizzes.slice(quizIdx + 1);
-
+			const [prevQuizzes, nextQuizzes] = tempFunc(state.quizzes, quizIdx);
 			const newQuiz: IQuiz = {
 				...state.quizzes[quizIdx],
 				choices: state.quizzes[quizIdx].choices.map((choice) => {
@@ -80,18 +72,12 @@ const useCreateQuizStore = create<State>((set) => ({
 		}),
 	deleteChoice: (quizIdx: number, choiceId: number) =>
 		set((state) => {
-			const prevQuizzes = state.quizzes.slice(0, quizIdx);
-			const nextQuizzes = state.quizzes.slice(quizIdx + 1);
-
+			const [prevQuizzes, nextQuizzes] = tempFunc(state.quizzes, quizIdx);
 			const newQuiz: IQuiz = {
 				...state.quizzes[quizIdx],
 				choices: state.quizzes[quizIdx].choices.filter((choice) => choice.id !== choiceId),
 			};
 			return { quizzes: [...prevQuizzes, newQuiz, ...nextQuizzes] };
-		}),
-	initQuizzes: () =>
-		set({
-			quizzes: [initQuiz],
 		}),
 }));
 

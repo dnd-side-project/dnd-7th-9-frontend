@@ -1,8 +1,7 @@
 import { useRouter } from 'next/router';
-import useCreateQuizStore from '@app.modules/store/createQuiz';
+import useCreateQuizStore from '@app.modules/store/quiz/createQuiz';
 import DeleteIcon from '@assets/iconoir_cancel.svg';
 import DefaultButton from '@app.component/button/DefaultButton';
-import PageTransitionButton from '@app.component/button/PageTransitionButton';
 import ProgressBar from '@app.component/progressBar';
 import QuizPageController from '@app.feature/quiz/component/QuizPageController';
 import ChoiceContainer from '../component/ChoiceContainer';

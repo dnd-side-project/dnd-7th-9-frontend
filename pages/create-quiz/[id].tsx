@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import useCreateQuizStore from '@app.modules/store/createQuiz';
+import useCreateQuizStore from '@app.modules/store/quiz/createQuiz';
 import { useRouter } from 'next/router';
 import CreateQuizScreen from '@app.feature/quiz/create-quiz/CreateQuizScreen';
 

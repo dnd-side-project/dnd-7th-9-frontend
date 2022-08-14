@@ -1,11 +1,9 @@
 import { useRouter } from 'next/router';
-import PageTransitionButton from '@app.component/button/PageTransitionButton';
 import ProgressBar from '@app.component/progressBar';
-
 import ChoiceContainer from '@app.feature/quiz/component/ChoiceContainer';
 import AnswerCheckButton from '@app.feature/quiz/component/AnswerCheckButton';
 import QuizHeader from '@app.feature/quiz/component/QuizHeader';
-import useSolveQuizStore from '@app.modules/store/solveQuiz'; // temp
+import useSolveQuizStore from '@app.modules/store/quiz/solveQuiz'; // temp
 import QuizPageController from '@app.feature/quiz/component/QuizPageController';
 
 interface Props {

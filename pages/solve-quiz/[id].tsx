@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 import { useRouter } from 'next/router';
 import SolveQuizScreen from '@app.feature/quiz/solve-quiz/SolveQuizScreen';
-import useSolveQuizStore, { IQuiz } from '@app.modules/store/solveQuiz'; // temp
+import useSolveQuizStore, { IQuiz } from '@app.modules/store/quiz/solveQuiz'; // temp
 // 임시로 5문제 만들기로 설정
 export default function CreateQuiz() {
 	const router = useRouter();
