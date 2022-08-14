@@ -1,6 +1,7 @@
 import type { NextPage } from 'next';
 import UpdatedQuizScreen from '@app.feature/quiz/screen/UpdatedQuizScreen';
 import UpdatedQuizNoneScreen from '@app.feature/quiz/screen/UpdatedQuizNoneScreen';
+import useQueryHook from 'src/app.hooks/useQueryHook';
 
 interface IQuiz {
 	updateTime: number;
@@ -10,6 +11,12 @@ interface IQuiz {
 }
 
 const UpdatedQuizzes: NextPage = () => {
+	const { data, isLoading, refetch } = useQueryHook('/question-book/list/live');
+
+	if (isLoading) return <div>로딩 중</div>;
+
+	console.log(data);
+
 	// const DUMMY_QUIZ_DATA: IQuiz[] = [];
 	const DUMMY_QUIZ_DATA: IQuiz[] = [
 		{
