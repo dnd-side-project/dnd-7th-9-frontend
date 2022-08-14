@@ -11,7 +11,7 @@ export default function InitHomeScreen() {
 				함께 원하는 목표를 달성해 봐요!
 			</h2>
 			<div className="flex flex-col items-center">
-				<div className="flex flex-col items-center mx-auto bg-white w-[209px]   mt-[98px] mb-[19.78px] rounded-[10px] drop-shadow-white">
+				<div className="flex flex-col items-center mx-auto bg-white w-[209px]   mt-[98px] mb-[19.78px] rounded drop-shadow-white">
 					<div className="grid place-items-center mt-[34px] bg-background-gray w-[73px] rounded-[19px] p-[22px] mb-[27px] ">
 						<QuestionIcon />
 					</div>
