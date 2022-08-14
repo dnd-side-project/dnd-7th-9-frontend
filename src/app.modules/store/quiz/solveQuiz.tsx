@@ -13,6 +13,8 @@ export interface IQuiz {
 }
 interface State {
 	quizzes: IQuiz[];
+	setInitQuizzes: (quizzes: IQuiz[]) => void;
+	checkAnswer: (quizIdx: number, choiceId: number) => void;
 }
 const useSolveQuizStore = create<State>((set) => ({
 	quizzes: [initQuiz],
@@ -34,11 +36,6 @@ const useSolveQuizStore = create<State>((set) => ({
 				}),
 			};
 			return { quizzes: [...prevQuizzes, newQuiz, ...nextQuizzes] };
-		}),
-
-	initQuizzes: () =>
-		set({
-			quizzes: [initQuiz],
 		}),
 }));
 

@@ -3,10 +3,10 @@ import create from 'zustand';
 // temp
 export interface IQuiz {
 	question: string;
-	choices: { id: number; content: string; isAnswer: boolean }[];
+	choices: { id: number; content: string; isChecked: boolean }[];
 }
 
-const tempFunc = (curQuizzes: IQuiz[], quizIdx: number) => {
+const getRestQuizzes = (curQuizzes: IQuiz[], quizIdx: number) => {
 	const prevQuizzes = curQuizzes.slice(0, quizIdx);
 	const nextQuizzes = curQuizzes.slice(quizIdx + 1);
 	return [prevQuizzes, nextQuizzes];
@@ -14,11 +14,17 @@ const tempFunc = (curQuizzes: IQuiz[], quizIdx: number) => {
 
 const initQuiz = {
 	question: '',
-	choices: [{ id: 0, content: '', isAnswer: false }],
+	choices: [{ id: 0, content: '', isChecked: false }],
 };
 
 interface State {
 	quizzes: IQuiz[];
+	setInitQuizzes: (quizLength: number) => void;
+	editQuestion: (newQuestion: string, quizIdx: number) => void;
+	editChoice: (newChoiceContent: string, quizIdx: number, choiceId: number) => void;
+	addChoice: (quizIdx: number) => void;
+	checkAnswer: (quizIdx: number, choiceId: number) => void;
+	deleteChoice: (quizIdx: number, choiceId: number) => void;
 }
 const useCreateQuizStore = create<State>((set) => ({
 	quizzes: [initQuiz],
@@ -29,13 +35,13 @@ const useCreateQuizStore = create<State>((set) => ({
 
 	editQuestion: (newQuestion: string, quizIdx: number) =>
 		set((state) => {
-			const [prevQuizzes, nextQuizzes] = tempFunc(state.quizzes, quizIdx);
+			const [prevQuizzes, nextQuizzes] = getRestQuizzes(state.quizzes, quizIdx);
 			const newQuiz: IQuiz = { ...state.quizzes[quizIdx], question: newQuestion };
 			return { quizzes: [...prevQuizzes, newQuiz, ...nextQuizzes] };
 		}),
 	editChoice: (newChoiceContent: string, quizIdx: number, choiceId: number) =>
 		set((state) => {
-			const [prevQuizzes, nextQuizzes] = tempFunc(state.quizzes, quizIdx);
+			const [prevQuizzes, nextQuizzes] = getRestQuizzes(state.quizzes, quizIdx);
 			const newQuiz: IQuiz = {
 				...state.quizzes[quizIdx],
 				choices: state.quizzes[quizIdx].choices.map((choice) => {
@@ -48,23 +54,23 @@ const useCreateQuizStore = create<State>((set) => ({
 	addChoice: (quizIdx: number) =>
 		set((state) => {
 			if (state.quizzes[quizIdx].choices.length >= 5) return { quizzes: state.quizzes };
-			const [prevQuizzes, nextQuizzes] = tempFunc(state.quizzes, quizIdx);
+			const [prevQuizzes, nextQuizzes] = getRestQuizzes(state.quizzes, quizIdx);
 			const newQuiz: IQuiz = {
 				...state.quizzes[quizIdx],
 				choices: [
 					...state.quizzes[quizIdx].choices,
-					{ id: state.quizzes[quizIdx].choices.length, content: '', isAnswer: false },
+					{ id: state.quizzes[quizIdx].choices.length, content: '', isChecked: false },
 				],
 			};
 			return { quizzes: [...prevQuizzes, newQuiz, ...nextQuizzes] };
 		}),
 	checkAnswer: (quizIdx: number, choiceId: number) =>
 		set((state) => {
-			const [prevQuizzes, nextQuizzes] = tempFunc(state.quizzes, quizIdx);
+			const [prevQuizzes, nextQuizzes] = getRestQuizzes(state.quizzes, quizIdx);
 			const newQuiz: IQuiz = {
 				...state.quizzes[quizIdx],
 				choices: state.quizzes[quizIdx].choices.map((choice) => {
-					if (choice.id === choiceId) return { ...choice, isAnswer: !choice.isAnswer };
+					if (choice.id === choiceId) return { ...choice, isChecked: !choice.isChecked };
 					return choice;
 				}),
 			};
@@ -72,7 +78,7 @@ const useCreateQuizStore = create<State>((set) => ({
 		}),
 	deleteChoice: (quizIdx: number, choiceId: number) =>
 		set((state) => {
-			const [prevQuizzes, nextQuizzes] = tempFunc(state.quizzes, quizIdx);
+			const [prevQuizzes, nextQuizzes] = getRestQuizzes(state.quizzes, quizIdx);
 			const newQuiz: IQuiz = {
 				...state.quizzes[quizIdx],
 				choices: state.quizzes[quizIdx].choices.filter((choice) => choice.id !== choiceId),

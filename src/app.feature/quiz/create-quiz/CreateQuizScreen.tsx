@@ -24,6 +24,13 @@ export default function CreateQuizScreen({ quizIdx, submitQuizHandler }: Props) 
 		}
 		addChoice(quizIdx);
 	};
+	const checkAnswerHandler = (choiceContent: string, choiceId: number) => {
+		if (!choiceContent.trim()) {
+			alert('빈칸인 보기는 답이 될 수 없습니다.'); // 보기가 빈칸인 경우에는 체크할수 없음
+			return;
+		}
+		checkAnswer(quizIdx, choiceId);
+	};
 	const toPrevHandler = () => {
 		if (QUIZ_PAGE <= 1) return;
 		router.push(`/create-quiz/${quizIdx}`);
@@ -39,7 +46,7 @@ export default function CreateQuizScreen({ quizIdx, submitQuizHandler }: Props) 
 			alert('최소 2개의 답안을 작성해 주세요.');
 			return;
 		}
-
+		// TO DO : 정답 표시안해도 되나? (정답이 없는 문제인 경우)
 		router.push(`/create-quiz/${QUIZ_PAGE + 1}`);
 	};
 	return (
@@ -71,7 +78,10 @@ export default function CreateQuizScreen({ quizIdx, submitQuizHandler }: Props) 
 						/>
 						<div className="flex   justify-center  ">
 							<div className="ml-[2.77px]" />
-							<AnswerCheckButton isChecked={choice.isAnswer} checkHandler={() => checkAnswer(quizIdx, choice.id)} />
+							<AnswerCheckButton
+								isChecked={choice.isChecked}
+								checkHandler={() => checkAnswerHandler(choice.content, choice.id)}
+							/>
 							<button
 								onClick={() => deleteChoice(quizIdx, choice.id)}
 								type="button"
