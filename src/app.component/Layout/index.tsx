@@ -11,8 +11,13 @@ export default function Layout({ children }: Props) {
 	return (
 		<>
 			{/* padding-bottom : 네비게이션에 의해 가려지는 영역 문제가 있어 패딩 값 줌 */}
-			<main className="px-[20px] pb-[80px]">{children}</main>
-			{hasNav.includes(router.pathname) && <FooterNav curUrl={router.pathname} />}
+			<main className="px-[20px]">{children}</main>
+			{hasNav.includes(router.pathname) && (
+				<>
+					<div className="mt-[80px]" />
+					<FooterNav curUrl={router.pathname} />
+				</>
+			)}
 		</>
 	);
 }
