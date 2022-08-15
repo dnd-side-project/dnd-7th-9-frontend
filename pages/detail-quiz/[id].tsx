@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react';
 
 import { useRouter } from 'next/router';
-import SolveQuizScreen from '@app.feature/quiz/screen/SolveQuizScreen';
-import useSolveQuizStore, { IQuiz } from '@app.modules/store/quiz/solveQuiz'; // temp
+import useSolveQuizStore from '@app.modules/store/quiz/solveQuiz'; // temp
 import { NextPage } from 'next';
+import DetailQuizScreen from '@app.feature/quiz/screen/DetailQuizScreen';
 // 임시로 5문제 만들기로 설정
-const SolveQuiz: NextPage = () => {
+const DetailQuiz: NextPage = () => {
 	const router = useRouter();
 
 	const { quizzes, setInitQuizzes } = useSolveQuizStore();
 
-	const TEMP_QUIZZES: IQuiz[] = [1, 1, 1, 1, 1].map(() => ({
+	const TEMP_QUIZZES = [1, 1, 1, 1, 1].map(() => ({
 		question: 'eat 뜻으로 옳은 것은?',
 		choices: [
 			{ id: 1, content: '먹다', isChecked: false },
@@ -30,9 +30,9 @@ const SolveQuiz: NextPage = () => {
 	}, []);
 	return (
 		<div>
-			{router?.query?.id && <SolveQuizScreen quizIdx={+router.query.id - 1} submitQuizHandler={submitQuizHandler} />}
+			{router?.query?.id && <DetailQuizScreen quizIdx={+router.query.id - 1} submitQuizHandler={submitQuizHandler} />}
 		</div>
 	);
 };
 
-export default SolveQuiz;
+export default DetailQuiz;

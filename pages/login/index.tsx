@@ -12,6 +12,7 @@ const Login: NextPage = () => {
 		if (!isSuccess) return; // TO DO : 로그인 에러 페이지로 이동
 		const accessToken = params.get('token') ?? '';
 		const refreshToken = params.get('refresh') ?? '';
+		if (!accessToken.trim() || !refreshToken.trim()) return; // TO DO : 에러 표시
 		localStorage.setItem('TEST_TOKEN', accessToken);
 		setCookie('REFRESH_TOKEN', refreshToken, { path: '/', secure: true, sameSite: 'none' });
 
