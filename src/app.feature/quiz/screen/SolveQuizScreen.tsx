@@ -4,7 +4,7 @@ import ChoiceContainer from '@app.feature/quiz/component/container/ChoiceContain
 import AnswerCheckButton from '@app.feature/quiz/component/button/AnswerCheckButton';
 import QuizHeader from '@app.feature/quiz/component/header/QuizHeader';
 import useSolveQuizStore from '@app.modules/store/quiz/solveQuiz'; // temp
-import QuizPageController from '@app.feature/quiz/component/pageController/QuizPageController';
+import PageController from '@app.component/pageController/PageController';
 
 function GoalDetail() {
 	return (
@@ -59,9 +59,9 @@ export default function CreateQuizScreen({ quizIdx, submitQuizHandler }: Props) 
 					</ChoiceContainer>
 				))}
 			</div>
-			<QuizPageController
-				quizPage={QUIZ_PAGE}
-				quizzesLength={quizzes.length}
+			<PageController
+				curPage={QUIZ_PAGE}
+				pagesLength={quizzes.length}
 				finishWord="제출하기"
 				toPrevHandler={toPrevHandler}
 				toNextHandler={toNextHandler}

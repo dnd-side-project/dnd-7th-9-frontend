@@ -5,37 +5,14 @@ import QuizHeader from '@app.feature/quiz/component/header/QuizHeader';
 import PageController from '@app.component/pageController/PageController';
 import XIcon from '@assets/quiz/akar-icons_circle-x.svg';
 import OIcon from '@assets/quiz/bi_check-circle-fill.svg';
-import { useState } from 'react';
+
 import BackAlertModal from '@app.component/modal/BackAlertModal';
 
 interface Props {
 	quizIdx: number;
 	endQuizHandler: () => void;
 }
-const quizzes = [
-	{
-		question: 'eat 뜻으로 옳은 것은?',
-		isAnswered: true,
-		choices: [
-			{ id: 1, content: '먹다', isChecked: true, isAnswer: true },
-			{ id: 2, content: '보다', isChecked: false, isAnswer: false },
-			{ id: 3, content: '가다', isChecked: false, isAnswer: false },
-			{ id: 4, content: '놀다', isChecked: false, isAnswer: false },
-			{ id: 5, content: '입다', isChecked: false, isAnswer: false },
-		],
-	},
-	{
-		question: 'buy 뜻으로 옳은 것은?',
-		isAnswered: false,
-		choices: [
-			{ id: 1, content: '사다', isChecked: false, isAnswer: true },
-			{ id: 2, content: '보다', isChecked: false, isAnswer: false },
-			{ id: 3, content: '가다', isChecked: false, isAnswer: false },
-			{ id: 4, content: '놀다', isChecked: true, isAnswer: false },
-			{ id: 5, content: '입다', isChecked: false, isAnswer: false },
-		],
-	},
-];
+
 interface TempProps {
 	content: string;
 	isChecked: boolean;
@@ -81,26 +58,7 @@ export default function CreateQuizScreen({ quizIdx, endQuizHandler }: Props) {
 				<ProgressBar progress={(QUIZ_PAGE / quizzes.length) * 100} />
 			</div>
 			<QuizHeader quizPage={QUIZ_PAGE} quizzesLength={quizzes.length} />
-			<div className="mt-[64px] mb-[120.07px]">
-				<span
-					className={`block mb-[10px] text-small2 ${
-						quizzes[quizIdx].isAnswered ? 'text-[#079985]' : 'text-error-red'
-					} font-bold`}
-				>
-					{quizzes[quizIdx].isAnswered ? '이번 목표를 잘 수행해 주셨어요!' : '아쉬운 답은 기록하면 목표에 한 발자국!'}
-				</span>
-				<span className="block mb-[40px] text-headline text-black-400 font-medium">{quizzes[quizIdx].question}</span>
-				<div className="flex flex-col items-center w-full">
-					{quizzes[quizIdx].choices.map((choice) => (
-						<ChoiceContainer key={choice.id}>
-							<Temp content={choice.content} isChecked={choice.isChecked} isAnswer={choice.isAnswer} />
-						</ChoiceContainer>
-					))}
-					<button type="button" className="px-[26px] py-[6px]  bg-background-white rounded">
-						<span className=" text-slate font-regular text-small">정답이 이상해요</span>
-					</button>
-				</div>
-			</div>
+			<div className="mt-[64px] mb-[120.07px]" />
 			<PageController
 				curPage={QUIZ_PAGE}
 				pagesLength={quizzes.length}

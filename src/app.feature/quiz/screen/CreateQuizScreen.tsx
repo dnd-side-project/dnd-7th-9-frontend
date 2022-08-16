@@ -3,7 +3,7 @@ import useCreateQuizStore from '@app.modules/store/quiz/createQuiz';
 import DeleteIcon from '@assets/iconoir_cancel.svg';
 import DefaultButton from '@app.component/button/DefaultButton';
 import ProgressBar from '@app.component/progressBar';
-import QuizPageController from '@app.feature/quiz/component/pageController/QuizPageController';
+import PageController from '@app.component/pageController/PageController';
 
 import { useState } from 'react';
 import BackAlertModal from '@app.component/modal/BackAlertModal';
@@ -118,9 +118,9 @@ export default function CreateQuizScreen({ quizIdx, submitQuizHandler }: Props) 
 				<DefaultButton text="선택 답안 추가" onClick={addChoiceHandler} />
 				<BackAlertModal isModalOpen={isModalOpen} onCloseModal={() => setIsModalOpen(false)} />
 			</div>
-			<QuizPageController
-				quizPage={QUIZ_PAGE}
-				quizzesLength={quizzes.length}
+			<PageController
+				curPage={QUIZ_PAGE}
+				pagesLength={quizzes.length}
 				finishWord="제출하기"
 				toPrevHandler={toPrevHandler}
 				toNextHandler={toNextHandler}

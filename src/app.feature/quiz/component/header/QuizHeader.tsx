@@ -6,7 +6,7 @@ interface Props {
 	quizPage: number;
 	quizzesLength: number;
 	goalDetail?: React.ReactNode;
-	backAlertModalOpen: () => void;
+	backAlertModalOpen?: () => void;
 }
 export default function QuizHeader({ quizPage, quizzesLength, goalDetail, backAlertModalOpen }: Props) {
 	return (

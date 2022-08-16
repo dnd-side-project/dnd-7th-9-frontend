@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import React, { useCallback } from 'react';
 
 interface Props {
 	show: boolean;
@@ -7,7 +7,7 @@ interface Props {
 	children: React.ReactNode;
 }
 export default function Modal({ show, onCloseModal, children }: Props) {
-	const stopPropagation = useCallback((e) => {
+	const stopPropagation = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
 		e.stopPropagation();
 	}, []);
 

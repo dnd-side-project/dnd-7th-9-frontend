@@ -2,16 +2,16 @@ import PageTransitionButton from '@app.component/button/PageTransitionButton';
 import React from 'react';
 
 interface Props {
-	quizPage: number;
-	quizzesLength: number;
+	curPage: number;
+	pagesLength: number;
 	finishWord: '끝내기' | '제출하기';
 	toPrevHandler: () => void;
 	toNextHandler: () => void;
 	finishHandler: () => void;
 }
-export default function QuizPageController({
-	quizPage,
-	quizzesLength,
+export default function PageController({
+	curPage,
+	pagesLength,
 	finishWord,
 	toNextHandler,
 	toPrevHandler,
@@ -20,15 +20,15 @@ export default function QuizPageController({
 	return (
 		<div className="flex justify-between items-center">
 			<div className=" fixed left-[20px]  bottom-[22.2px]">
-				<PageTransitionButton pageTo="before" onClick={toPrevHandler} isActive={quizPage > 1} />
+				<PageTransitionButton pageTo="before" onClick={toPrevHandler} isActive={curPage > 1} />
 			</div>
 			<div className=" fixed  right-[20px] bottom-[22.2px]">
-				{quizPage >= quizzesLength ? (
+				{curPage >= pagesLength ? (
 					<button type="button" onClick={finishHandler} className="p-[10px]">
 						<span className="text-body1 text-[#999999] font-medium">{finishWord}</span>
 					</button>
 				) : (
-					<PageTransitionButton pageTo="next" onClick={toNextHandler} isActive={quizPage < quizzesLength} />
+					<PageTransitionButton pageTo="next" onClick={toNextHandler} isActive={curPage < pagesLength} />
 				)}
 			</div>
 		</div>
