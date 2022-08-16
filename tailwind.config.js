@@ -31,6 +31,7 @@ module.exports = {
 			dropShadow: {
 				white: '0px 0px 7px rgba(139, 149, 161, 0.25)',
 				colored: '0px 0px 7px rgba(0, 0, 0, 0.25)',
+				graph: '0px 0px 4px rgba(0, 0, 0, 0.25)',
 			},
 		},
 		fontWeight: {

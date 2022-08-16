@@ -9,7 +9,7 @@ export default function PageTitle({ title }: Props) {
 	return (
 		<div className="h-[70px] flex">
 			<div className="self-center">
-				{lineBreak(title).map((line) => (
+				{lineBreak(title).map((line: string) => (
 					<p key={line} className="text-title2 font-bold">
 						{line}
 						<br />
