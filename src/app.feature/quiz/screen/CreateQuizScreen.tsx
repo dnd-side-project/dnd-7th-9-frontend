@@ -5,7 +5,7 @@ import DefaultButton from '@app.component/button/DefaultButton';
 import ProgressBar from '@app.component/progressBar';
 import QuizPageController from '@app.feature/quiz/component/QuizPageController';
 import ChoiceContainer from '../component/ChoiceContainer';
-import AnswerCheckButton from '../component/AnswerCheckButton';
+import AnswerCheckButton from '../component/button/AnswerCheckButton';
 import QuizHeader from '../component/QuizHeader';
 
 function GoalDetail() {

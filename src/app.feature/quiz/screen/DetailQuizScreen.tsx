@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import ProgressBar from '@app.component/progressBar';
 import ChoiceContainer from '@app.feature/quiz/component/ChoiceContainer';
-import AnswerCheckButton from '@app.feature/quiz/component/AnswerCheckButton';
+import AnswerCheckButton from '@app.feature/quiz/component/button/AnswerCheckButton';
 import QuizHeader from '@app.feature/quiz/component/QuizHeader';
 import useSolveQuizStore from '@app.modules/store/quiz/solveQuiz'; // temp
 import QuizPageController from '@app.feature/quiz/component/QuizPageController';
