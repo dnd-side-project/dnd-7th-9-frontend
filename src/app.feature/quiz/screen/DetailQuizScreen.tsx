@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router';
 import ProgressBar from '@app.component/progressBar';
-import ChoiceContainer from '@app.feature/quiz/component/ChoiceContainer';
+import ChoiceContainer from '@app.feature/quiz/component/container/ChoiceContainer';
 import AnswerCheckButton from '@app.feature/quiz/component/button/AnswerCheckButton';
-import QuizHeader from '@app.feature/quiz/component/QuizHeader';
+import QuizHeader from '@app.feature/quiz/component/header/QuizHeader';
 import useSolveQuizStore from '@app.modules/store/quiz/solveQuiz'; // temp
-import QuizPageController from '@app.feature/quiz/component/QuizPageController';
+import QuizPageController from '@app.feature/quiz/component/pageController/QuizPageController';
 import XIcon from '@assets/quiz/akar-icons_circle-x.svg';
 import OIcon from '@assets/quiz/bi_check-circle-fill.svg';
 

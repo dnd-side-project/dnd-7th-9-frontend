@@ -3,10 +3,10 @@ import useCreateQuizStore from '@app.modules/store/quiz/createQuiz';
 import DeleteIcon from '@assets/iconoir_cancel.svg';
 import DefaultButton from '@app.component/button/DefaultButton';
 import ProgressBar from '@app.component/progressBar';
-import QuizPageController from '@app.feature/quiz/component/QuizPageController';
-import ChoiceContainer from '../component/ChoiceContainer';
+import QuizPageController from '@app.feature/quiz/component/pageController/QuizPageController';
+import ChoiceContainer from '../component/container/ChoiceContainer';
 import AnswerCheckButton from '../component/button/AnswerCheckButton';
-import QuizHeader from '../component/QuizHeader';
+import QuizHeader from '../component/header/QuizHeader';
 
 function GoalDetail() {
 	return (
