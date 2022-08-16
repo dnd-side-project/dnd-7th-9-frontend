@@ -46,7 +46,12 @@ export default function CreateQuizScreen({ quizIdx, submitQuizHandler }: Props) 
 			alert('최소 2개의 답안을 작성해 주세요.');
 			return;
 		}
-		// TO DO : 정답 표시안해도 되나? (정답이 없는 문제인 경우)
+		const answerCount = quizzes[quizIdx].choices.filter((choice) => choice.isChecked).length;
+		if (answerCount !== 1) {
+			alert('1개의 정답을 선택해야 합니다');
+			return;
+		}
+
 		router.push(`/create-quiz/${QUIZ_PAGE + 1}`);
 	};
 	return (
