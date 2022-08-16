@@ -8,6 +8,14 @@ import ChoiceContainer from '../component/ChoiceContainer';
 import AnswerCheckButton from '../component/AnswerCheckButton';
 import QuizHeader from '../component/QuizHeader';
 
+function GoalDetail() {
+	return (
+		<div className="flex flex-col">
+			<span className="text-slate text-small2 font-bold">1주차 목표</span>
+			<span className="mt-[4px] text-slate text-small1 font-regular">기본 동사 20개 암기하기</span>
+		</div>
+	);
+}
 interface Props {
 	quizIdx: number;
 	submitQuizHandler: () => void;
@@ -59,7 +67,7 @@ export default function CreateQuizScreen({ quizIdx, submitQuizHandler }: Props) 
 			<div className="fixed top-0 left-0 right-0  ">
 				<ProgressBar progress={(QUIZ_PAGE / quizzes.length) * 100} />
 			</div>
-			<QuizHeader quizPage={QUIZ_PAGE} quizzesLength={quizzes.length} />
+			<QuizHeader quizPage={QUIZ_PAGE} quizzesLength={quizzes.length} goalDetail={<GoalDetail />} />
 			<div className=" mt-[43px] mb-[120.07px]">
 				<input
 					placeholder="문제를 적어주세요"

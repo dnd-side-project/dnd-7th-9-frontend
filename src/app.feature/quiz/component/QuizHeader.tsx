@@ -1,19 +1,23 @@
 import React from 'react';
+import BackIcon from '@assets/quiz/ic_round-navigate-next.svg';
 
 interface Props {
 	quizPage: number;
 	quizzesLength: number;
+	goalDetail?: React.ReactNode;
 }
-export default function QuizHeader({ quizPage, quizzesLength }: Props) {
+export default function QuizHeader({ quizPage, quizzesLength, goalDetail }: Props) {
 	return (
 		<div>
-			<div className="flex items-center justify-between mt-[13px] ">
-				<span className="text-slate text-small2 font-bold">1주차 목표</span>
+			<div className="flex items-start justify-between mt-[13px] ">
+				<div className="flex items-start -translate-x-[15px]">
+					<BackIcon />
+					{goalDetail}
+				</div>
 				<span className="text-[#089A76] text-small1 font-regular">
 					{quizPage}/{quizzesLength}
 				</span>
 			</div>
-			<span className="mt-[4px] text-slate text-small1 font-regular">기본 동사 20개 암기하기</span>
 		</div>
 	);
 }
