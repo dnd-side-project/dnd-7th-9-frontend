@@ -2,10 +2,11 @@ import React, { useEffect } from 'react';
 
 import useCreateQuizStore from '@app.modules/store/quiz/createQuiz';
 import { useRouter } from 'next/router';
-import CreateQuizScreen from '@app.feature/quiz/create-quiz/CreateQuizScreen';
+import CreateQuizScreen from '@app.feature/quiz/screen/CreateQuizScreen';
+import { NextPage } from 'next';
 
 // 임시로 5문제 만들기로 설정
-export default function CreateQuiz() {
+const CreateQuiz: NextPage = () => {
 	const router = useRouter();
 	const { quizzes, setInitQuizzes } = useCreateQuizStore();
 	const submitQuizHandler = () => {
@@ -21,4 +22,5 @@ export default function CreateQuiz() {
 			{router?.query?.id && <CreateQuizScreen quizIdx={+router.query.id - 1} submitQuizHandler={submitQuizHandler} />}
 		</div>
 	);
-}
+};
+export default CreateQuiz;

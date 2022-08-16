@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 
 import { useRouter } from 'next/router';
-import SolveQuizScreen from '@app.feature/quiz/solve-quiz/SolveQuizScreen';
+import SolveQuizScreen from '@app.feature/quiz/screen/SolveQuizScreen';
 import useSolveQuizStore, { IQuiz } from '@app.modules/store/quiz/solveQuiz'; // temp
+import { NextPage } from 'next';
 // 임시로 5문제 만들기로 설정
-export default function CreateQuiz() {
+const SolveQuiz: NextPage = () => {
 	const router = useRouter();
 
 	const { quizzes, setInitQuizzes } = useSolveQuizStore();
@@ -32,4 +33,6 @@ export default function CreateQuiz() {
 			{router?.query?.id && <SolveQuizScreen quizIdx={+router.query.id - 1} submitQuizHandler={submitQuizHandler} />}
 		</div>
 	);
-}
+};
+
+export default SolveQuiz;

@@ -3,11 +3,19 @@ import useCreateQuizStore from '@app.modules/store/quiz/createQuiz';
 import DeleteIcon from '@assets/iconoir_cancel.svg';
 import DefaultButton from '@app.component/button/DefaultButton';
 import ProgressBar from '@app.component/progressBar';
-import QuizPageController from '@app.feature/quiz/component/QuizPageController';
-import ChoiceContainer from '../component/ChoiceContainer';
-import AnswerCheckButton from '../component/AnswerCheckButton';
-import QuizHeader from '../component/QuizHeader';
+import QuizPageController from '@app.feature/quiz/component/pageController/QuizPageController';
+import ChoiceContainer from '../component/container/ChoiceContainer';
+import AnswerCheckButton from '../component/button/AnswerCheckButton';
+import QuizHeader from '../component/header/QuizHeader';
 
+function GoalDetail() {
+	return (
+		<div className="flex flex-col">
+			<span className="text-slate text-small2 font-bold">1주차 목표</span>
+			<span className="mt-[4px] text-slate text-small1 font-regular">기본 동사 20개 암기하기</span>
+		</div>
+	);
+}
 interface Props {
 	quizIdx: number;
 	submitQuizHandler: () => void;
@@ -46,7 +54,12 @@ export default function CreateQuizScreen({ quizIdx, submitQuizHandler }: Props) 
 			alert('최소 2개의 답안을 작성해 주세요.');
 			return;
 		}
-		// TO DO : 정답 표시안해도 되나? (정답이 없는 문제인 경우)
+		const answerCount = quizzes[quizIdx].choices.filter((choice) => choice.isChecked).length;
+		if (answerCount !== 1) {
+			alert('1개의 정답을 선택해야 합니다');
+			return;
+		}
+
 		router.push(`/create-quiz/${QUIZ_PAGE + 1}`);
 	};
 	return (
@@ -54,7 +67,7 @@ export default function CreateQuizScreen({ quizIdx, submitQuizHandler }: Props) 
 			<div className="fixed top-0 left-0 right-0  ">
 				<ProgressBar progress={(QUIZ_PAGE / quizzes.length) * 100} />
 			</div>
-			<QuizHeader quizPage={QUIZ_PAGE} quizzesLength={quizzes.length} />
+			<QuizHeader quizPage={QUIZ_PAGE} quizzesLength={quizzes.length} goalDetail={<GoalDetail />} />
 			<div className=" mt-[43px] mb-[120.07px]">
 				<input
 					placeholder="문제를 적어주세요"
@@ -98,9 +111,10 @@ export default function CreateQuizScreen({ quizIdx, submitQuizHandler }: Props) 
 			<QuizPageController
 				quizPage={QUIZ_PAGE}
 				quizzesLength={quizzes.length}
+				finishWord="제출하기"
 				toPrevHandler={toPrevHandler}
 				toNextHandler={toNextHandler}
-				submitQuizHandler={submitQuizHandler}
+				finishHandler={submitQuizHandler}
 			/>
 		</div>
 	);

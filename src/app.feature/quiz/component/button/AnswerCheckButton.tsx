@@ -1,5 +1,5 @@
 interface Props {
-	checkHandler: () => void;
+	checkHandler?: () => void;
 	isChecked: boolean;
 	ringColor?: string;
 }
