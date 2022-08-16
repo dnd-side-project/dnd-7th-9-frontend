@@ -4,16 +4,18 @@ import React from 'react';
 interface Props {
 	quizPage: number;
 	quizzesLength: number;
+	finishWord: '끝내기' | '제출하기';
 	toPrevHandler: () => void;
 	toNextHandler: () => void;
-	submitQuizHandler: () => void;
+	finishHandler: () => void;
 }
 export default function QuizPageController({
 	quizPage,
 	quizzesLength,
+	finishWord,
 	toNextHandler,
 	toPrevHandler,
-	submitQuizHandler,
+	finishHandler,
 }: Props) {
 	return (
 		<div className="flex justify-between items-center">
@@ -22,8 +24,8 @@ export default function QuizPageController({
 			</div>
 			<div className=" fixed  right-[20px] bottom-[22.2px]">
 				{quizPage >= quizzesLength ? (
-					<button type="button" onClick={submitQuizHandler} className="p-[10px]">
-						<span className="text-body1 text-[#999999] font-medium">제출하기</span>
+					<button type="button" onClick={finishHandler} className="p-[10px]">
+						<span className="text-body1 text-[#999999] font-medium">{finishWord}</span>
 					</button>
 				) : (
 					<PageTransitionButton pageTo="next" onClick={toNextHandler} isActive={quizPage < quizzesLength} />

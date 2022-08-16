@@ -62,9 +62,10 @@ export default function CreateQuizScreen({ quizIdx, submitQuizHandler }: Props) 
 			<QuizPageController
 				quizPage={QUIZ_PAGE}
 				quizzesLength={quizzes.length}
+				finishWord="제출하기"
 				toPrevHandler={toPrevHandler}
 				toNextHandler={toNextHandler}
-				submitQuizHandler={submitQuizHandler}
+				finishHandler={submitQuizHandler}
 			/>
 		</div>
 	);
