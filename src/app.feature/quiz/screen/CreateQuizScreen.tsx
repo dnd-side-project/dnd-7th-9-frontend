@@ -4,6 +4,9 @@ import DeleteIcon from '@assets/iconoir_cancel.svg';
 import DefaultButton from '@app.component/button/DefaultButton';
 import ProgressBar from '@app.component/progressBar';
 import QuizPageController from '@app.feature/quiz/component/pageController/QuizPageController';
+
+import { useState } from 'react';
+import BackAlertModal from '@app.component/modal/BackAlertModal';
 import ChoiceContainer from '../component/container/ChoiceContainer';
 import AnswerCheckButton from '../component/button/AnswerCheckButton';
 import QuizHeader from '../component/header/QuizHeader';
@@ -25,6 +28,7 @@ export default function CreateQuizScreen({ quizIdx, submitQuizHandler }: Props) 
 	const router = useRouter();
 	const { quizzes, addChoice, editQuestion, editChoice, checkAnswer, deleteChoice } = useCreateQuizStore();
 	const QUIZ_PAGE = quizIdx + 1;
+	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 	const addChoiceHandler = () => {
 		if (quizzes[quizIdx].choices.length >= quizzes.length) {
 			alert('답안의 최대 개수는 5개입니다.');
@@ -67,7 +71,12 @@ export default function CreateQuizScreen({ quizIdx, submitQuizHandler }: Props) 
 			<div className="fixed top-0 left-0 right-0  ">
 				<ProgressBar progress={(QUIZ_PAGE / quizzes.length) * 100} />
 			</div>
-			<QuizHeader quizPage={QUIZ_PAGE} quizzesLength={quizzes.length} goalDetail={<GoalDetail />} />
+			<QuizHeader
+				quizPage={QUIZ_PAGE}
+				quizzesLength={quizzes.length}
+				backAlertModalOpen={() => setIsModalOpen(true)}
+				goalDetail={<GoalDetail />}
+			/>
 			<div className=" mt-[43px] mb-[120.07px]">
 				<input
 					placeholder="문제를 적어주세요"
@@ -100,13 +109,14 @@ export default function CreateQuizScreen({ quizIdx, submitQuizHandler }: Props) 
 								type="button"
 								className="ml-[16.69px] mr-[4px] mt-[6.26px] mb-[33.74px] "
 							>
-								<DeleteIcon />
+								<DeleteIcon stroke="#CCCCCC" />
 							</button>
 						</div>
 					</ChoiceContainer>
 				))}
 
 				<DefaultButton text="선택 답안 추가" onClick={addChoiceHandler} />
+				<BackAlertModal isModalOpen={isModalOpen} onCloseModal={() => setIsModalOpen(false)} />
 			</div>
 			<QuizPageController
 				quizPage={QUIZ_PAGE}
