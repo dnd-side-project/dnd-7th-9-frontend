@@ -3,7 +3,9 @@ import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 import { NextPage } from 'next';
-import CreateStudyGroupScreen from '@app.feature/studyGroup/screen/CreateStudyGroupScreen';
+import IntroduceStudyScreen from '@app.feature/studyGroup/screen/IntroduceStudyScreen';
+import StudyDateScreen from '@app.feature/studyGroup/screen/StudyDateScreen';
+import StudyGoalScreen from '@app.feature/studyGroup/screen/StudyGoalScreen';
 
 const CreateStudy: NextPage = () => {
 	const router = useRouter();
@@ -14,7 +16,9 @@ const CreateStudy: NextPage = () => {
 
 	return (
 		<div>
-			{router?.query?.id && <CreateStudyGroupScreen pageIdx={+router.query.id - 1} submitHandler={submitHandler} />}
+			{router?.query?.id && +router.query.id === 1 && <IntroduceStudyScreen submitHandler={submitHandler} />}
+			{router?.query?.id && +router.query.id === 2 && <StudyDateScreen submitHandler={submitHandler} />}
+			{router?.query?.id && +router.query.id === 3 && <StudyGoalScreen submitHandler={submitHandler} />}
 		</div>
 	);
 };

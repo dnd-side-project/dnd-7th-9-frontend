@@ -15,7 +15,6 @@ import Box from '@app.component/box';
 import RequireMark from '../component/RequireMark';
 
 interface Props {
-	pageIdx: number;
 	submitHandler: () => void;
 }
 export const STUDY_CATEGORIES = [
@@ -37,15 +36,15 @@ export const STUDY_CATEGORIES = [
 	},
 ];
 
-export default function CreateStudyGroupScreen({ pageIdx, submitHandler }: Props) {
+export default function IntroduceStudyScreenScreen({ submitHandler }: Props) {
 	const router = useRouter();
 	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-	const CUR_PAGE = pageIdx + 1;
+	const CUR_PAGE = 1;
 	const STEPS_COUNT = 3;
 	const toPrevHandler = () => {
-		if (CUR_PAGE <= 1) return;
-		router.push(`/create-study/${pageIdx}`);
+		// if (CUR_PAGE <= 1) return;
+		// router.push(`/create-study/${pageIdx}`);
 	};
 
 	const toNextHandler = () => {
