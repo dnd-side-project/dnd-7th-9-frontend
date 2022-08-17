@@ -1,55 +1,54 @@
 import type { NextPage } from 'next';
 import UpdatedQuizScreen from '@app.feature/quiz/screen/UpdatedQuizScreen';
 import UpdatedQuizNoneScreen from '@app.feature/quiz/screen/UpdatedQuizNoneScreen';
+import { useQuery } from '@tanstack/react-query';
+import client from '@app.modules/api/client';
+import { AxiosError } from 'axios';
 
 interface IQuiz {
-	updateTime: number;
-	userName: string;
-	studyTitle: string;
-	week: number;
+	questionBookId: number;
+	goalContent: string;
+	userNickName: string;
+	userProfileImageUrl?: string | null;
+	studyGroupName: string;
+	questionCreatedAt: string;
+	solved: boolean;
 }
 
 const UpdatedQuizzes: NextPage = () => {
 	// const DUMMY_QUIZ_DATA: IQuiz[] = [];
+
+	const { data: updatedQuizData } = useQuery<IQuiz[], AxiosError>(
+		['question-book', 'list', 'live'],
+		() => client.get('/question-book/list/live'),
+		{
+			onSuccess: (res) => console.log(res),
+		}
+	);
+
+	console.log(updatedQuizData);
+
 	const DUMMY_QUIZ_DATA: IQuiz[] = [
 		{
-			updateTime: 2,
-			userName: '차주희',
-			studyTitle: '프론트 스터디',
-			week: 1,
+			questionBookId: 4,
+			goalContent: '이번주는 회고록 작성하기! + DND 문제 풀기',
+			userNickName: '메롱',
+			userProfileImageUrl: null,
+			studyGroupName: 'DND 짱들',
+			questionCreatedAt: '2022-08-14T00:00:00',
+			solved: false,
 		},
 		{
-			updateTime: 3,
-			userName: '정예원',
-			studyTitle: '프론트 스터디',
-			week: 3,
-		},
-		{
-			updateTime: 10,
-			userName: '원태연',
-			studyTitle: '백엔드 스터디',
-			week: 1,
-		},
-		{
-			updateTime: 60,
-			userName: '심미경',
-			studyTitle: '백엔드 스터디',
-			week: 1,
-		},
-		{
-			updateTime: 40000,
-			userName: '최나은',
-			studyTitle: '디자인 스터디',
-			week: 2,
-		},
-		{
-			updateTime: 503000,
-			userName: '송지민',
-			studyTitle: '디자인 스터디',
-			week: 2,
+			questionBookId: 4,
+			goalContent: '이번주는 회고록 작성하기! + DND 문제 풀기',
+			userNickName: '메롱',
+			userProfileImageUrl: null,
+			studyGroupName: 'DND 짱들',
+			questionCreatedAt: '2022-08-14T00:00:00',
+			solved: false,
 		},
 	];
-	return DUMMY_QUIZ_DATA.length ? <UpdatedQuizScreen quizData={DUMMY_QUIZ_DATA} /> : <UpdatedQuizNoneScreen />;
+	return DUMMY_QUIZ_DATA.length ? <UpdatedQuizScreen updatedQuizData={DUMMY_QUIZ_DATA} /> : <UpdatedQuizNoneScreen />;
 };
 
 export default UpdatedQuizzes;
