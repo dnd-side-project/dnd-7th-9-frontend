@@ -1,12 +1,11 @@
 import { useRouter } from 'next/router';
 import ProgressBar from '@app.component/progressBar';
 import ChoiceContainer from '@app.feature/quiz/component/container/ChoiceContainer';
-import QuizHeader from '@app.feature/quiz/component/header/QuizHeader';
+import ProgressHeader from '@app.component/header/Progress';
 import PageController from '@app.component/pageController/PageController';
 import XIcon from '@assets/quiz/akar-icons_circle-x.svg';
 import OIcon from '@assets/quiz/bi_check-circle-fill.svg';
-import { useState } from 'react';
-import BackAlertModal from '@app.component/modal/BackAlertModal';
+import Box from '@app.component/box';
 
 interface Props {
 	quizIdx: number;
@@ -41,7 +40,7 @@ interface TempProps {
 	isChecked: boolean;
 	isAnswer: boolean;
 }
-function Temp({ content, isChecked, isAnswer }: TempProps) {
+function Choice({ content, isChecked, isAnswer }: TempProps) {
 	return (
 		<div
 			className={`w-full flex items-center  rounded justify-between px-[22.09px]  ${
@@ -77,10 +76,7 @@ export default function CreateQuizScreen({ quizIdx, endQuizHandler }: Props) {
 
 	return (
 		<div>
-			<div className="fixed top-0 left-0 right-0  ">
-				<ProgressBar progress={(QUIZ_PAGE / quizzes.length) * 100} />
-			</div>
-			<QuizHeader quizPage={QUIZ_PAGE} quizzesLength={quizzes.length} />
+			<ProgressHeader curPage={QUIZ_PAGE} pagesLength={quizzes.length} />
 			<div className="mt-[64px] mb-[120.07px]">
 				<span
 					className={`block mb-[10px] text-small2 ${
@@ -90,11 +86,11 @@ export default function CreateQuizScreen({ quizIdx, endQuizHandler }: Props) {
 					{quizzes[quizIdx].isAnswered ? '이번 목표를 잘 수행해 주셨어요!' : '아쉬운 답은 기록하면 목표에 한 발자국!'}
 				</span>
 				<span className="block mb-[40px] text-headline text-black-400 font-medium">{quizzes[quizIdx].question}</span>
-				<div className="flex flex-col items-center w-full">
+				<div className="flex flex-col items-center w-full space-y-[12px]">
 					{quizzes[quizIdx].choices.map((choice) => (
-						<ChoiceContainer key={choice.id}>
-							<Temp content={choice.content} isChecked={choice.isChecked} isAnswer={choice.isAnswer} />
-						</ChoiceContainer>
+						<Box key={choice.id} height="h-[64px]">
+							<Choice content={choice.content} isChecked={choice.isChecked} isAnswer={choice.isAnswer} />
+						</Box>
 					))}
 					<button type="button" className="px-[26px] py-[6px]  bg-background-white rounded">
 						<span className=" text-slate font-regular text-small">정답이 이상해요</span>

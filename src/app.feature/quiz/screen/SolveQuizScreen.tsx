@@ -6,6 +6,7 @@ import PageController from '@app.component/pageController/PageController';
 import ProgressHeader from '@app.component/header/Progress';
 import { useState } from 'react';
 import BackAlertModal from '@app.component/modal/BackAlertModal';
+import Box from '@app.component/box';
 
 function GoalDetail() {
 	return (
@@ -45,7 +46,7 @@ export default function CreateQuizScreen({ quizIdx, submitQuizHandler }: Props) 
 			<div className="mt-[80px] mb-[120.07px]">
 				<span className="block mb-[40px] text-headline text-black-400 font-medium">{quizzes[quizIdx].question}</span>
 				{quizzes[quizIdx].choices.map((choice) => (
-					<ChoiceContainer key={choice.id}>
+					<Box key={choice.id} height="h-[64px]" className="mt-[12px]">
 						<div
 							className={`w-full flex items-center rounded justify-between px-[22.09px]  ${
 								choice.isChecked && 'bg-green-200 border-[1px] border-[#1CB576]'
@@ -59,7 +60,7 @@ export default function CreateQuizScreen({ quizIdx, submitQuizHandler }: Props) 
 								checkHandler={() => checkAnswer(quizIdx, choice.id)}
 							/>
 						</div>
-					</ChoiceContainer>
+					</Box>
 				))}
 				<BackAlertModal isModalOpen={isModalOpen} onCloseModal={() => setIsModalOpen(false)} />
 			</div>

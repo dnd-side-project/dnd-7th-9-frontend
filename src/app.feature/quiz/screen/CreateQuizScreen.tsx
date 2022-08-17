@@ -7,6 +7,7 @@ import PageController from '@app.component/pageController/PageController';
 import { useState } from 'react';
 import BackAlertModal from '@app.component/modal/BackAlertModal';
 import ProgressHeader from '@app.component/header/Progress';
+import Box from '@app.component/box';
 import ChoiceContainer from '../component/container/ChoiceContainer';
 import AnswerCheckButton from '../component/button/AnswerCheckButton';
 
@@ -86,10 +87,10 @@ export default function CreateQuizScreen({ quizIdx, submitQuizHandler }: Props) 
 				</span>
 
 				{quizzes[quizIdx].choices.map((choice) => (
-					<ChoiceContainer key={choice.id}>
+					<Box key={choice.id} height="h-[64px]" className="pl-[22.09px] mb-[12px]">
 						<input
 							placeholder="답안을 작성해주세요."
-							className="w-full   ml-[22.09px] outline-none text-body1 font-medium"
+							className="w-full    outline-none text-body1 font-medium"
 							value={choice.content}
 							onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
 								editChoice(event.target.value, quizIdx, choice.id)
@@ -109,7 +110,7 @@ export default function CreateQuizScreen({ quizIdx, submitQuizHandler }: Props) 
 								<DeleteIcon stroke="#CCCCCC" />
 							</button>
 						</div>
-					</ChoiceContainer>
+					</Box>
 				))}
 
 				<DefaultButton text="선택 답안 추가" onClick={addChoiceHandler} />

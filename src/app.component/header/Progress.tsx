@@ -5,7 +5,7 @@ interface Props {
 	curPage: number;
 	pagesLength: number;
 	Description?: React.ReactNode; // 세부 목표 설명 영역
-	backAlertModalOpen: () => void;
+	backAlertModalOpen?: () => void;
 }
 export default function ProgressHeader({ curPage, pagesLength, backAlertModalOpen, Description }: Props) {
 	return (
