@@ -1,10 +1,11 @@
 import { useRouter } from 'next/router';
-import ProgressBar from '@app.component/progressBar';
 import ChoiceContainer from '@app.feature/quiz/component/container/ChoiceContainer';
 import AnswerCheckButton from '@app.feature/quiz/component/button/AnswerCheckButton';
-import QuizHeader from '@app.feature/quiz/component/header/QuizHeader';
 import useSolveQuizStore from '@app.modules/store/quiz/solveQuiz'; // temp
 import PageController from '@app.component/pageController/PageController';
+import ProgressHeader from '@app.component/header/Progress';
+import { useState } from 'react';
+import BackAlertModal from '@app.component/modal/BackAlertModal';
 
 function GoalDetail() {
 	return (
@@ -21,7 +22,7 @@ interface Props {
 // 임시로 5문제를 가진 문제집의 1페이지로 설정
 export default function CreateQuizScreen({ quizIdx, submitQuizHandler }: Props) {
 	const router = useRouter();
-
+	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 	const { quizzes, checkAnswer } = useSolveQuizStore();
 	const QUIZ_PAGE = quizIdx + 1;
 	const toPrevHandler = () => {
@@ -35,10 +36,12 @@ export default function CreateQuizScreen({ quizIdx, submitQuizHandler }: Props) 
 
 	return (
 		<div>
-			<div className="fixed top-0 left-0 right-0  ">
-				<ProgressBar progress={(QUIZ_PAGE / quizzes.length) * 100} />
-			</div>
-			<QuizHeader quizPage={QUIZ_PAGE} quizzesLength={quizzes.length} goalDetail={<GoalDetail />} />
+			<ProgressHeader
+				curPage={QUIZ_PAGE}
+				pagesLength={quizzes.length}
+				Description={<GoalDetail />}
+				backAlertModalOpen={() => setIsModalOpen(true)}
+			/>
 			<div className="mt-[80px] mb-[120.07px]">
 				<span className="block mb-[40px] text-headline text-black-400 font-medium">{quizzes[quizIdx].question}</span>
 				{quizzes[quizIdx].choices.map((choice) => (
@@ -58,6 +61,7 @@ export default function CreateQuizScreen({ quizIdx, submitQuizHandler }: Props) 
 						</div>
 					</ChoiceContainer>
 				))}
+				<BackAlertModal isModalOpen={isModalOpen} onCloseModal={() => setIsModalOpen(false)} />
 			</div>
 			<PageController
 				curPage={QUIZ_PAGE}

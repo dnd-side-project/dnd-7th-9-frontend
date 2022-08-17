@@ -3,9 +3,9 @@ import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 import { NextPage } from 'next';
-import CreateStudyGroupScreen from '@app.feature/studyGroup/screen/StudyGroupScreen';
+import CreateStudyGroupScreen from '@app.feature/studyGroup/screen/CreateStudyGroupScreen';
 
-const DetailQuiz: NextPage = () => {
+const CreateStudy: NextPage = () => {
 	const router = useRouter();
 
 	const submitHandler = () => {
@@ -14,9 +14,9 @@ const DetailQuiz: NextPage = () => {
 
 	return (
 		<div>
-			{router?.query?.id && <CreateStudyGroupScreen stepIdx={+router.query.id - 1} submitHandler={submitHandler} />}
+			{router?.query?.id && <CreateStudyGroupScreen pageIdx={+router.query.id - 1} submitHandler={submitHandler} />}
 		</div>
 	);
 };
 
-export default DetailQuiz;
+export default CreateStudy;

@@ -1,70 +1,46 @@
 import { useRouter } from 'next/router';
 import ProgressBar from '@app.component/progressBar';
 import ChoiceContainer from '@app.feature/quiz/component/container/ChoiceContainer';
-import QuizHeader from '@app.feature/quiz/component/header/QuizHeader';
+import ProgressHeader from '@app.component/header/Progress';
 import PageController from '@app.component/pageController/PageController';
 import XIcon from '@assets/quiz/akar-icons_circle-x.svg';
 import OIcon from '@assets/quiz/bi_check-circle-fill.svg';
 
 import BackAlertModal from '@app.component/modal/BackAlertModal';
+import { useState } from 'react';
 
 interface Props {
-	quizIdx: number;
-	endQuizHandler: () => void;
+	pageIdx: number;
+	submitHandler: () => void;
 }
 
-interface TempProps {
-	content: string;
-	isChecked: boolean;
-	isAnswer: boolean;
-}
-function Temp({ content, isChecked, isAnswer }: TempProps) {
-	return (
-		<div
-			className={`w-full flex items-center  rounded justify-between px-[22.09px]  ${
-				isAnswer && 'bg-green-200 border-[1px] border-[#1CB576]'
-			}
-				${isChecked && !isAnswer && 'bg-error-red '}
-			}
-			${!isChecked && isAnswer && 'opacity-50 '}
-			}
-			`}
-		>
-			<span className=" text-body1 font-medium ">{content}</span>
-			{isAnswer && 'bg-error-red ' && <OIcon />}
-			{isChecked && !isAnswer && 'bg-error-red ' && <XIcon />}
-		</div>
-	);
-}
-
-// 임시로 5문제를 가진 문제집의 1페이지로 설정
-export default function CreateQuizScreen({ quizIdx, endQuizHandler }: Props) {
+export default function CreateStudyGroupScreen({ pageIdx, submitHandler }: Props) {
 	const router = useRouter();
-
+	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 	// const { quizzes, checkAnswer } = useSolveQuizStore();
-	const QUIZ_PAGE = quizIdx + 1;
+	const CUR_PAGE = pageIdx + 1;
+	const STEPS_COUNT = 5; // 스터디 생성 단계가 5단계까지 있나?
 	const toPrevHandler = () => {
-		if (QUIZ_PAGE <= 1) return;
-		router.push(`/detail-quiz/${quizIdx}`);
+		if (CUR_PAGE <= 1) return;
+		router.push(`/create-study/${pageIdx}`);
 	};
+
 	const toNextHandler = () => {
-		if (QUIZ_PAGE >= quizzes.length) return;
-		router.push(`/detail-quiz/${QUIZ_PAGE + 1}`);
+		if (CUR_PAGE >= STEPS_COUNT) return;
+		router.push(`/create-study/${CUR_PAGE + 1}`);
 	};
 
 	return (
 		<div>
-			<div className="fixed top-0 left-0 right-0  ">
-				<ProgressBar progress={(QUIZ_PAGE / quizzes.length) * 100} />
-			</div>
-			<QuizHeader quizPage={QUIZ_PAGE} quizzesLength={quizzes.length} />
+			<ProgressHeader curPage={CUR_PAGE} pagesLength={STEPS_COUNT} backAlertModalOpen={() => setIsModalOpen(true)} />
 			<div className="mt-[64px] mb-[120.07px]" />
+			<BackAlertModal isModalOpen={isModalOpen} onCloseModal={() => setIsModalOpen(false)} />
 			<PageController
-				curPage={QUIZ_PAGE}
-				pagesLength={quizzes.length}
+				curPage={CUR_PAGE}
+				pagesLength={STEPS_COUNT}
 				toPrevHandler={toPrevHandler}
 				toNextHandler={toNextHandler}
-				finishHandler={endQuizHandler}
+				finishHandler={submitHandler}
 				finishWord="끝내기"
 			/>
 		</div>

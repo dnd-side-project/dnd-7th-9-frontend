@@ -2,14 +2,13 @@ import { useRouter } from 'next/router';
 import useCreateQuizStore from '@app.modules/store/quiz/createQuiz';
 import DeleteIcon from '@assets/iconoir_cancel.svg';
 import DefaultButton from '@app.component/button/DefaultButton';
-import ProgressBar from '@app.component/progressBar';
 import PageController from '@app.component/pageController/PageController';
 
 import { useState } from 'react';
 import BackAlertModal from '@app.component/modal/BackAlertModal';
+import ProgressHeader from '@app.component/header/Progress';
 import ChoiceContainer from '../component/container/ChoiceContainer';
 import AnswerCheckButton from '../component/button/AnswerCheckButton';
-import QuizHeader from '../component/header/QuizHeader';
 
 function GoalDetail() {
 	return (
@@ -68,15 +67,13 @@ export default function CreateQuizScreen({ quizIdx, submitQuizHandler }: Props) 
 	};
 	return (
 		<div>
-			<div className="fixed top-0 left-0 right-0  ">
-				<ProgressBar progress={(QUIZ_PAGE / quizzes.length) * 100} />
-			</div>
-			<QuizHeader
-				quizPage={QUIZ_PAGE}
-				quizzesLength={quizzes.length}
+			<ProgressHeader
+				curPage={QUIZ_PAGE}
+				pagesLength={quizzes.length}
+				Description={<GoalDetail />}
 				backAlertModalOpen={() => setIsModalOpen(true)}
-				goalDetail={<GoalDetail />}
 			/>
+
 			<div className=" mt-[43px] mb-[120.07px]">
 				<input
 					placeholder="문제를 적어주세요"
