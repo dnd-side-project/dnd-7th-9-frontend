@@ -1,11 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
-import { useRouter } from 'next/router';
-
-import { NextPage } from 'next';
 import IntroduceStudyScreen from '@app.feature/studyGroup/screen/IntroduceStudyScreen';
 import StudyDateScreen from '@app.feature/studyGroup/screen/StudyDateScreen';
 import StudyGoalScreen from '@app.feature/studyGroup/screen/StudyGoalScreen';
+
+import Error from 'next/error';
+import type { NextPage } from 'next';
+import { useRouter } from 'next/router';
+import CreateStudyLastScreen from '@app.feature/create-study/screen/CreateStudyLastScreen';
 
 const CreateStudy: NextPage = () => {
 	const router = useRouter();
@@ -14,13 +16,11 @@ const CreateStudy: NextPage = () => {
 		console.log('끝');
 	};
 
-	return (
-		<div>
-			{router?.query?.id && +router.query.id === 1 && <IntroduceStudyScreen submitHandler={submitHandler} />}
-			{router?.query?.id && +router.query.id === 2 && <StudyDateScreen submitHandler={submitHandler} />}
-			{router?.query?.id && +router.query.id === 3 && <StudyGoalScreen submitHandler={submitHandler} />}
-		</div>
-	);
+	if (router.query.id === '1') return <IntroduceStudyScreen />;
+	if (router.query.id === '2') return <StudyDateScreen />;
+	if (router.query.id === '3') return <StudyGoalScreen />;
+	if (router.query.id === '4') return <CreateStudyLastScreen />;
+	return <Error statusCode={404} title="page Not Found" />;
 };
 
 export default CreateStudy;
