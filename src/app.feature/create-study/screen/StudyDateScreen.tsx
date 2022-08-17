@@ -1,6 +1,6 @@
-import CreateStudyLayout from '@app.feature/studyGroup/component/Layout';
+import CreateStudyLayout from '@app.feature/create-study/component/layout';
 import Box from '@app.component/box';
-import RequireMark from '../component/RequireMark';
+import RequireMark from '../component/requireMark/RequireMark';
 
 export default function StudyDateScreen() {
 	const CUR_PAGE = 2;

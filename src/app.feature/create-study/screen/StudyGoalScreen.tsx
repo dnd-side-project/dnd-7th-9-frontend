@@ -1,6 +1,6 @@
 import Box from '@app.component/box';
-import CreateStudyLayout from '@app.feature/studyGroup/component/Layout';
-import RequireMark from '../component/RequireMark';
+import CreateStudyLayout from '@app.feature/create-study/component/layout';
+import RequireMark from '../component/requireMark/RequireMark';
 
 export default function StudyGoalScreen() {
 	const CUR_PAGE = 3;

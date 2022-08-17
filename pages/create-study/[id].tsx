@@ -1,8 +1,8 @@
 import React from 'react';
 
-import IntroduceStudyScreen from '@app.feature/studyGroup/screen/IntroduceStudyScreen';
-import StudyDateScreen from '@app.feature/studyGroup/screen/StudyDateScreen';
-import StudyGoalScreen from '@app.feature/studyGroup/screen/StudyGoalScreen';
+import IntroduceStudyScreen from '@app.feature/create-study/screen/IntroduceStudyScreen';
+import StudyDateScreen from '@app.feature/create-study/screen/StudyDateScreen';
+import StudyGoalScreen from '@app.feature/create-study/screen/StudyGoalScreen';
 
 import Error from 'next/error';
 import type { NextPage } from 'next';

@@ -3,8 +3,8 @@ import LanguageIcon from '@assets/study/language_icon.svg';
 import CertificationIcon from '@assets/study/certification_icon.svg';
 import ExamIcon from '@assets/study/Exam_icon.svg';
 import Box from '@app.component/box';
-import CreateStudyLayout from '@app.feature/studyGroup/component/Layout';
-import RequireMark from '../component/RequireMark';
+import CreateStudyLayout from '@app.feature/create-study/component/layout';
+import RequireMark from '../component/requireMark/RequireMark';
 
 export const STUDY_CATEGORIES = [
 	{
