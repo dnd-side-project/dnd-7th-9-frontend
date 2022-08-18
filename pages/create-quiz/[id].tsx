@@ -6,10 +6,12 @@ import CreateQuizScreen from '@app.feature/quiz/screen/CreateQuizScreen';
 import { NextPage } from 'next';
 
 // 임시로 5문제 만들기로 설정
+
 const CreateQuiz: NextPage = () => {
 	const router = useRouter();
 	const { quizzes, setInitQuizzes } = useCreateQuizStore();
 	const submitQuizHandler = () => {
+		// TO DO : validation 체크 필요
 		console.log(quizzes); // TO DO :  api 요구사항에 따라 quizzes 작업 필요
 	};
 	useEffect(() => {

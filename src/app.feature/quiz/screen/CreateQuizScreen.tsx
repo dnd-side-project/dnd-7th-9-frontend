@@ -2,11 +2,14 @@ import { useRouter } from 'next/router';
 import useCreateQuizStore from '@app.modules/store/quiz/createQuiz';
 import DeleteIcon from '@assets/iconoir_cancel.svg';
 import DefaultButton from '@app.component/button/DefaultButton';
-import ProgressBar from '@app.component/progressBar';
-import QuizPageController from '@app.feature/quiz/component/pageController/QuizPageController';
+import PageController from '@app.component/pageController/PageController';
+
+import { useState } from 'react';
+import BackAlertModal from '@app.component/modal/BackAlertModal';
+import ProgressHeader from '@app.component/header/Progress';
+import Box from '@app.component/box';
 import ChoiceContainer from '../component/container/ChoiceContainer';
 import AnswerCheckButton from '../component/button/AnswerCheckButton';
-import QuizHeader from '../component/header/QuizHeader';
 
 function GoalDetail() {
 	return (
@@ -25,6 +28,7 @@ export default function CreateQuizScreen({ quizIdx, submitQuizHandler }: Props) 
 	const router = useRouter();
 	const { quizzes, addChoice, editQuestion, editChoice, checkAnswer, deleteChoice } = useCreateQuizStore();
 	const QUIZ_PAGE = quizIdx + 1;
+	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 	const addChoiceHandler = () => {
 		if (quizzes[quizIdx].choices.length >= quizzes.length) {
 			alert('답안의 최대 개수는 5개입니다.');
@@ -64,10 +68,13 @@ export default function CreateQuizScreen({ quizIdx, submitQuizHandler }: Props) 
 	};
 	return (
 		<div>
-			<div className="fixed top-0 left-0 right-0  ">
-				<ProgressBar progress={(QUIZ_PAGE / quizzes.length) * 100} />
-			</div>
-			<QuizHeader quizPage={QUIZ_PAGE} quizzesLength={quizzes.length} goalDetail={<GoalDetail />} />
+			<ProgressHeader
+				curPage={QUIZ_PAGE}
+				pagesLength={quizzes.length}
+				Description={<GoalDetail />}
+				backAlertModalOpen={() => setIsModalOpen(true)}
+			/>
+
 			<div className=" mt-[43px] mb-[120.07px]">
 				<input
 					placeholder="문제를 적어주세요"
@@ -80,10 +87,10 @@ export default function CreateQuizScreen({ quizIdx, submitQuizHandler }: Props) 
 				</span>
 
 				{quizzes[quizIdx].choices.map((choice) => (
-					<ChoiceContainer key={choice.id}>
+					<Box key={choice.id} height="h-[64px]" className="pl-[22.09px] mb-[12px]">
 						<input
 							placeholder="답안을 작성해주세요."
-							className="w-full   ml-[22.09px] outline-none text-body1 font-medium"
+							className="w-full    outline-none text-body1 font-medium"
 							value={choice.content}
 							onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
 								editChoice(event.target.value, quizIdx, choice.id)
@@ -100,17 +107,18 @@ export default function CreateQuizScreen({ quizIdx, submitQuizHandler }: Props) 
 								type="button"
 								className="ml-[16.69px] mr-[4px] mt-[6.26px] mb-[33.74px] "
 							>
-								<DeleteIcon />
+								<DeleteIcon stroke="#CCCCCC" />
 							</button>
 						</div>
-					</ChoiceContainer>
+					</Box>
 				))}
 
 				<DefaultButton text="선택 답안 추가" onClick={addChoiceHandler} />
+				<BackAlertModal isModalOpen={isModalOpen} onCloseModal={() => setIsModalOpen(false)} />
 			</div>
-			<QuizPageController
-				quizPage={QUIZ_PAGE}
-				quizzesLength={quizzes.length}
+			<PageController
+				curPage={QUIZ_PAGE}
+				pagesLength={quizzes.length}
 				finishWord="제출하기"
 				toPrevHandler={toPrevHandler}
 				toNextHandler={toNextHandler}

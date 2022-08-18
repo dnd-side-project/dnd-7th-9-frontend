@@ -1,19 +1,19 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import QuizPageController from './QuizPageController';
+import PageController from './PageController';
 
 export default {
-	component: QuizPageController,
-	title: '@app.feature/quiz/component/QuizPageController',
-} as ComponentMeta<typeof QuizPageController>;
+	component: PageController,
+	title: '@app.component/PageController',
+} as ComponentMeta<typeof PageController>;
 
-const Template: ComponentStory<typeof QuizPageController> = (args) => <QuizPageController {...args} />;
+const Template: ComponentStory<typeof PageController> = (args) => <PageController {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-	quizPage: 1,
-	quizzesLength: 5,
+	curPage: 1,
+	pagesLength: 5,
 	finishWord: '끝내기',
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	toPrevHandler: () => {},
@@ -25,8 +25,8 @@ Default.args = {
 
 export const LastPage = Template.bind({});
 LastPage.args = {
-	quizPage: 5,
-	quizzesLength: 5,
+	curPage: 5,
+	pagesLength: 5,
 	finishWord: '끝내기',
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	toPrevHandler: () => {},
