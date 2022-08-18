@@ -7,6 +7,17 @@ import MyPageStudyCategory from '../component/category/MyPageStudyCategory';
 import MyPageStudyStatusToggle from '../component/toggle/MyPageStudyStatusToggle';
 import MyPageStudyAccordionContent from '../component/accordian-content/MyPageStudyAccordionContent';
 
+interface IStudyList {
+	groupId: number;
+	groupName: string;
+	groupStartDate: string;
+	groupEndDate: string;
+	groupGoal: string;
+	groupImageUrl: null | string;
+	groupCategory: 'language' | 'company' | 'certification' | 'etc';
+	groupStatus: 'proceeding' | 'complete';
+}
+
 interface IFilteringInput {
 	[key: string]: string;
 }
@@ -22,29 +33,73 @@ export default function MyPageScreen() {
 		});
 	};
 
-	console.log(router, router.query, toggle, category);
+	const username = '박수정'; // DUMMY
+
+	const studyList: IStudyList[] = [
+		// DUMMY
+		{
+			groupId: 1,
+			groupName: '중국어 스터디',
+			groupStartDate: '2022-08-15',
+			groupEndDate: '2022-12-15',
+			groupGoal: '중국어 능력 마스터하기',
+			groupImageUrl: null,
+			groupCategory: 'language',
+			groupStatus: 'proceeding',
+		},
+		{
+			groupId: 2,
+			groupName: 'GSAT 스터디',
+			groupStartDate: '2022-08-15',
+			groupEndDate: '2022-12-15',
+			groupGoal: '삼성 취뽀 하기',
+			groupImageUrl: null,
+			groupCategory: 'company',
+			groupStatus: 'proceeding',
+		},
+		{
+			groupId: 2,
+			groupName: '컴퓨터 자격증 스터디',
+			groupStartDate: '2022-08-15',
+			groupEndDate: '2022-12-15',
+			groupGoal: '컴퓨터 자격증 1달만에 취득하기',
+			groupImageUrl: null,
+			groupCategory: 'certification',
+			groupStatus: 'proceeding',
+		},
+	];
+
 	return (
 		<div>
 			{/* 프로필 영역 */}
-			<MyPageUserProfile />
+			<MyPageUserProfile username={username} />
 
 			{/* 토글 영역 */}
 			<MyPageStudyStatusToggle toggle={toggle} handleFilteringMyPage={handleFilteringMyPage} />
 
 			{/* 스터디 카테고리 영역 */}
-			<MyPageStudyCategory />
+			<MyPageStudyCategory category={category} handleFilteringMyPage={handleFilteringMyPage} />
 
 			{/* 스터디 리스트 영역 */}
 			<section>
-				<div>
-					<Accordion
-						className="mb-[10px]"
-						icon={<CategoryIcon type="language" />}
-						text="중국어 스터디"
-						status="완료"
-						content={<MyPageStudyAccordionContent />}
-					/>
-				</div>
+				{studyList.map((study) => {
+					if (
+						(category !== 'all' && study.groupCategory === category && study.groupStatus === toggle) ||
+						(category === 'all' && study.groupStatus === toggle && study.groupStatus === toggle)
+					)
+						return (
+							<Accordion
+								className="mb-[10px]"
+								icon={<CategoryIcon type={study.groupCategory} />}
+								text={study.groupName}
+								status={study.groupStatus}
+								content={
+									<MyPageStudyAccordionContent goal={study.groupGoal} groupId={study.groupId} achieveRate={80} />
+								}
+							/>
+						);
+					return null; // TO DO : 스터디 그룹 없을 때 보여줄 화면
+				})}
 			</section>
 		</div>
 	);

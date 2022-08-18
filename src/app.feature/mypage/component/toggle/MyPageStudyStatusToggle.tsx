@@ -16,8 +16,8 @@ export default function MyPageStudyStatusToggle({ toggle, handleFilteringMyPage 
 				role="button"
 				className="w-1/2 text-center"
 				tabIndex={0}
-				onClick={() => handleFilteringMyPage({ toggle: 'proceeding' })}
-				onKeyPress={() => handleFilteringMyPage({ toggle: 'proceeding' })}
+				onClick={() => handleFilteringMyPage({ toggle: 'proceeding', category: 'all' })}
+				onKeyPress={() => handleFilteringMyPage({ toggle: 'proceeding', category: 'all' })}
 			>
 				<p
 					className={`${toggle === 'proceeding' ? 'text-black-400' : 'text-slate'}
@@ -38,8 +38,8 @@ export default function MyPageStudyStatusToggle({ toggle, handleFilteringMyPage 
 				role="button"
 				className="w-1/2 text-center"
 				tabIndex={0}
-				onClick={() => handleFilteringMyPage({ toggle: 'completed' })}
-				onKeyPress={() => handleFilteringMyPage({ toggle: 'completed' })}
+				onClick={() => handleFilteringMyPage({ toggle: 'completed', category: 'all' })}
+				onKeyPress={() => handleFilteringMyPage({ toggle: 'completed', category: 'all' })}
 			>
 				<p
 					className={`${toggle === 'completed' ? 'text-black-400' : 'text-slate'}
