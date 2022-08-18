@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router';
-import ChoiceContainer from '@app.feature/quiz/component/container/ChoiceContainer';
 import AnswerCheckButton from '@app.feature/quiz/component/button/AnswerCheckButton';
 import useSolveQuizStore from '@app.modules/store/quiz/solveQuiz'; // temp
 import PageController from '@app.component/pageController/PageController';

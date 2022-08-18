@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { useRouter } from 'next/router';
-import useSolveQuizStore from '@app.modules/store/quiz/solveQuiz'; // temp
-import { NextPage } from 'next';
+
+import type { NextPage } from 'next';
 import DetailQuizScreen from '@app.feature/quiz/screen/DetailQuizScreen';
 // 임시로 5문제 만들기로 설정
 const DetailQuiz: NextPage = () => {

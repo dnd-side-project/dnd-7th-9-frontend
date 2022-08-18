@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import SolveQuizScreen from '@app.feature/quiz/screen/SolveQuizScreen';
 import useSolveQuizStore, { IQuiz } from '@app.modules/store/quiz/solveQuiz'; // temp
-import { NextPage } from 'next';
+import type { NextPage } from 'next';
 // 임시로 5문제 만들기로 설정
 const SolveQuiz: NextPage = () => {
 	const router = useRouter();

@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import useCreateQuizStore from '@app.modules/store/quiz/createQuiz';
 import { useRouter } from 'next/router';
 import CreateQuizScreen from '@app.feature/quiz/screen/CreateQuizScreen';
-import { NextPage } from 'next';
+import type { NextPage } from 'next';
 
 // 임시로 5문제 만들기로 설정
 
