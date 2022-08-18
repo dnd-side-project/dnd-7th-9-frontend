@@ -42,10 +42,11 @@ export default function Accordion({ className, icon, text, status, content }: Pr
 			</div>
 			<div
 				className={`
-				${isOpenedAccordion ? 'visible p-3' : 'invisible h-0'}
-				w-full bg-background-white rounded-b border-t-[1px] border-[#D9D9D9]
+				${isOpenedAccordion ? 'visible px-3 pb-3' : 'invisible h-0'}
+				w-full bg-background-white rounded-b 
 				`}
 			>
+				<hr className="text-[#D9D9D9] mb-[19px]" />
 				{content}
 			</div>
 		</div>
