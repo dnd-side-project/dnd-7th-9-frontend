@@ -3,7 +3,7 @@ import Router from 'next/router';
 import DefaultButton from '@app.component/button/DefaultButton';
 import QuizCompleteGraph from '../component/graph/QuizCompleteGraph';
 import QuizSolveCompleteTitle from '../component/title/QuizSolveCompleteTitle';
-import QuizCompleteAnimation from '../component/animation/QuizCompleteAnimation';
+import CompleteAnimation from '../component/animation/CompleteAnimation';
 
 export default function QuizSolveCompleteScreen() {
 	const DUMMY_DATA1 = {
@@ -41,7 +41,7 @@ export default function QuizSolveCompleteScreen() {
 			<QuizSolveCompleteTitle {...DUMMY_DATA3} />
 			<QuizCompleteGraph {...DUMMY_DATA3} />
 			<div className="mt-[90px]">
-				{(DUMMY_DATA3.addPercentageSolve > 0 || DUMMY_DATA3.score === 100) && <QuizCompleteAnimation />}
+				{(DUMMY_DATA3.addPercentageSolve > 0 || DUMMY_DATA3.score === 100) && <CompleteAnimation />}
 				{/* TO DO : 라우터 변경 */}
 				<DefaultButton text="문제 풀러가기" onClick={() => Router.push('/')} />
 				<DefaultButton className="mt-[20px]" text="끝내기" type="close" onClick={() => Router.push('/')} />

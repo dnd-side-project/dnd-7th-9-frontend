@@ -1,10 +1,12 @@
 import { useRouter } from 'next/router';
-import ProgressBar from '@app.component/progressBar';
 import ChoiceContainer from '@app.feature/quiz/component/container/ChoiceContainer';
 import AnswerCheckButton from '@app.feature/quiz/component/button/AnswerCheckButton';
-import QuizHeader from '@app.feature/quiz/component/header/QuizHeader';
 import useSolveQuizStore from '@app.modules/store/quiz/solveQuiz'; // temp
-import QuizPageController from '@app.feature/quiz/component/pageController/QuizPageController';
+import PageController from '@app.component/pageController/PageController';
+import ProgressHeader from '@app.component/header/Progress';
+import { useState } from 'react';
+import BackAlertModal from '@app.component/modal/BackAlertModal';
+import Box from '@app.component/box';
 
 function GoalDetail() {
 	return (
@@ -21,7 +23,7 @@ interface Props {
 // 임시로 5문제를 가진 문제집의 1페이지로 설정
 export default function CreateQuizScreen({ quizIdx, submitQuizHandler }: Props) {
 	const router = useRouter();
-
+	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 	const { quizzes, checkAnswer } = useSolveQuizStore();
 	const QUIZ_PAGE = quizIdx + 1;
 	const toPrevHandler = () => {
@@ -35,14 +37,16 @@ export default function CreateQuizScreen({ quizIdx, submitQuizHandler }: Props) 
 
 	return (
 		<div>
-			<div className="fixed top-0 left-0 right-0  ">
-				<ProgressBar progress={(QUIZ_PAGE / quizzes.length) * 100} />
-			</div>
-			<QuizHeader quizPage={QUIZ_PAGE} quizzesLength={quizzes.length} goalDetail={<GoalDetail />} />
+			<ProgressHeader
+				curPage={QUIZ_PAGE}
+				pagesLength={quizzes.length}
+				Description={<GoalDetail />}
+				backAlertModalOpen={() => setIsModalOpen(true)}
+			/>
 			<div className="mt-[80px] mb-[120.07px]">
 				<span className="block mb-[40px] text-headline text-black-400 font-medium">{quizzes[quizIdx].question}</span>
 				{quizzes[quizIdx].choices.map((choice) => (
-					<ChoiceContainer key={choice.id}>
+					<Box key={choice.id} height="h-[64px]" className="mt-[12px]">
 						<div
 							className={`w-full flex items-center rounded justify-between px-[22.09px]  ${
 								choice.isChecked && 'bg-green-200 border-[1px] border-[#1CB576]'
@@ -56,12 +60,13 @@ export default function CreateQuizScreen({ quizIdx, submitQuizHandler }: Props) 
 								checkHandler={() => checkAnswer(quizIdx, choice.id)}
 							/>
 						</div>
-					</ChoiceContainer>
+					</Box>
 				))}
+				<BackAlertModal isModalOpen={isModalOpen} onCloseModal={() => setIsModalOpen(false)} />
 			</div>
-			<QuizPageController
-				quizPage={QUIZ_PAGE}
-				quizzesLength={quizzes.length}
+			<PageController
+				curPage={QUIZ_PAGE}
+				pagesLength={quizzes.length}
 				finishWord="제출하기"
 				toPrevHandler={toPrevHandler}
 				toNextHandler={toNextHandler}
