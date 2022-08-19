@@ -1,13 +1,13 @@
 import React from 'react';
 import Box from '@app.component/box';
 import RequireMark from '@app.component/requireMark/RequireMark';
-import LayoutCreateDetailObjectByInput from '../component/layout/LayoutCreateDetailObjectByInput';
+import LayoutCreateDetailGoalByInput from '../component/layout/LayoutCreateDetailGoalByInput';
 
 /* id1 = 스터디 기간 */
 export default function CreateDetailObjectScreenByDate() {
 	return (
 		<div>
-			<LayoutCreateDetailObjectByInput
+			<LayoutCreateDetailGoalByInput
 				title="세부 목표 날짜를 작성해주세요."
 				content={
 					<div>

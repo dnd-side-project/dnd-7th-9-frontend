@@ -10,7 +10,7 @@ interface Props {
 	count: number;
 }
 
-export default function ControlCountCreateDetailObject({ minCount = 1, maxCount = 5, count }: Props) {
+export default function ControlCountDetailObject({ minCount = 1, maxCount = 5, count }: Props) {
 	return (
 		<div className="flex">
 			<button type="button">{minCount >= count ? <DisabledMinusIcon /> : <MinusIcon />}</button>

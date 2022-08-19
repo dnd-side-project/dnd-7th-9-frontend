@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import ControlCountCreateDetailObject from '../control/ControlCountCreateDetailObject';
+import ControlCountDetailObject from '../control/ControlCountDetailGoal';
 
 interface Props {
 	title: string;
@@ -10,7 +10,7 @@ interface Props {
 	count: number;
 }
 
-export default function LayoutCreateDetailObjectBySelect({
+export default function LayoutCreateDetailGoalBySelect({
 	title,
 	svgIcon,
 	description,
@@ -23,7 +23,7 @@ export default function LayoutCreateDetailObjectBySelect({
 			<h1 className="text-black-400 text-title2 font-bold mt-[83px] mb-[103px]">{title}</h1>
 			<div>{svgIcon}</div>
 			<p className="text-black-400 text-headline font-medium mt-[102px] mb-[35px]">{description}</p>
-			<ControlCountCreateDetailObject minCount={minCount} maxCount={maxCount} count={count} />
+			<ControlCountDetailObject minCount={minCount} maxCount={maxCount} count={count} />
 		</div>
 	);
 }

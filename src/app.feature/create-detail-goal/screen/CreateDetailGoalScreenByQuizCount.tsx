@@ -1,12 +1,12 @@
 import React from 'react';
 import QuizIcon from '@assets/create-detail-object/quiz.svg';
-import LayoutCreateDetailObjectBySelect from '../component/layout/LayoutCreateDetailObjectBySelect';
+import LayoutCreateDetailGoalBySelect from '../component/layout/LayoutCreateDetailGoalBySelect';
 
 /* id3 = 몇 개의 문제를 내야하는지 */
-export default function CreateDetailObjectScreenByQuizCount() {
+export default function CreateDetailGoalScreenByQuizCount() {
 	return (
 		<div>
-			<LayoutCreateDetailObjectBySelect
+			<LayoutCreateDetailGoalBySelect
 				title="문제집 하나당"
 				description="몇 개의 문제를 내야 하나요?"
 				svgIcon={<QuizIcon />}

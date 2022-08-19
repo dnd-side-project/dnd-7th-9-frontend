@@ -1,12 +1,12 @@
 import React from 'react';
 import Input from '@app.component/input';
-import LayoutCreateDetailObjectByInput from '../component/layout/LayoutCreateDetailObjectByInput';
+import LayoutCreateDetailGoalByInput from '../component/layout/LayoutCreateDetailGoalByInput';
 
 /* id2 = 세부 목표 */
-export default function CreateDetailObjectScreenByObject() {
+export default function CreateDetailGoalScreenByContent() {
 	return (
 		<div>
-			<LayoutCreateDetailObjectByInput
+			<LayoutCreateDetailGoalByInput
 				title="세부 목표를 작성해주세요."
 				content={
 					<div>
