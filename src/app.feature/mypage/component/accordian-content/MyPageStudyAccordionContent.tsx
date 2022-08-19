@@ -25,6 +25,7 @@ export default function MyPageStudyAccordionContent({ goal, groupId, achieveRate
 					<p className="text-small font-regular text-[#222222]">{achieveRate}%</p>
 				</div>
 			</div>
+			{/* TODO : 버튼 클릭시 스터디 자세히 보기 라우터 이동 */}
 			<DefaultButton text="자세히 보기" />
 		</div>
 	);
