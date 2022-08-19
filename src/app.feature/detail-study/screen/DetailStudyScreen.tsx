@@ -60,8 +60,8 @@ const chartOptions = {
 	},
 };
 export default function DetailStudyScreen({ studyId }: Props) {
-	const router = useRouter();
 	const [curGoalId, setCurGoalId] = useState<number>(0); // temp
+	const [collectionType, setCollectionType] = useState<'team' | 'personal'>('team'); // temp
 	return (
 		<div>
 			<DetailStudyHeader />
@@ -116,12 +116,17 @@ export default function DetailStudyScreen({ studyId }: Props) {
 				</div>
 				<div className="mt-[22.93px] pt-[15.55px] px-[15.55px] rounded-t-[25px] drop-shadow-white bg-background-white -mx-[20px] ">
 					<div className="flex justify-around">
-						<button type="button" className="w-[88.72px] p-[10px] border-b-[4px] border-main">
-							<span className="text-[#999999] font-medium text-body1">팀</span>
-						</button>
-						<button type="button" className="w-[88.72px] p-[10px]">
-							<span className="text-[#999999] font-medium text-body1">개인</span>
-						</button>
+						{['team', 'personal'].map((type) => (
+							<button
+								type="button"
+								onClick={() => setCollectionType(type)}
+								className={`w-[88.72px] pt-[10px] px-[10px]  ${
+									collectionType === type ? 'pb-[6px] border-b-[4px] border-main' : 'pb-[10px]'
+								}`}
+							>
+								<span className="text-[#999999] font-medium text-body1">{type === 'team' ? '팀' : '개인'}</span>
+							</button>
+						))}
 					</div>
 					<div className="mt-[41.71px]">
 						<div className="grid place-items-center mt-[31px]">
@@ -151,33 +156,22 @@ export default function DetailStudyScreen({ studyId }: Props) {
 							</div>
 							<div className="-mt-[185px] w-full h-[36.15px] bg-background-white " />
 							<div className="-mt-[95px] pb-[30px] w-full bg-background-white ">
-								<div className="space-y-[14px]">
-									<div className="rounded bg-[#EFF3F6] p-[16px] space-y-[15px]">
-										<span className="font-medium text-black-500 text-headline">내 문제집</span>
-										<div className="flex justify-between">
-											<div className="flex items-center space-x-[6px]">
-												<div className="bg-[#E2EFFF] rounded-full w-[30px] h-[30px]" />
-												<span className="text-black-500 font-regular text-caption">박수정</span>
+								<div className="space-y-[14px] h-[357.83px] overflow-y-auto">
+									{[1, 1, 1, 1].map(() => (
+										<div className="rounded bg-[#EFF3F6] p-[16px] space-y-[15px]">
+											<span className="font-medium text-black-500 text-headline">내 문제집</span>
+											<div className="flex justify-between">
+												<div className="flex items-center space-x-[6px]">
+													<div className="bg-[#E2EFFF] rounded-full w-[30px] h-[30px]" />
+													<span className="text-black-500 font-regular text-caption">박수정</span>
+												</div>
+												<button type="button" className="flex items-center space-x-[10.56px]">
+													<span className="text-brown font-bold text-small2">7명 풀이 완료</span>
+													<ArrowBottomIcon />
+												</button>
 											</div>
-											<button type="button" className="flex items-center space-x-[10.56px]">
-												<span className="text-brown font-bold text-small2">7명 풀이 완료</span>
-												<ArrowBottomIcon />
-											</button>
 										</div>
-									</div>
-									<div className="rounded bg-[#EFF3F6] p-[16px] space-y-[15px]">
-										<span className="font-medium text-black-500 text-headline">내 문제집</span>
-										<div className="flex justify-between">
-											<div className="flex items-center space-x-[6px]">
-												<div className="bg-[#E2EFFF] rounded-full w-[30px] h-[30px]" />
-												<span className="text-black-500 font-regular text-caption">박수정</span>
-											</div>
-											<button type="button" className="flex items-center space-x-[10.56px]">
-												<span className="text-brown font-bold text-small2">7명 풀이 완료</span>
-												<ArrowBottomIcon />
-											</button>
-										</div>
-									</div>
+									))}
 								</div>
 							</div>
 						</div>
