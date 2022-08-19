@@ -6,6 +6,7 @@ import MyPageUserProfile from '../component/profile/MyPageUserProfile';
 import MyPageStudyCategory from '../component/category/MyPageStudyCategory';
 import MyPageStudyStatusToggle from '../component/toggle/MyPageStudyStatusToggle';
 import MyPageStudyAccordionContent from '../component/accordian-content/MyPageStudyAccordionContent';
+import MyPageNoneStudyScreen from './MyPageNoneStudyScreen';
 
 interface IStudyList {
 	groupId: number;
@@ -69,6 +70,14 @@ export default function MyPageScreen() {
 		},
 	];
 
+	const filteredStudyList = studyList.filter(
+		(study) =>
+			(category !== 'all' && study.groupCategory === category && study.groupStatus === toggle) ||
+			(category === 'all' && study.groupStatus === toggle && study.groupStatus === toggle)
+	);
+
+	console.log(filteredStudyList);
+
 	return (
 		<div>
 			{/* 프로필 영역 */}
@@ -82,12 +91,9 @@ export default function MyPageScreen() {
 
 			{/* 스터디 리스트 영역 */}
 			<section>
-				{studyList.map((study) => {
-					if (
-						(category !== 'all' && study.groupCategory === category && study.groupStatus === toggle) ||
-						(category === 'all' && study.groupStatus === toggle && study.groupStatus === toggle)
-					)
-						return (
+				{filteredStudyList.length ? (
+					<div>
+						{filteredStudyList.map((study) => (
 							<Accordion
 								className="mb-[10px]"
 								icon={<CategoryIcon type={study.groupCategory} />}
@@ -97,9 +103,11 @@ export default function MyPageScreen() {
 									<MyPageStudyAccordionContent goal={study.groupGoal} groupId={study.groupId} achieveRate={80} />
 								}
 							/>
-						);
-					return null; // TO DO : 스터디 그룹 없을 때 보여줄 화면
-				})}
+						))}
+					</div>
+				) : (
+					<MyPageNoneStudyScreen status={toggle} />
+				)}
 			</section>
 		</div>
 	);
