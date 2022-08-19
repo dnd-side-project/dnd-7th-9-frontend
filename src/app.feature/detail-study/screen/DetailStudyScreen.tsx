@@ -60,6 +60,59 @@ const chartOptions = {
 		},
 	},
 };
+function MyCollection() {
+	const [isOpenedAccordion, setIsOpenedAccordion] = useState(false);
+	const handleAccordion = () => setIsOpenedAccordion(!isOpenedAccordion);
+	return (
+		<div className="bg-[#EFF3F6] rounded">
+			<div className={`  p-[16px] space-y-[15px] `}>
+				<span className="font-medium text-black-500 text-headline">내 문제집</span>
+				<div className="flex justify-between">
+					<div className="flex items-center space-x-[6px]">
+						<div className="bg-[#E2EFFF] rounded-full w-[30px] h-[30px]" />
+						<span className="text-black-500 font-regular text-caption">박수정</span>
+					</div>
+					{true ? (
+						<button
+							type="button"
+							onClick={() => setIsOpenedAccordion((prev) => !prev)}
+							className="flex items-center space-x-[10.56px]"
+						>
+							<span className="text-brown font-bold text-small2">7명 풀이 완료</span>
+							<ArrowBottomIcon />
+						</button>
+					) : (
+						<DefaultButton text="수정하기" size="small" width="w-[109.77px]" />
+					)}
+				</div>
+			</div>
+			<div
+				className={`
+	${isOpenedAccordion ? 'visible  ' : 'invisible h-0'}
+ 
+	`}
+			>
+				<hr className="text-[#D9D9D9] mb-[16px]" />
+				<div className="  px-[16px] pb-[16px] grid grid-cols-3 gap-x-auto  gap-y-[25px]">
+					{[1, 1, 1, 1, 1, 1].map((_, index) => (
+						// eslint-disable-next-line react/no-array-index-key
+						<div key={index} className="flex items-center space-x-[6px]">
+							<div className="bg-green-500 rounded-full w-[30px] h-[30px]" />
+							<span className="text-black-500 font-regular text-caption">박수정</span>
+						</div>
+					))}
+				</div>
+			</div>
+		</div>
+	);
+}
+/*
+<div key={index} className="flex items-center space-x-[6px]">
+							<div className="bg-green-500 rounded-full w-[30px] h-[30px]" />
+							<span className="text-black-500 font-regular text-caption">박수정</span>
+						</div>
+*/
+
 export default function DetailStudyScreen({ studyId }: Props) {
 	const [curGoalId, setCurGoalId] = useState<number>(0); // temp
 	const [collectionType, setCollectionType] = useState<'team' | 'personal'>('team'); // temp
@@ -129,6 +182,7 @@ export default function DetailStudyScreen({ studyId }: Props) {
 							</button>
 						))}
 					</div>
+
 					<div className="mt-[41.71px]">
 						<div className="grid place-items-center mt-[31px]">
 							<div>
@@ -159,23 +213,7 @@ export default function DetailStudyScreen({ studyId }: Props) {
 							<div className="-mt-[95px] pb-[30px] w-full bg-background-white ">
 								<div className="space-y-[14px] h-[357.83px] overflow-y-auto">
 									{[1, 1, 1, 1].map(() => (
-										<div className="rounded bg-[#EFF3F6] p-[16px] space-y-[15px]">
-											<span className="font-medium text-black-500 text-headline">내 문제집</span>
-											<div className="flex justify-between">
-												<div className="flex items-center space-x-[6px]">
-													<div className="bg-[#E2EFFF] rounded-full w-[30px] h-[30px]" />
-													<span className="text-black-500 font-regular text-caption">박수정</span>
-												</div>
-												{false ? (
-													<button type="button" className="flex items-center space-x-[10.56px]">
-														<span className="text-brown font-bold text-small2">7명 풀이 완료</span>
-														<ArrowBottomIcon />
-													</button>
-												) : (
-													<DefaultButton text="수정하기" size="small" width="w-[109.77px]" />
-												)}
-											</div>
-										</div>
+										<MyCollection />
 									))}
 								</div>
 							</div>
@@ -186,9 +224,3 @@ export default function DetailStudyScreen({ studyId }: Props) {
 		</div>
 	);
 }
-/*
-
-<div className="" />
-								
-
-								*/
