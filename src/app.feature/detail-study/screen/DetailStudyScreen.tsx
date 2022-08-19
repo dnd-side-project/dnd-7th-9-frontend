@@ -13,6 +13,7 @@ import DocumentIcon from '@assets/study/fluent_document-edit-20-regular.svg';
 import ArrowBottomIcon from '@assets/main/arrow-bottom.svg';
 import ArrowTopIcon from '@assets/main/arrow-top.svg';
 import { useState } from 'react';
+import DefaultButton from '@app.component/button/DefaultButton';
 
 interface Props {
 	studyId: string;
@@ -165,10 +166,14 @@ export default function DetailStudyScreen({ studyId }: Props) {
 													<div className="bg-[#E2EFFF] rounded-full w-[30px] h-[30px]" />
 													<span className="text-black-500 font-regular text-caption">박수정</span>
 												</div>
-												<button type="button" className="flex items-center space-x-[10.56px]">
-													<span className="text-brown font-bold text-small2">7명 풀이 완료</span>
-													<ArrowBottomIcon />
-												</button>
+												{false ? (
+													<button type="button" className="flex items-center space-x-[10.56px]">
+														<span className="text-brown font-bold text-small2">7명 풀이 완료</span>
+														<ArrowBottomIcon />
+													</button>
+												) : (
+													<DefaultButton text="수정하기" size="small" width="w-[109.77px]" />
+												)}
 											</div>
 										</div>
 									))}

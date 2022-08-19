@@ -23,7 +23,7 @@ export default function BackAlertModal({ isModalOpen, onCloseModal }: Props) {
 					<br />
 					별도로 저장되지 않아요.
 				</span>
-				<DefaultButton text="페이지 나가기" onClick={() => router.back()} />
+				<DefaultButton text="페이지 나가기" size="middle" onClick={() => router.back()} />
 			</div>
 		</Modal>
 	);
