@@ -6,7 +6,7 @@ import TestIcon from '@assets/category/test-icon.svg';
 
 interface Props {
 	className?: string;
-	type: 'certification' | 'company' | 'language' | 'test';
+	type: 'certification' | 'company' | 'language' | 'etc';
 	colored?: boolean;
 }
 
@@ -34,7 +34,7 @@ export default function CategoryIcon({ className, type, colored = true }: Props)
 				</section>
 			),
 		},
-		test: {
+		etc: {
 			icon: (
 				<section className={`${colored ? 'bg-[#F5F7F5]' : 'bg-background-white'} ${baseStyle}`}>
 					<TestIcon className="m-auto" width="20px" height="20px" viewBox="0 0 20 40" />

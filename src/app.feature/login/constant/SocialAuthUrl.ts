@@ -1,3 +1,3 @@
-export const KAKAO_AUTH_URL = `${process.env.API_URL}/oauth2/authorization/kakao`;
-export const NAVER_AUTH_URL = `${process.env.API_URL}/oauth2/authorization/naver`;
-export const GOOGLE_AUTH_URL = `${process.env.API_URL}/oauth2/authorization/google`;
+export const KAKAO_AUTH_URL = `${process.env.API_URL}/oauth/login/kakao`;
+export const NAVER_AUTH_URL = `${process.env.API_URL}/oauth/login/naver`;
+export const GOOGLE_AUTH_URL = `${process.env.API_URL}/oauth/login/google`;

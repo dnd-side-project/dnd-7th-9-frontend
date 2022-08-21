@@ -24,6 +24,8 @@ module.exports = {
 				// error
 				'error-red': '#FF8080',
 				'error-green': 'rgba(36, 205, 136, 0.3)',
+				// profile
+				'profile-green': 'rgba(36, 205, 136, 0.1)',
 			},
 			borderRadius: {
 				DEFAULT: '10px',
