@@ -1,9 +1,12 @@
 import React from 'react';
 import QuizIcon from '@assets/create-detail-object/quiz.svg';
+import { useCreateDetailGoalStore } from '@app.modules/store/create-detail-goal/createDetailGoal';
 import LayoutCreateDetailGoalBySelect from '../component/layout/LayoutCreateDetailGoalBySelect';
 
 /* id3 = 몇 개의 문제를 내야하는지 */
 export default function CreateDetailGoalScreenByQuizCount() {
+	const { updateDetailGoalContent } = useCreateDetailGoalStore();
+
 	return (
 		<div>
 			<LayoutCreateDetailGoalBySelect

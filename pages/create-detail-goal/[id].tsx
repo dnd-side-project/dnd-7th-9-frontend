@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NextPage } from 'next';
-import { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
 import PageController from '@app.component/pageController/PageController';
 import CreateDetailGoalScreenByDate from '@app.feature/create-detail-goal/screen/CreateDetailGoalScreenByDate';
 import CreateDetailGoalScreenByContent from '@app.feature/create-detail-goal/screen/CreateDetailGoalScreenByContent';
@@ -8,32 +8,14 @@ import CreateDetailGoalScreenByQuizCount from '@app.feature/create-detail-goal/s
 import CreateDetailGoalScreenBySolveQuiz from '@app.feature/create-detail-goal/screen/CreateDetailGoalScreenBySolveQuiz';
 import CreateDetailGoalScreenByCorrectCount from '@app.feature/create-detail-goal/screen/CreateDetailGoalScreenByCorrectCount';
 import CreateDetailGoalScreenByPassMember from '@app.feature/create-detail-goal/screen/CreateDetailGoalScreenByPassMember';
-
-interface ICreateObjectRequest {
-	studyGroupId: number;
-	goalContent: string;
-	goalStartDate: string;
-	goalEndDate: string;
-	minQuestionPerQuestionBook: number;
-	minSolveQuestionBook: number;
-	minAnswerPerQuestionBook: number;
-	minPersonPerQuestionBook: number;
-}
+import { useCreateDetailGoalStore } from '@app.modules/store/create-detail-goal/createDetailGoal';
 
 const CreateDetailGoal: NextPage = () => {
 	const router = useRouter();
 	const { id } = router.query;
 
-	const createObjectRequest: ICreateObjectRequest = {
-		studyGroupId: 0,
-		goalContent: '',
-		goalStartDate: '',
-		goalEndDate: '',
-		minQuestionPerQuestionBook: 3,
-		minSolveQuestionBook: 3,
-		minAnswerPerQuestionBook: 3,
-		minPersonPerQuestionBook: 5,
-	};
+	// TO DO : 각 스크린에서 request 값 저장
+	const { request, resetRequest } = useCreateDetailGoalStore();
 
 	return (
 		<div>
@@ -51,16 +33,17 @@ const CreateDetailGoal: NextPage = () => {
 			{id === '6' && <CreateDetailGoalScreenByPassMember />}
 
 			<PageController
-				curPage={1}
-				pagesLength={1}
+				curPage={Number(id)}
+				pagesLength={6}
 				toPrevHandler={() => {
-					console.log('이전');
+					Router.push(`/create-detail-goal/${Number(id) - 1}`);
 				}}
 				toNextHandler={() => {
-					console.log('다음');
+					Router.push(`/create-detail-goal/${Number(id) + 1}`);
 				}}
 				finishHandler={() => {
-					console.log('끝');
+					// TO DO : API 연동
+					resetRequest();
 				}}
 				finishWord="끝내기"
 			/>
