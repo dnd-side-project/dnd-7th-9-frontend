@@ -6,13 +6,13 @@ export default function DetailGoals() {
 	const [curGoalId, setCurGoalId] = useState<number>(0); // temp
 	return (
 		<>
-			<div className="flex items-center mt-[160.13px] space-x-[9.25px]">
-				<div>
+			<div className="flex justify-between items-center mt-[160.13px] ">
+				<div className="flex  items-center space-x-[9.25px]">
 					<span className="text-body2 text-black-400 font-medium ">전체 목표</span>
 					<span className=" text-body2 text-slate font-medium ">오픽 AL 달성</span>
 				</div>
 
-				<DefaultButton text="수정하기" size="small" width="w-[109.77px]" />
+				{false && <DefaultButton text="달성완료" size="small" width="w-[109.77px]" />}
 			</div>
 			<div className="mt-[19.87px]  pt-[36.72px] bg-background-white -mx-[20px] px-[20px] pb-[29.08px] ">
 				<span className="text-black-500 font-medium text-body2">세부 목표</span>
