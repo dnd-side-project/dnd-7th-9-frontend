@@ -1,4 +1,4 @@
-import DetailStudyHeader from '@app.feature/detail-study/component/header';
+import DetailStudyHeader from '@app.feature/detail-study/component/Header';
 import PlusIcon from '@assets/study/plus_icon.svg';
 
 import DetailGoals from '@app.feature/detail-study/component/DetailGoals';
