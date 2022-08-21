@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router';
-import ProgressBar from '@app.component/progressBar';
-import ChoiceContainer from '@app.feature/quiz/component/container/ChoiceContainer';
 import ProgressHeader from '@app.component/header/Progress';
 import PageController from '@app.component/pageController/PageController';
 import XIcon from '@assets/quiz/akar-icons_circle-x.svg';
 import OIcon from '@assets/quiz/bi_check-circle-fill.svg';
 import Box from '@app.component/box';
+import { useState } from 'react';
+import ReportIssueModal from '@app.component/modal/ReportIssueModal';
 
 interface Props {
 	quizIdx: number;
@@ -62,7 +62,7 @@ function Choice({ content, isChecked, isAnswer }: TempProps) {
 // 임시로 5문제를 가진 문제집의 1페이지로 설정
 export default function CreateQuizScreen({ quizIdx, endQuizHandler }: Props) {
 	const router = useRouter();
-
+	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 	// const { quizzes, checkAnswer } = useSolveQuizStore();
 	const QUIZ_PAGE = quizIdx + 1;
 	const toPrevHandler = () => {
@@ -92,11 +92,16 @@ export default function CreateQuizScreen({ quizIdx, endQuizHandler }: Props) {
 							<Choice content={choice.content} isChecked={choice.isChecked} isAnswer={choice.isAnswer} />
 						</Box>
 					))}
-					<button type="button" className="px-[26px] py-[6px]  bg-background-white rounded">
+					<button
+						type="button"
+						onClick={() => setIsModalOpen(true)}
+						className="px-[26px] py-[6px]  bg-background-white rounded"
+					>
 						<span className=" text-slate font-regular text-small">정답이 이상해요</span>
 					</button>
 				</div>
 			</div>
+			<ReportIssueModal isModalOpen={isModalOpen} onCloseModal={() => setIsModalOpen(false)} />
 			<PageController
 				curPage={QUIZ_PAGE}
 				pagesLength={quizzes.length}
