@@ -6,6 +6,7 @@ import PageController from '@app.component/pageController/PageController';
 import BackAlertModal from '@app.component/modal/BackAlertModal';
 
 import { useState } from 'react';
+import Url from '@app.modules/constant/url';
 
 interface Props {
 	children: React.ReactNode;

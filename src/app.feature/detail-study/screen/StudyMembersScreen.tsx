@@ -14,8 +14,8 @@ export default function StudyMemberScreen({ studyId }: Props) {
 			</div>
 			<div className="bg-background-white h-screen -mx-[20px] mt-[120px]">
 				<div className="  divide-y-[1px] divide-gray ">
-					{[1, 1, 1, 1, 1, 1].map((_, index) => (
-						<div className="px-[20px] py-[14px] flex items-center justify-between">
+					{[1, 1, 1, 1, 1, 1, 1, 1, 1, 1].map((_, index) => (
+						<div className="px-[20px] bg-background-white py-[14px] flex items-center justify-between">
 							<div className="flex items-center space-x-[18px]">
 								<div className="bg-[#E2EFFF] rounded-full w-[30px] h-[30px]" />
 								<span className="text-black-500 font-medium text-body2">박수정</span>
