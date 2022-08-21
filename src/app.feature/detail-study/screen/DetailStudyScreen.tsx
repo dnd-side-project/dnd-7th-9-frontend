@@ -64,8 +64,8 @@ function MyCollection() {
 	const [isOpenedAccordion, setIsOpenedAccordion] = useState(false);
 	const handleAccordion = () => setIsOpenedAccordion(!isOpenedAccordion);
 	return (
-		<div className="bg-[#EFF3F6] rounded">
-			<div className={`  p-[16px] space-y-[15px] `}>
+		<div className="bg-[#EFF3F6] rounded w-full">
+			<div className="rounded-t  p-[16px] space-y-[15px]">
 				<span className="font-medium text-black-500 text-headline">내 문제집</span>
 				<div className="flex justify-between">
 					<div className="flex items-center space-x-[6px]">
@@ -93,11 +93,11 @@ function MyCollection() {
 	`}
 			>
 				<hr className="text-[#D9D9D9] mb-[16px]" />
-				<div className="  px-[16px] pb-[16px] grid grid-cols-3 gap-x-auto  gap-y-[25px]">
+				<div className="   pb-[16px] grid grid-cols-3 place-items-center  gap-y-[25px]">
 					{[1, 1, 1, 1, 1, 1].map((_, index) => (
 						// eslint-disable-next-line react/no-array-index-key
 						<div key={index} className="flex items-center space-x-[6px]">
-							<div className="bg-green-500 rounded-full w-[30px] h-[30px]" />
+							<div className="bg-[#E2EFFF] rounded-full w-[30px] h-[30px]" />
 							<span className="text-black-500 font-regular text-caption">박수정</span>
 						</div>
 					))}
@@ -211,7 +211,7 @@ export default function DetailStudyScreen({ studyId }: Props) {
 							</div>
 							<div className="-mt-[185px] w-full h-[36.15px] bg-background-white " />
 							<div className="-mt-[95px] pb-[30px] w-full bg-background-white ">
-								<div className="space-y-[14px] h-[357.83px] overflow-y-auto">
+								<div className="space-y-[14px]  h-[357.83px] overflow-y-auto">
 									{[1, 1, 1, 1].map(() => (
 										<MyCollection />
 									))}
