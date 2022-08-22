@@ -5,7 +5,7 @@ import RequireMark from './RequireMark';
 
 export default {
 	component: RequireMark,
-	title: '@app.feature/create-study/component/RequireMark',
+	title: 'app.component/RequireMark',
 } as ComponentMeta<typeof RequireMark>;
 
 const Template: ComponentStory<typeof RequireMark> = (args) => <RequireMark {...args} />;
