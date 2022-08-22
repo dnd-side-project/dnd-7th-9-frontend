@@ -4,17 +4,22 @@ import BellIcon from '@assets/main/eva_bell-outline.svg';
 import UpdatedQuizCard from '../component/card/UpdatedQuizCard';
 
 interface IQuiz {
-	updateTime: number;
-	userName: string;
-	studyTitle: string;
-	week: number;
+	questionBookId: number;
+	goalContent: string;
+	userNickName: string;
+	userProfileImageUrl?: string | null;
+	studyGroupName: string;
+	questionCreatedAt: string;
+	solved: boolean;
 }
 
 interface Props {
-	quizData: IQuiz[];
+	updatedQuizData: IQuiz[];
 }
 
-export default function UpdatedQuizScreen({ quizData }: Props) {
+export default function UpdatedQuizScreen({ updatedQuizData }: Props) {
+	const nowDate = new Date();
+
 	return (
 		<div>
 			<div className="flex justify-between mt-[40px] mb-[55px]">
@@ -22,15 +27,25 @@ export default function UpdatedQuizScreen({ quizData }: Props) {
 				<BellIcon className="cursor-pointer" />
 			</div>
 			<div className="h-full scroll-auto">
-				{quizData.map((quiz) => (
-					<UpdatedQuizCard
-						className="mb-[10px]"
-						updateTime={quiz.updateTime}
-						userName={quiz.userName}
-						studyTitle={quiz.studyTitle}
-						week={quiz.week}
-					/>
-				))}
+				{updatedQuizData.map((quiz) => {
+					const createdDate = Date.parse(quiz.questionCreatedAt);
+					const updateTime = (nowDate.getTime() - createdDate) / 1000;
+
+					return (
+						<div>
+							{!quiz.solved && (
+								<UpdatedQuizCard
+									key={quiz.questionBookId}
+									className="mb-[10px]"
+									updateTime={updateTime}
+									userNickName={quiz.userNickName}
+									studyGroupName={quiz.studyGroupName}
+									goalContent={quiz.goalContent}
+								/>
+							)}
+						</div>
+					);
+				})}
 			</div>
 		</div>
 	);

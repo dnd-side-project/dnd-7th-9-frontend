@@ -6,12 +6,12 @@ import { transformSecond } from '@app.modules/util';
 interface Props {
 	className?: string;
 	updateTime: number;
-	userName: string;
-	studyTitle: string;
-	week: number;
+	userNickName: string;
+	studyGroupName: string;
+	goalContent: string;
 }
 
-export default function UpdatedQuizCard({ className, updateTime, userName, studyTitle, week }: Props) {
+export default function UpdatedQuizCard({ className, updateTime, userNickName, studyGroupName, goalContent }: Props) {
 	return (
 		<div className={`px-[18px] bg-background-white rounded drop-shadow-white ${className}`}>
 			<div className="flex justify-end pt-[10px]">
@@ -25,11 +25,11 @@ export default function UpdatedQuizCard({ className, updateTime, userName, study
 					</div>
 					<div>
 						<div className="flex">
-							<span className="text-small text-brown font-regular">{userName}</span>
+							<span className="text-small text-brown font-regular">{userNickName}</span>
 							<hr className="border border-brown h-[9px] my-auto ml-[6px] mr-[9px]" />
-							<span className="text-small text-brown font-bold">{studyTitle}</span>
+							<span className="text-small text-brown font-bold">{studyGroupName}</span>
 						</div>
-						<p className="text-body1 font-medium">{week}주차 목표 문제집</p>
+						<p className="text-body1 font-medium">{goalContent}</p>
 					</div>
 				</div>
 				<div className="my-auto">
