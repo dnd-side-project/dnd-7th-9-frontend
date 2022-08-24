@@ -14,15 +14,15 @@ const SolveQuiz: NextPage = () => {
 
 	const [questionBookData, setQuestionBookData] = useState(InitQuestionBookData);
 
-	// const query = useQuery(['question', questionBookId], () => fetchGetQuestionBook(questionBookId), {
-	// 	onSuccess: (data) => {
-	// 		setQuestionBookData(data);
-	// 	},
-	// 	onError: () => {
-	// 		alert('알 수 없는 에러가 발생했습니다.');
-	// 		router.push('/');
-	// 	},
-	// });
+	const query = useQuery(['question', questionBookId], () => fetchGetQuestionBook(questionBookId), {
+		onSuccess: (data) => {
+			setQuestionBookData(data);
+		},
+		onError: () => {
+			alert('알 수 없는 에러가 발생했습니다.');
+			router.push('/');
+		},
+	});
 
 	useEffect(() => {
 		if (!router.isReady) return;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useMutation } from '@tanstack/react-query';
 import Box from '@app.component/box';
@@ -32,11 +32,9 @@ export default function CreateQuizScreen({ quizId, questionBookId, questionBookD
 
 	const [solveQuiz, setSolveQuiz] = useState({
 		questionBookId: Number(questionBookId),
-		solveDtoList: [
-			...questionBookData.questionList.map((question) => {
-				return { questionId: question.questionId, checkAnswer: -1 };
-			}),
-		],
+		solveDtoList: questionBookData.questionList.map((question) => {
+			return { questionId: question.questionId, checkAnswer: -1 };
+		}),
 	});
 
 	const mutation = useMutation((solvedQuizzes: IQuestionBookQuizEnd) => {
@@ -52,6 +50,15 @@ export default function CreateQuizScreen({ quizId, questionBookId, questionBookD
 		if (quizId > questionBookData.questionList.length) return;
 		router.push({ pathname: `/solve-quiz/${quizId + 1}`, query: { questionBookId } });
 	};
+
+	useEffect(() => {
+		setSolveQuiz({
+			questionBookId: Number(questionBookId),
+			solveDtoList: questionBookData.questionList.map((question) => {
+				return { questionId: question.questionId, checkAnswer: -1 };
+			}),
+		});
+	}, [questionBookData]);
 
 	return (
 		<div>
