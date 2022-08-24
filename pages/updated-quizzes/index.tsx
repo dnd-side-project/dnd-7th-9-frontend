@@ -1,34 +1,18 @@
 import type { NextPage } from 'next';
+import { useQuery } from '@tanstack/react-query';
 import UpdatedQuizScreen from '@app.feature/quiz/screen/UpdatedQuizScreen';
 import UpdatedQuizNoneScreen from '@app.feature/quiz/screen/UpdatedQuizNoneScreen';
-import { useQuery } from '@tanstack/react-query';
-import client from '@app.modules/api/client';
-import { AxiosError } from 'axios';
-
-interface IQuiz {
-	questionBookId: number;
-	goalContent: string;
-	userNickName: string;
-	userProfileImageUrl?: string | null;
-	studyGroupName: string;
-	questionCreatedAt: string;
-	solved: boolean;
-}
+import { IUpdatedQuiz } from '@app.feature/quiz/types';
+import { fetchGetUpdatedQuizzes } from '@app.feature/quiz/api';
 
 const UpdatedQuizzes: NextPage = () => {
-	// const DUMMY_QUIZ_DATA: IQuiz[] = [];
+	// const {
+	// 	data: updatedQuizData,
+	// 	isError,
+	// 	isLoading,
+	// } = useQuery(['question-book', 'list', 'live'], fetchGetUpdatedQuizzes);
 
-	const { data: updatedQuizData } = useQuery<IQuiz[], AxiosError>(
-		['question-book', 'list', 'live'],
-		() => client.get('/question-book/list/live'),
-		{
-			onSuccess: (res) => console.log(res),
-		}
-	);
-
-	console.log(updatedQuizData);
-
-	const DUMMY_QUIZ_DATA: IQuiz[] = [
+	const DUMMY_QUIZ_DATA: IUpdatedQuiz[] = [
 		{
 			questionBookId: 4,
 			goalContent: '이번주는 회고록 작성하기! + DND 문제 풀기',
@@ -39,7 +23,7 @@ const UpdatedQuizzes: NextPage = () => {
 			solved: false,
 		},
 		{
-			questionBookId: 4,
+			questionBookId: 6,
 			goalContent: '이번주는 회고록 작성하기! + DND 문제 풀기',
 			userNickName: '메롱',
 			userProfileImageUrl: null,
