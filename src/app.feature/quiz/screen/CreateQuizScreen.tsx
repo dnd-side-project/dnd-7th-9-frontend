@@ -8,7 +8,7 @@ import { useState } from 'react';
 import BackAlertModal from '@app.component/modal/BackAlertModal';
 import ProgressHeader from '@app.component/header/Progress';
 import Box from '@app.component/box';
-import ChoiceContainer from '../component/container/ChoiceContainer';
+
 import AnswerCheckButton from '../component/button/AnswerCheckButton';
 
 function GoalDetail() {
