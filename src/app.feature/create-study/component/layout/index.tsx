@@ -40,12 +40,16 @@ export default function Layout({ curPage, children, todo }: Props) {
 		}
 		return true;
 	};
-	// TO DO : Util 함수로 분리하기
-	const CheckDateValidation = (): boolean => {
+	const DateFormatter = (month: string, day: string) => {
 		const date = new Date();
 		const curYear = date.getFullYear();
-		const startDate = `${curYear}-${groupStartMonth}-${groupStartDay}`;
-		const endDate = `${curYear}-${groupEndMonth}-${groupEndDay}`;
+		return `${curYear}-${month.length === 1 ? `0${month}` : month}-${day.length === 1 ? `0${day}` : day}`;
+	};
+	// TO DO : Util 함수로 분리하기
+	const CheckDateValidation = (): boolean => {
+		const startDate = DateFormatter(groupStartMonth, groupStartDay);
+		const endDate = DateFormatter(groupEndMonth, groupEndDay);
+
 		const today = new Date();
 		const todayParse = Date.parse(`${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`);
 		if (

@@ -12,23 +12,23 @@ import useCreateStudyStore from '@app.feature/create-study/store';
 import { PostStudyBody } from '@app.feature/create-study/types';
 import { useMutation } from '@tanstack/react-query';
 import { postStudyGroup } from '@app.feature/create-study/api';
+import Url from '@app.modules/constant/url';
 
 const CreateStudy: NextPage = () => {
 	const router = useRouter();
 	const { study, initStudy } = useCreateStudyStore();
 	const { mutate: postStudy } = useMutation(() => postStudyGroup(study), {
-		onSuccess: (data) => {
-			console.log(data);
+		onSuccess: () => {
+			router.push('/complete/invite-member');
 		},
-		onError: (error) => {
-			console.log(error);
+		onError: () => {
+			initStudy();
+			alert('알 수 없는 에러가 발생했습니다.');
+			router.push(Url.home);
 		},
 	});
 	const submitHandler = () => {
 		postStudy();
-		console.log(study);
-		// initStudy();
-		router.push('/complete/invite-member');
 	};
 
 	if (router.query.id === '1') return <IntroduceStudyScreen />;
