@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Router, useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import { useMutation } from '@tanstack/react-query';
 import Box from '@app.component/box';
 import ProgressHeader from '@app.component/header/Progress';
@@ -9,11 +9,11 @@ import AnswerCheckButton from '@app.feature/quiz/component/button/AnswerCheckBut
 import { IQuestionBook, IQuestionBookQuizEnd } from '@app.feature/solve-quiz/types';
 import { fetchPostQuestionBookEnd } from '@app.feature/solve-quiz/api';
 
-function GoalDetail() {
+function GoalDetail({ goal, goalDescription }: { goal: string; goalDescription: string }) {
 	return (
 		<div className="flex flex-col">
-			<span className="text-slate text-small2 font-bold">1주차 목표</span>
-			<span className="mt-[4px] text-slate text-small1 font-regular">기본 동사 20개 암기하기</span>
+			<span className="text-slate text-small2 font-bold">{goal}</span>
+			<span className="mt-[4px] text-slate text-small1 font-regular">{goalDescription}</span>
 		</div>
 	);
 }
@@ -21,7 +21,7 @@ function GoalDetail() {
 interface Props {
 	quizId: number;
 	questionBookId: string | string[];
-	questionBookData: IQuestionBook[];
+	questionBookData: IQuestionBook;
 }
 
 // 임시로 5문제를 가진 문제집의 1페이지로 설정
@@ -29,10 +29,11 @@ export default function CreateQuizScreen({ quizId, questionBookId, questionBookD
 	const router = useRouter();
 
 	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
 	const [solveQuiz, setSolveQuiz] = useState({
 		questionBookId: Number(questionBookId),
 		solveDtoList: [
-			...questionBookData.map((question) => {
+			...questionBookData.questionList.map((question) => {
 				return { questionId: question.questionId, checkAnswer: -1 };
 			}),
 		],
@@ -48,33 +49,33 @@ export default function CreateQuizScreen({ quizId, questionBookId, questionBookD
 	};
 
 	const toNextHandler = () => {
-		if (quizId > questionBookData.length) return;
+		if (quizId > questionBookData.questionList.length) return;
 		router.push({ pathname: `/solve-quiz/${quizId + 1}`, query: { questionBookId } });
 	};
-
-	// console.log('questionBookData :: ', questionBookData);
-	// console.log('solveQuiz :: ', solveQuiz);
 
 	return (
 		<div>
 			<ProgressHeader
 				curPage={quizId}
-				pagesLength={questionBookData.length}
-				Description={<GoalDetail />}
+				pagesLength={questionBookData.questionList.length}
+				Description={
+					<GoalDetail goal={questionBookData.goalContent} goalDescription={questionBookData.questionBookContent} />
+				}
 				backAlertModalOpen={() => setIsModalOpen(true)}
 			/>
 			<div className="mt-[80px] mb-[120.07px]">
 				{/* 질문 */}
 				<span className="block mb-[40px] text-headline text-black-400 font-medium">
-					{questionBookData[quizId - 1].questionContent}
+					{questionBookData.questionList[quizId - 1].questionContent}
 				</span>
 
 				{/* 퀴즈 */}
-				{questionBookData[quizId - 1].optionList.map((option, optionIndex) => (
+				{questionBookData.questionList[quizId - 1].optionList.map((option, optionIndex) => (
 					<Box key={option.optionId} height="h-[64px]" className="mt-[12px]">
 						<div
 							className={`w-full flex items-center rounded justify-between px-[22.09px]
-							${solveQuiz.solveDtoList[quizId - 1].checkAnswer - 1 === optionIndex && 'bg-green-200 border-[1px] border-[#1CB576]'}`}
+							 ${solveQuiz.solveDtoList[quizId - 1].checkAnswer - 1 === optionIndex && 'bg-green-200 border-[1px] border-[#1CB576]'} 
+							`}
 						>
 							<span className=" text-body1 font-medium ">{option.optionContent}</span>
 
@@ -97,7 +98,7 @@ export default function CreateQuizScreen({ quizId, questionBookId, questionBookD
 			</div>
 			<PageController
 				curPage={quizId}
-				pagesLength={questionBookData.length}
+				pagesLength={questionBookData.questionList.length}
 				finishWord="제출하기"
 				toPrevHandler={toPrevHandler}
 				toNextHandler={toNextHandler}
