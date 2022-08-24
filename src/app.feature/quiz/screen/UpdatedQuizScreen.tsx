@@ -1,25 +1,15 @@
 import React from 'react';
+import Router from 'next/router';
 import PageTitle from '@app.component/title/PageTitle';
 import BellIcon from '@assets/main/eva_bell-outline.svg';
 import UpdatedQuizCard from '../component/card/UpdatedQuizCard';
-
-interface IQuiz {
-	questionBookId: number;
-	goalContent: string;
-	userNickName: string;
-	userProfileImageUrl?: string | null;
-	studyGroupName: string;
-	questionCreatedAt: string;
-	solved: boolean;
-}
+import { IUpdatedQuiz } from '../types';
 
 interface Props {
-	updatedQuizData: IQuiz[];
+	updatedQuizData: IUpdatedQuiz[];
 }
 
 export default function UpdatedQuizScreen({ updatedQuizData }: Props) {
-	const nowDate = new Date();
-
 	return (
 		<div>
 			<div className="flex justify-between mt-[40px] mb-[55px]">
@@ -28,21 +18,17 @@ export default function UpdatedQuizScreen({ updatedQuizData }: Props) {
 			</div>
 			<div className="h-full scroll-auto">
 				{updatedQuizData.map((quiz) => {
-					const createdDate = Date.parse(quiz.questionCreatedAt);
-					const updateTime = (nowDate.getTime() - createdDate) / 1000;
-
+					const handleRouterPushSolveQuiz = () =>
+						Router.push({ pathname: '/solve-quiz/1', query: { questionBookId: quiz.questionBookId } });
 					return (
-						<div>
-							{!quiz.solved && (
-								<UpdatedQuizCard
-									key={quiz.questionBookId}
-									className="mb-[10px]"
-									updateTime={updateTime}
-									userNickName={quiz.userNickName}
-									studyGroupName={quiz.studyGroupName}
-									goalContent={quiz.goalContent}
-								/>
-							)}
+						<div
+							key={quiz.questionBookId}
+							role="button"
+							onClick={handleRouterPushSolveQuiz}
+							onKeyPress={handleRouterPushSolveQuiz}
+							tabIndex={0}
+						>
+							{!quiz.solved && <UpdatedQuizCard key={quiz.questionBookId} className="mb-[10px]" quizData={quiz} />}
 						</div>
 					);
 				})}

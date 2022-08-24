@@ -1,17 +1,19 @@
+import axios from 'axios';
 import { getCookie, setCookie } from '@app.modules/cookie/cookie';
-import axios, { AxiosError } from 'axios';
 
 const client = axios.create({
 	baseURL: process.env.API_URL,
+	// TO DO : 추후 CORS 에러 해결시 수정
 	withCredentials: false,
 	headers: {
 		'Access-Control-Allow-Origin': 'http://localhost:3000/',
 	},
 });
+
 client.interceptors.request.use(
 	(config) => {
 		const token = localStorage.getItem('TEST_TOKEN');
-		console.log(token);
+
 		if (token) client.defaults.headers.common['Access-Token'] = token;
 
 		return config;

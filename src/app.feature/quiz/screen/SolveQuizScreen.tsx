@@ -1,11 +1,13 @@
-import { useRouter } from 'next/router';
-import AnswerCheckButton from '@app.feature/quiz/component/button/AnswerCheckButton';
-import useSolveQuizStore from '@app.modules/store/quiz/solveQuiz'; // temp
-import PageController from '@app.component/pageController/PageController';
-import ProgressHeader from '@app.component/header/Progress';
-import { useState } from 'react';
-import BackAlertModal from '@app.component/modal/BackAlertModal';
+import React, { useState } from 'react';
+import { Router, useRouter } from 'next/router';
+import { useMutation } from '@tanstack/react-query';
 import Box from '@app.component/box';
+import ProgressHeader from '@app.component/header/Progress';
+import BackAlertModal from '@app.component/modal/BackAlertModal';
+import PageController from '@app.component/pageController/PageController';
+import AnswerCheckButton from '@app.feature/quiz/component/button/AnswerCheckButton';
+import { IQuestionBook, IQuestionBookQuizEnd } from '@app.feature/solve-quiz/types';
+import { fetchPostQuestionBookEnd } from '@app.feature/solve-quiz/api';
 
 function GoalDetail() {
 	return (
@@ -15,48 +17,78 @@ function GoalDetail() {
 		</div>
 	);
 }
+
 interface Props {
-	quizIdx: number;
-	submitQuizHandler: () => void;
+	quizId: number;
+	questionBookId: string | string[];
+	questionBookData: IQuestionBook[];
 }
+
 // 임시로 5문제를 가진 문제집의 1페이지로 설정
-export default function CreateQuizScreen({ quizIdx, submitQuizHandler }: Props) {
+export default function CreateQuizScreen({ quizId, questionBookId, questionBookData }: Props) {
 	const router = useRouter();
+
 	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-	const { quizzes, checkAnswer } = useSolveQuizStore();
-	const QUIZ_PAGE = quizIdx + 1;
+	const [solveQuiz, setSolveQuiz] = useState({
+		questionBookId: Number(questionBookId),
+		solveDtoList: [
+			...questionBookData.map((question) => {
+				return { questionId: question.questionId, checkAnswer: -1 };
+			}),
+		],
+	});
+
+	const mutation = useMutation((solvedQuizzes: IQuestionBookQuizEnd) => {
+		return fetchPostQuestionBookEnd(solvedQuizzes);
+	});
+
 	const toPrevHandler = () => {
-		if (QUIZ_PAGE <= 1) return;
-		router.push(`/solve-quiz/${quizIdx}`);
+		if (quizId <= 1) return;
+		router.push({ pathname: `/solve-quiz/${quizId - 1}`, query: { questionBookId } });
 	};
+
 	const toNextHandler = () => {
-		if (QUIZ_PAGE >= quizzes.length) return;
-		router.push(`/solve-quiz/${QUIZ_PAGE + 1}`);
+		if (quizId > questionBookData.length) return;
+		router.push({ pathname: `/solve-quiz/${quizId + 1}`, query: { questionBookId } });
 	};
+
+	// console.log('questionBookData :: ', questionBookData);
+	// console.log('solveQuiz :: ', solveQuiz);
 
 	return (
 		<div>
 			<ProgressHeader
-				curPage={QUIZ_PAGE}
-				pagesLength={quizzes.length}
+				curPage={quizId}
+				pagesLength={questionBookData.length}
 				Description={<GoalDetail />}
 				backAlertModalOpen={() => setIsModalOpen(true)}
 			/>
 			<div className="mt-[80px] mb-[120.07px]">
-				<span className="block mb-[40px] text-headline text-black-400 font-medium">{quizzes[quizIdx].question}</span>
-				{quizzes[quizIdx].choices.map((choice) => (
-					<Box key={choice.id} height="h-[64px]" className="mt-[12px]">
+				{/* 질문 */}
+				<span className="block mb-[40px] text-headline text-black-400 font-medium">
+					{questionBookData[quizId - 1].questionContent}
+				</span>
+
+				{/* 퀴즈 */}
+				{questionBookData[quizId - 1].optionList.map((option, optionIndex) => (
+					<Box key={option.optionId} height="h-[64px]" className="mt-[12px]">
 						<div
-							className={`w-full flex items-center rounded justify-between px-[22.09px]  ${
-								choice.isChecked && 'bg-green-200 border-[1px] border-[#1CB576]'
-							}`}
+							className={`w-full flex items-center rounded justify-between px-[22.09px]
+							${solveQuiz.solveDtoList[quizId - 1].checkAnswer - 1 === optionIndex && 'bg-green-200 border-[1px] border-[#1CB576]'}`}
 						>
-							<span className=" text-body1 font-medium ">{choice.content}</span>
+							<span className=" text-body1 font-medium ">{option.optionContent}</span>
 
 							<AnswerCheckButton
 								ringColor="ring-[#1AB576]"
-								isChecked={choice.isChecked}
-								checkHandler={() => checkAnswer(quizIdx, choice.id)}
+								isChecked={solveQuiz.solveDtoList[quizId - 1].checkAnswer - 1 === optionIndex}
+								checkHandler={() => {
+									setSolveQuiz({
+										questionBookId: Number(questionBookId),
+										solveDtoList: solveQuiz.solveDtoList.map((answer, answerIndex) =>
+											answerIndex === quizId - 1 ? { ...answer, checkAnswer: optionIndex + 1 } : answer
+										),
+									});
+								}}
 							/>
 						</div>
 					</Box>
@@ -64,12 +96,16 @@ export default function CreateQuizScreen({ quizIdx, submitQuizHandler }: Props) 
 				<BackAlertModal isModalOpen={isModalOpen} onCloseModal={() => setIsModalOpen(false)} />
 			</div>
 			<PageController
-				curPage={QUIZ_PAGE}
-				pagesLength={quizzes.length}
+				curPage={quizId}
+				pagesLength={questionBookData.length}
 				finishWord="제출하기"
 				toPrevHandler={toPrevHandler}
 				toNextHandler={toNextHandler}
-				finishHandler={submitQuizHandler}
+				finishHandler={() => {
+					mutation.mutate(solveQuiz);
+
+					if (mutation.isSuccess) console.log('mutation Data :: ', mutation.data);
+				}}
 			/>
 		</div>
 	);

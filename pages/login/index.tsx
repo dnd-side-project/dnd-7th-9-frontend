@@ -17,6 +17,8 @@ const Login: NextPage = () => {
 		client.defaults.headers.common['Access-Token'] = accessToken;
 		console.log(client.defaults.headers);
 		localStorage.setItem('TEST_TOKEN', accessToken);
+		client.defaults.headers.common['Access-Token'] = accessToken;
+
 		setCookie('REFRESH_TOKEN', refreshToken, { path: '/', secure: true, sameSite: 'none' });
 
 		router.push('/');

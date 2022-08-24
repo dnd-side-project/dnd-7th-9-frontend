@@ -1,36 +1,51 @@
-import React, { useEffect } from 'react';
-
+import React from 'react';
 import { useRouter } from 'next/router';
+import { useQuery } from '@tanstack/react-query';
 import SolveQuizScreen from '@app.feature/quiz/screen/SolveQuizScreen';
-import useSolveQuizStore, { IQuiz } from '@app.modules/store/quiz/solveQuiz'; // temp
+import { fetchGetQuestionBook } from '@app.feature/solve-quiz/api';
+
 import type { NextPage } from 'next';
+
 // 임시로 5문제 만들기로 설정
 const SolveQuiz: NextPage = () => {
 	const router = useRouter();
+	const { questionBookId, id } = router.query;
 
-	const { quizzes, setInitQuizzes } = useSolveQuizStore();
+	// const {
+	// 	data: questionBookData,
+	// 	isError,
+	// 	isLoading,
+	// } = useQuery(['question', questionBookId], () => fetchGetQuestionBook(questionBookId));
 
-	const TEMP_QUIZZES: IQuiz[] = [1, 1, 1, 1, 1].map(() => ({
-		question: 'eat 뜻으로 옳은 것은?',
-		choices: [
-			{ id: 1, content: '먹다', isChecked: false },
-			{ id: 2, content: '보다', isChecked: false },
-			{ id: 3, content: '가다', isChecked: false },
-			{ id: 4, content: '놀다', isChecked: false },
-			{ id: 5, content: '입다', isChecked: false },
-		],
-	}));
+	const TEMP_QUIZ = [
+		{
+			questionId: 10,
+			questionContent: '고양이가 아닌 것은?',
+			optionList: [
+				{ optionId: 28, optionContent: '러시안블루', optionImageEnable: false, optionImageUrl: '' },
+				{ optionId: 29, optionContent: '먼치킨', optionImageEnable: false, optionImageUrl: '' },
+				{ optionId: 30, optionContent: '골든 리트리버', optionImageEnable: false, optionImageUrl: '' },
+			],
+		},
+		{
+			questionId: 11,
+			questionContent: '강아지가 아닌 것은?',
+			optionList: [
+				{ optionId: 31, optionContent: '치와와', optionImageEnable: false, optionImageUrl: '' },
+				{ optionId: 32, optionContent: '먼치킨', optionImageEnable: false, optionImageUrl: '' },
+			],
+		},
+	];
 
-	const submitQuizHandler = () => {
-		// TO DO : 모든 문제를 풀었는지 확인 필요. 혹은 안 풀어도 제출 가능?
-		console.log(quizzes);
-	};
-	useEffect(() => {
-		setInitQuizzes(TEMP_QUIZZES);
-	}, []);
+	// console.log(solveQuiz);
+
+	// const { quizzes, setInitQuizzes } = useSolveQuizStore();
+
 	return (
 		<div>
-			{router?.query?.id && <SolveQuizScreen quizIdx={+router.query.id - 1} submitQuizHandler={submitQuizHandler} />}
+			{questionBookId && id && (
+				<SolveQuizScreen quizId={Number(id)} questionBookId={questionBookId} questionBookData={TEMP_QUIZ} />
+			)}
 		</div>
 	);
 };
