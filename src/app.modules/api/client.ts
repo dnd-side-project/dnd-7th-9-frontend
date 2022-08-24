@@ -3,7 +3,7 @@ import { getCookie, setCookie } from '@app.modules/cookie/cookie';
 
 const client = axios.create({
 	baseURL: process.env.API_URL,
-	// TO DO : 임시로 CORS 에러 방지해놓음. 백엔드와 맞춰봐야 함.
+	// TO DO : 추후 CORS 에러 해결시 수정
 	withCredentials: false,
 	headers: {
 		'Access-Control-Allow-Origin': 'http://localhost:3000/',
@@ -33,7 +33,7 @@ client.interceptors.response.use(
 			response: { status },
 		} = error;
 
-		if (status === 400) {
+		if (status === 401) {
 			try {
 				const originalRequest = config;
 
@@ -45,7 +45,7 @@ client.interceptors.response.use(
 				);
 
 				// 토큰 갱신
-				const { accessToken: newAccessToken, refreshToken: newRefreshToken } = data;
+				const { accessToken: newAccessToken, refreshToken: newRefreshToken } = data.result;
 
 				localStorage.setItem('TEST_TOKEN', newAccessToken);
 				setCookie('REFRESH_TOKEN', newRefreshToken, { path: '/', secure: true, sameSite: 'none' });
