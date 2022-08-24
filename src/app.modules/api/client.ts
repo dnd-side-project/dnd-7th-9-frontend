@@ -2,6 +2,10 @@ import axios, { AxiosError } from 'axios';
 
 const client = axios.create({
 	baseURL: process.env.API_URL,
+	withCredentials: false,
+	headers: {
+		'Access-Control-Allow-Origin': 'http://localhost:3000/',
+	},
 });
 client.interceptors.response.use(
 	(res) => {
@@ -12,11 +16,18 @@ client.interceptors.response.use(
 			config,
 			response: { status },
 		} = error;
-		if (status === 401) {
+
+		return Promise.reject(error);
+	}
+);
+
+export default client;
+/*
+if (status === 401) {
 			try {
 				const originalRequest = config;
 				// token refresh 요청
-				const { data } = await client.post(
+				const { data } = await client.get(
 					'/auth/token/reissue' // token refresh api
 				);
 				// 토큰 갱신
@@ -29,9 +40,4 @@ client.interceptors.response.use(
 			} catch (refreshError) {
 				return Promise.reject(refreshError); // refresh token 문제로 access 토큰 갱신 실패, 로그인화면으로 이동
 			}
-		}
-		return Promise.reject(error);
-	}
-);
-
-export default client;
+		} */

@@ -13,6 +13,3 @@ export const postStudyGroup = async (body: PostStudyBody) => {
 		return error;
 	}
 };
-
-
-export 
