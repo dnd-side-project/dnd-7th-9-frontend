@@ -2,8 +2,11 @@ import client from '@app.modules/api/client';
 import { ICreateQuestion } from '../types';
 
 // 문제집 저장
-const fetchPostQuestionBookCreateEnd = (createQuestionPayload: ICreateQuestion) => {
+export const fetchPostQuestionBookCreateEnd = (createQuestionPayload: ICreateQuestion) => {
 	return client.post('/question-book/list', createQuestionPayload);
 };
 
-export default fetchPostQuestionBookCreateEnd;
+// 문제집 자세히 보기
+export const fetchGetQuestionBookDetail = (questionBookId: number) => {
+	return client.get(`/question-book/${questionBookId}/solved/details`);
+};

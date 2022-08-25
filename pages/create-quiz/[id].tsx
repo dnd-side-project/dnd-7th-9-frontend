@@ -6,7 +6,7 @@ import CreateQuizScreen from '@app.feature/quiz/screen/CreateQuizScreen';
 import type { NextPage } from 'next';
 import { useMutation } from '@tanstack/react-query';
 import { ICreateQuestion } from '@app.feature/quiz/types';
-import fetchPostQuestionBookCreateEnd from '@app.feature/quiz/api';
+import { fetchPostQuestionBookCreateEnd } from '@app.feature/quiz/api';
 
 // 임시로 5문제 만들기로 설정
 

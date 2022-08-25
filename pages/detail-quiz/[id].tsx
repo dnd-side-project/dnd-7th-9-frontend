@@ -1,25 +1,49 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
 
 import type { NextPage } from 'next';
 import DetailQuizScreen from '@app.feature/quiz/screen/DetailQuizScreen';
-// 임시로 5문제 만들기로 설정
+import { InitSolvedQuestionBookDetail } from '@app.feature/quiz/constant';
+import { useQuery } from '@tanstack/react-query';
+import { fetchGetQuestionBookDetail } from '@app.feature/quiz/api';
+
 const DetailQuiz: NextPage = () => {
 	const router = useRouter();
+	const { questionBookId, id } = router.query;
 
-	// 	const { quizzes, setInitQuizzes } = useSolveQuizStore();
+	const [solvedQuestionBookDetail, setSolvedQuestionBookDetail] = useState(InitSolvedQuestionBookDetail);
+
+	const query = useQuery(['question', questionBookId], () => fetchGetQuestionBookDetail(Number(questionBookId)), {
+		onSuccess: (data) => {
+			console.log(data.data);
+			setSolvedQuestionBookDetail(data.data);
+		},
+		onError: () => {
+			alert('알 수 없는 에러가 발생했습니다.');
+			router.push('/');
+		},
+	});
 
 	const endQuizHandler = () => {
-		// TO DO : 홈으로 보내기
-		console.log('끝');
+		Router.push('/');
 	};
-	/* useEffect(() => {
-		setInitQuizzes(TEMP_QUIZZES);
-	}, []); */
+
+	useEffect(() => {
+		if (!router.isReady) return;
+		if (!router.query) alert('알 수 없는 오류가 발생하였습니다.');
+	}, [router.isReady]);
+
 	return (
 		<div>
-			{router?.query?.id && <DetailQuizScreen quizIdx={+router.query.id - 1} endQuizHandler={endQuizHandler} />}
+			{id && questionBookId && (
+				<DetailQuizScreen
+					quizIdx={+id - 1}
+					endQuizHandler={endQuizHandler}
+					questionBookId={+questionBookId}
+					solvedQuestionBookDetail={solvedQuestionBookDetail}
+				/>
+			)}
 		</div>
 	);
 };
