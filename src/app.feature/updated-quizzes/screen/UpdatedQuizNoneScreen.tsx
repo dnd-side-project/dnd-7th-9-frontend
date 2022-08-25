@@ -1,5 +1,5 @@
-import PageTitleSubContent from '@app.component/title/PageTitleSubContent';
 import React from 'react';
+import PageTitleSubContent from '@app.component/title/PageTitleSubContent';
 import NoneQuizCard from '../component/card/NoneQuizCard';
 
 export default function UpdatedQuizNoneScreen() {

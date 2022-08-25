@@ -10,10 +10,16 @@ interface IQuestionBookQuiz {
 	checkAnswer: number;
 }
 
-export interface IQuestionBook {
+interface IQuestionList {
 	questionId: number;
 	questionContent: string;
 	optionList: IQuestionBookQuizOption[];
+}
+
+export interface IQuestionBook {
+	goalContent: string;
+	questionBookContent: string;
+	questionList: IQuestionList[];
 }
 
 export interface IQuestionBookQuizEnd {

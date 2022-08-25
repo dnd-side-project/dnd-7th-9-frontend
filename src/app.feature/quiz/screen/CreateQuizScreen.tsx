@@ -1,24 +1,16 @@
-import { useRouter } from 'next/router';
-import useCreateQuizStore from '@app.modules/store/quiz/createQuiz';
-import DeleteIcon from '@assets/iconoir_cancel.svg';
-import DefaultButton from '@app.component/button/DefaultButton';
-import PageController from '@app.component/pageController/PageController';
-
 import { useState } from 'react';
-import BackAlertModal from '@app.component/modal/BackAlertModal';
-import ProgressHeader from '@app.component/header/Progress';
+import { useRouter } from 'next/router';
 import Box from '@app.component/box';
+import DeleteIcon from '@assets/iconoir_cancel.svg';
+import ProgressHeader from '@app.component/header/Progress';
+import DefaultButton from '@app.component/button/DefaultButton';
+import BackAlertModal from '@app.component/modal/BackAlertModal';
 
+import GoalDetailTitle from '@app.component/title/GoalDetailTitle';
+import useCreateQuizStore from '@app.modules/store/quiz/createQuiz';
+import PageController from '@app.component/pageController/PageController';
 import AnswerCheckButton from '../component/button/AnswerCheckButton';
 
-function GoalDetail() {
-	return (
-		<div className="flex flex-col">
-			<span className="text-slate text-small2 font-bold">1주차 목표</span>
-			<span className="mt-[4px] text-slate text-small1 font-regular">기본 동사 20개 암기하기</span>
-		</div>
-	);
-}
 interface Props {
 	quizIdx: number;
 	submitQuizHandler: () => void;
@@ -26,9 +18,11 @@ interface Props {
 
 export default function CreateQuizScreen({ quizIdx, submitQuizHandler }: Props) {
 	const router = useRouter();
+	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
 	const { quizzes, addChoice, editQuestion, editChoice, checkAnswer, deleteChoice } = useCreateQuizStore();
 	const QUIZ_PAGE = quizIdx + 1;
-	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
 	const addChoiceHandler = () => {
 		if (quizzes[quizIdx].choices.length >= quizzes.length) {
 			alert('답안의 최대 개수는 5개입니다.');
@@ -36,6 +30,7 @@ export default function CreateQuizScreen({ quizIdx, submitQuizHandler }: Props) 
 		}
 		addChoice(quizIdx);
 	};
+
 	const checkAnswerHandler = (choiceContent: string, choiceId: number) => {
 		if (!choiceContent.trim()) {
 			alert('빈칸인 보기는 답이 될 수 없습니다.'); // 보기가 빈칸인 경우에는 체크할수 없음
@@ -43,21 +38,25 @@ export default function CreateQuizScreen({ quizIdx, submitQuizHandler }: Props) 
 		}
 		checkAnswer(quizIdx, choiceId);
 	};
+
 	const toPrevHandler = () => {
 		if (QUIZ_PAGE <= 1) return;
 		router.push(`/create-quiz/${quizIdx}`);
 	};
+
 	const toNextHandler = () => {
 		if (QUIZ_PAGE >= quizzes.length) return;
 		if (!quizzes[quizIdx].question.trim()) {
 			alert('문제를 작성해 주세요.');
 			return;
 		}
+
 		const validChoices = quizzes[quizIdx].choices.filter((choice) => choice.content.trim());
 		if (validChoices.length < 2) {
 			alert('최소 2개의 답안을 작성해 주세요.');
 			return;
 		}
+
 		const answerCount = quizzes[quizIdx].choices.filter((choice) => choice.isChecked).length;
 		if (answerCount !== 1) {
 			alert('1개의 정답을 선택해야 합니다');
@@ -66,12 +65,13 @@ export default function CreateQuizScreen({ quizIdx, submitQuizHandler }: Props) 
 
 		router.push(`/create-quiz/${QUIZ_PAGE + 1}`);
 	};
+
 	return (
 		<div>
 			<ProgressHeader
 				curPage={QUIZ_PAGE}
 				pagesLength={quizzes.length}
-				Description={<GoalDetail />}
+				Description={<GoalDetailTitle goal="GOAL" goalDescription="GOAL DESCRIPTION" />}
 				backAlertModalOpen={() => setIsModalOpen(true)}
 			/>
 

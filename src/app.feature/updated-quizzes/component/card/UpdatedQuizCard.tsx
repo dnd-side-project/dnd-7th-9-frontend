@@ -2,7 +2,7 @@ import React from 'react';
 import PersonIcon from '@assets/quiz/person.svg';
 import ArrowRightIcon from '@assets/quiz/arrow-right.svg';
 import { transformSecond } from '@app.modules/util';
-import { IUpdatedQuiz } from '@app.feature/quiz/types';
+import { IUpdatedQuiz } from '@app.feature/updated-quizzes/types';
 
 interface Props {
 	className?: string;

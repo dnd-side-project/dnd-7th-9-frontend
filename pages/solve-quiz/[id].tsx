@@ -1,7 +1,8 @@
-import React from 'react';
-import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
+import Router, { useRouter } from 'next/router';
 import { useQuery } from '@tanstack/react-query';
-import SolveQuizScreen from '@app.feature/quiz/screen/SolveQuizScreen';
+import InitQuestionBookData from '@app.feature/solve-quiz/constant';
+import SolveQuizScreen from '@app.feature/solve-quiz/screen/SolveQuizScreen';
 import { fetchGetQuestionBook } from '@app.feature/solve-quiz/api';
 
 import type { NextPage } from 'next';
@@ -11,40 +12,27 @@ const SolveQuiz: NextPage = () => {
 	const router = useRouter();
 	const { questionBookId, id } = router.query;
 
-	// const {
-	// 	data: questionBookData,
-	// 	isError,
-	// 	isLoading,
-	// } = useQuery(['question', questionBookId], () => fetchGetQuestionBook(questionBookId));
+	const [questionBookData, setQuestionBookData] = useState(InitQuestionBookData);
 
-	const TEMP_QUIZ = [
-		{
-			questionId: 10,
-			questionContent: '고양이가 아닌 것은?',
-			optionList: [
-				{ optionId: 28, optionContent: '러시안블루', optionImageEnable: false, optionImageUrl: '' },
-				{ optionId: 29, optionContent: '먼치킨', optionImageEnable: false, optionImageUrl: '' },
-				{ optionId: 30, optionContent: '골든 리트리버', optionImageEnable: false, optionImageUrl: '' },
-			],
+	const query = useQuery(['question', questionBookId], () => fetchGetQuestionBook(questionBookId), {
+		onSuccess: (data) => {
+			setQuestionBookData(data);
 		},
-		{
-			questionId: 11,
-			questionContent: '강아지가 아닌 것은?',
-			optionList: [
-				{ optionId: 31, optionContent: '치와와', optionImageEnable: false, optionImageUrl: '' },
-				{ optionId: 32, optionContent: '먼치킨', optionImageEnable: false, optionImageUrl: '' },
-			],
+		onError: () => {
+			alert('알 수 없는 에러가 발생했습니다.');
+			router.push('/');
 		},
-	];
+	});
 
-	// console.log(solveQuiz);
-
-	// const { quizzes, setInitQuizzes } = useSolveQuizStore();
+	useEffect(() => {
+		if (!router.isReady) return;
+		if (!router.query.questionBookId) Router.push('/');
+	}, [router.isReady]);
 
 	return (
 		<div>
 			{questionBookId && id && (
-				<SolveQuizScreen quizId={Number(id)} questionBookId={questionBookId} questionBookData={TEMP_QUIZ} />
+				<SolveQuizScreen quizId={Number(id)} questionBookId={questionBookId} questionBookData={questionBookData} />
 			)}
 		</div>
 	);
