@@ -1,36 +1,39 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import Router, { useRouter } from 'next/router';
+import { useQuery } from '@tanstack/react-query';
+import InitQuestionBookData from '@app.feature/solve-quiz/constant';
+import SolveQuizScreen from '@app.feature/solve-quiz/screen/SolveQuizScreen';
+import { fetchGetQuestionBook } from '@app.feature/solve-quiz/api';
 
-import { useRouter } from 'next/router';
-import SolveQuizScreen from '@app.feature/quiz/screen/SolveQuizScreen';
-import useSolveQuizStore, { IQuiz } from '@app.modules/store/quiz/solveQuiz'; // temp
 import type { NextPage } from 'next';
+
 // 임시로 5문제 만들기로 설정
 const SolveQuiz: NextPage = () => {
 	const router = useRouter();
+	const { questionBookId, id } = router.query;
 
-	const { quizzes, setInitQuizzes } = useSolveQuizStore();
+	const [questionBookData, setQuestionBookData] = useState(InitQuestionBookData);
 
-	const TEMP_QUIZZES: IQuiz[] = [1, 1, 1, 1, 1].map(() => ({
-		question: 'eat 뜻으로 옳은 것은?',
-		choices: [
-			{ id: 1, content: '먹다', isChecked: false },
-			{ id: 2, content: '보다', isChecked: false },
-			{ id: 3, content: '가다', isChecked: false },
-			{ id: 4, content: '놀다', isChecked: false },
-			{ id: 5, content: '입다', isChecked: false },
-		],
-	}));
+	const query = useQuery(['question', questionBookId], () => fetchGetQuestionBook(questionBookId), {
+		onSuccess: (data) => {
+			setQuestionBookData(data);
+		},
+		onError: () => {
+			alert('알 수 없는 에러가 발생했습니다.');
+			router.push('/');
+		},
+	});
 
-	const submitQuizHandler = () => {
-		// TO DO : 모든 문제를 풀었는지 확인 필요. 혹은 안 풀어도 제출 가능?
-		console.log(quizzes);
-	};
 	useEffect(() => {
-		setInitQuizzes(TEMP_QUIZZES);
-	}, []);
+		if (!router.isReady) return;
+		if (!router.query.questionBookId) Router.push('/');
+	}, [router.isReady]);
+
 	return (
 		<div>
-			{router?.query?.id && <SolveQuizScreen quizIdx={+router.query.id - 1} submitQuizHandler={submitQuizHandler} />}
+			{questionBookId && id && (
+				<SolveQuizScreen quizId={Number(id)} questionBookId={questionBookId} questionBookData={questionBookData} />
+			)}
 		</div>
 	);
 };

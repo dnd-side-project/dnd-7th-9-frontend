@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { setCookie } from '@app.modules/cookie/cookie';
 import LoginScreen from '@app.feature/login/screen/LoginScreen';
+import client from '@app.modules/api/client';
 
 const Login: NextPage = () => {
 	const router = useRouter();
@@ -14,6 +15,8 @@ const Login: NextPage = () => {
 		const refreshToken = params.get('refresh') ?? '';
 		//	if (!accessToken.trim() || !refreshToken.trim()) return; // TO DO : 에러 표시
 		localStorage.setItem('TEST_TOKEN', accessToken);
+		client.defaults.headers.common['Access-Token'] = accessToken;
+
 		setCookie('REFRESH_TOKEN', refreshToken, { path: '/', secure: true, sameSite: 'none' });
 
 		router.push('/');
