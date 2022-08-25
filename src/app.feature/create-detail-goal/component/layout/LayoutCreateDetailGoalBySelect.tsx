@@ -8,6 +8,8 @@ interface Props {
 	minCount: number;
 	maxCount: number;
 	count: number;
+	plusHandler: () => void;
+	minusHandler: () => void;
 }
 
 export default function LayoutCreateDetailGoalBySelect({
@@ -17,13 +19,21 @@ export default function LayoutCreateDetailGoalBySelect({
 	minCount,
 	maxCount,
 	count,
+	plusHandler,
+	minusHandler,
 }: Props) {
 	return (
 		<div className="grid place-items-center">
 			<h1 className="text-black-400 text-title2 font-bold mt-[83px] mb-[103px]">{title}</h1>
 			<div>{svgIcon}</div>
 			<p className="text-black-400 text-headline font-medium mt-[102px] mb-[35px]">{description}</p>
-			<ControlCountDetailObject minCount={minCount} maxCount={maxCount} count={count} />
+			<ControlCountDetailObject
+				minCount={minCount}
+				maxCount={maxCount}
+				count={count}
+				plusHandler={plusHandler}
+				minusHandler={minusHandler}
+			/>
 		</div>
 	);
 }

@@ -4,7 +4,7 @@ import React from 'react';
 interface Props {
 	curPage: number;
 	pagesLength: number;
-	finishWord: '끝내기' | '제출하기' | '';
+	finishWord: '끝내기' | '제출하기' | '시작하기' | '';
 	toPrevHandler: () => void;
 	toNextHandler: () => void;
 	finishHandler: () => void;

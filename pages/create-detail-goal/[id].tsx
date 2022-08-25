@@ -14,7 +14,7 @@ const CreateDetailGoal: NextPage = () => {
 	const router = useRouter();
 	const { id } = router.query;
 	const STEPS_COUNT = 6;
-	const { groupStartMonth, groupStartDay, groupEndMonth, groupEndDay } = useSetDetailGoalDateStore();
+	const { goalStartMonth, goalStartDay, goalEndMonth, goalEndDay } = useSetDetailGoalDateStore();
 	const { detailGoal, setGoalStartDate, setGoalEndDate } = useCreateDetailGoalStore();
 	const CheckNameValidation = (): boolean => {
 		if (!detailGoal?.goalContent?.trim()) {
@@ -30,8 +30,8 @@ const CreateDetailGoal: NextPage = () => {
 	};
 	// TO DO : Util 함수로 분리하기
 	const CheckDateValidation = (): boolean => {
-		const startDate = DateFormatter(groupStartMonth, groupStartDay);
-		const endDate = DateFormatter(groupEndMonth, groupEndDay);
+		const startDate = DateFormatter(goalStartMonth, goalStartDay);
+		const endDate = DateFormatter(goalEndMonth, goalEndDay);
 
 		const today = new Date();
 		const todayParse = Date.parse(`${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`);
@@ -43,7 +43,7 @@ const CreateDetailGoal: NextPage = () => {
 			return false; // 실패 조건 : 유효한 날짜 형식이 아님
 		}
 		if (
-			((groupEndMonth?.trim() || groupEndDay?.trim()) &&
+			((goalEndMonth?.trim() || goalEndDay?.trim()) &&
 				// eslint-disable-next-line no-restricted-globals
 				(isNaN(Date.parse(endDate)) || todayParse > Date.parse(endDate))) ||
 			Date.parse(endDate) < Date.parse(startDate)
@@ -68,7 +68,7 @@ const CreateDetailGoal: NextPage = () => {
 	const toNextHandler = () => {
 		if (!id) return;
 
-		if (+id + 1 >= STEPS_COUNT) return;
+		if (+id + 1 > STEPS_COUNT) return;
 		if (+id === 1 && !CheckDateValidation()) return;
 		if (+id === 2 && !CheckNameValidation()) return;
 		// if (curPage === 3 && !CheckGoalValidation()) return;
@@ -101,9 +101,10 @@ const CreateDetailGoal: NextPage = () => {
 				finishHandler={() => {
 					// TO DO : API 연동
 					// resetRequest();
+					router.push('/create-quiz/1'); // temp
 					console.log(detailGoal);
 				}}
-				finishWord="끝내기"
+				finishWord="시작하기"
 			/>
 		</div>
 	);

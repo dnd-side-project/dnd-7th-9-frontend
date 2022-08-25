@@ -7,7 +7,7 @@ export default function DetailStudyHeader() {
 			<GoBackHeader />
 			<div className="fixed top-[63.35px] left-0 right-0 w-full bg-background-gray">
 				<div className="flex justify-between items-center px-[16px] pb-[35.78px] border-b border-gray">
-					<span className="text-black-500 text-title1 font-bold">영어 회화 스터디</span>
+					<span className="text-black-500 text-title1 font-bold">IT 개발 직무 면접 스터디</span>
 					<div className="flex space-x-2">
 						<div className="grid place-items-center border border-slate rounded-full w-[41.82px] h-[41.82px] bg-[#E2EFFF]">
 							<UserIcon />

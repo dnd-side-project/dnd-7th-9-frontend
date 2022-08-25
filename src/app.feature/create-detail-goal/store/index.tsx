@@ -33,22 +33,22 @@ const useCreateDetailGoalStore = create<State>((set) => ({
 export default useCreateDetailGoalStore;
 
 interface DateState {
-	groupStartMonth: string;
-	groupStartDay: string;
-	groupEndMonth: string;
-	groupEndDay: string;
-	setGroupStartMonth: (groupStartMonth: string) => void;
-	setGroupStartDay: (groupStartDay: string) => void;
-	setGroupEndMonth: (groupEndMonth: string) => void;
-	setGroupEndDay: (groupEndDay: string) => void;
+	goalStartMonth: string;
+	goalStartDay: string;
+	goalEndMonth: string;
+	goalEndDay: string;
+	setGoalStartMonth: (goalStartMonth: string) => void;
+	setGoalStartDay: (goalStartDay: string) => void;
+	setGoalEndMonth: (goalEndMonth: string) => void;
+	setGoalEndDay: (goalEndDay: string) => void;
 }
 export const useSetDetailGoalDateStore = create<DateState>((set) => ({
-	groupStartMonth: '',
-	groupStartDay: '',
-	groupEndMonth: '',
-	groupEndDay: '',
-	setGroupStartMonth: (groupStartMonth: string) => set(() => ({ groupStartMonth })),
-	setGroupStartDay: (groupStartDay: string) => set(() => ({ groupStartDay })),
-	setGroupEndMonth: (groupEndMonth: string) => set(() => ({ groupEndMonth })),
-	setGroupEndDay: (groupEndDay: string) => set(() => ({ groupEndDay })),
+	goalStartMonth: '',
+	goalStartDay: '',
+	goalEndMonth: '',
+	goalEndDay: '',
+	setGoalStartMonth: (goalStartMonth: string) => set(() => ({ goalStartMonth })),
+	setGoalStartDay: (goalStartDay: string) => set(() => ({ goalStartDay })),
+	setGoalEndMonth: (goalEndMonth: string) => set(() => ({ goalEndMonth })),
+	setGoalEndDay: (goalEndDay: string) => set(() => ({ goalEndDay })),
 }));

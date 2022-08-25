@@ -1,11 +1,11 @@
 import React from 'react';
 import Input from '@app.component/input';
-import { useCreateDetailGoalStore } from '@app.modules/store/create-detail-goal/createDetailGoal';
+import useCreateDetailGoalStore from '../store';
 import LayoutCreateDetailGoalByInput from '../component/layout/LayoutCreateDetailGoalByInput';
 
 /* id2 = 세부 목표 */
 export default function CreateDetailGoalScreenByContent() {
-	const { updateDetailGoalContent } = useCreateDetailGoalStore();
+	const { setGoalContent } = useCreateDetailGoalStore();
 
 	return (
 		<div>
@@ -18,7 +18,7 @@ export default function CreateDetailGoalScreenByContent() {
 							className="rounded w-full mt-[8px] h-[88px]"
 							placeholder="세부 목표 내용"
 							required
-							onChange={(event) => updateDetailGoalContent({ goalContent: event.target.value })}
+							onChange={(event) => setGoalContent(event.target.value)}
 						/>
 					</div>
 				}
