@@ -17,9 +17,11 @@ interface Props {
 
 export default function CreateQuizScreen({ quizIdx, submitQuizHandler }: Props) {
 	const router = useRouter();
+	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
 	const { quizzes, addChoice, editQuestion, editChoice, checkAnswer, deleteChoice } = useCreateQuizStore();
 	const QUIZ_PAGE = quizIdx + 1;
-	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
 	const addChoiceHandler = () => {
 		if (quizzes[quizIdx].choices.length >= quizzes.length) {
 			alert('답안의 최대 개수는 5개입니다.');
@@ -27,6 +29,7 @@ export default function CreateQuizScreen({ quizIdx, submitQuizHandler }: Props) 
 		}
 		addChoice(quizIdx);
 	};
+
 	const checkAnswerHandler = (choiceContent: string, choiceId: number) => {
 		if (!choiceContent.trim()) {
 			alert('빈칸인 보기는 답이 될 수 없습니다.'); // 보기가 빈칸인 경우에는 체크할수 없음
@@ -34,21 +37,25 @@ export default function CreateQuizScreen({ quizIdx, submitQuizHandler }: Props) 
 		}
 		checkAnswer(quizIdx, choiceId);
 	};
+
 	const toPrevHandler = () => {
 		if (QUIZ_PAGE <= 1) return;
 		router.push(`/create-quiz/${quizIdx}`);
 	};
+
 	const toNextHandler = () => {
 		if (QUIZ_PAGE >= quizzes.length) return;
 		if (!quizzes[quizIdx].question.trim()) {
 			alert('문제를 작성해 주세요.');
 			return;
 		}
+
 		const validChoices = quizzes[quizIdx].choices.filter((choice) => choice.content.trim());
 		if (validChoices.length < 2) {
 			alert('최소 2개의 답안을 작성해 주세요.');
 			return;
 		}
+
 		const answerCount = quizzes[quizIdx].choices.filter((choice) => choice.isChecked).length;
 		if (answerCount !== 1) {
 			alert('1개의 정답을 선택해야 합니다');

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
 import { useMutation } from '@tanstack/react-query';
 import Box from '@app.component/box';
 import ProgressHeader from '@app.component/header/Progress';
@@ -104,7 +104,15 @@ export default function CreateQuizScreen({ quizId, questionBookId, questionBookD
 				finishHandler={() => {
 					mutation.mutate(solveQuiz);
 
-					if (mutation.isSuccess) console.log('mutation Data :: ', mutation.data);
+					if (mutation.isSuccess) {
+						const { addedRate, userTotalRate, questionBookPostRate, questionBookSolveRate, pass } = mutation.data.data;
+						console.log('mutation Data :: ', mutation.data.data);
+
+						Router.push({
+							pathname: '/complete/quiz-solve',
+							query: { addedRate, userTotalRate, questionBookPostRate, questionBookSolveRate, pass },
+						}); // TO DO : quiz-solve 에서 query 로 해당 정보들 받기
+					}
 				}}
 			/>
 		</div>
