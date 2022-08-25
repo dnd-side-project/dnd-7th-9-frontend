@@ -28,9 +28,9 @@ export default function DrawerInviteTeamMember() {
 	return (
 		<div className="absolute bottom-0 left-0 right-0 bg-background-white px-[10px] pt-[39px] pb-[33px] rounded-t-[20px]">
 			<p className="text-black-500 text-body2 font-medium mb-[20px]">이메일을 작성해 팀원들을 초대해주세요.</p>
-			<div className="flex mb-[35px] px-[20px]">
+			<div className="flex justify-center mb-[35px]">
 				<Input
-					className="rounded-l w-[calc(100%-72px)]"
+					className="rounded-l w-full"
 					placeholder="팀원의 이메일 작성"
 					value={inputMember}
 					onClick={() => setIsInviteDrawerOpen(true)}
@@ -38,7 +38,7 @@ export default function DrawerInviteTeamMember() {
 				/>
 				<button
 					type="button"
-					className="bg-slate text-background-white text-body2 font-bold rounded-r w-[72px] px-[21px] py-[19px]"
+					className="bg-slate text-background-white text-body2 font-bold rounded-r whitespace-nowrap w-[30%] px-[21px] py-[19px]"
 					onClick={handleInviteMember}
 				>
 					추가
