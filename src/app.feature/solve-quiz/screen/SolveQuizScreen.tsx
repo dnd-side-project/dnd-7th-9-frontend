@@ -4,19 +4,11 @@ import { useMutation } from '@tanstack/react-query';
 import Box from '@app.component/box';
 import ProgressHeader from '@app.component/header/Progress';
 import BackAlertModal from '@app.component/modal/BackAlertModal';
+import GoalDetailTitle from '@app.component/title/GoalDetailTitle';
 import PageController from '@app.component/pageController/PageController';
 import AnswerCheckButton from '@app.feature/quiz/component/button/AnswerCheckButton';
 import { IQuestionBook, IQuestionBookQuizEnd } from '@app.feature/solve-quiz/types';
 import { fetchPostQuestionBookEnd } from '@app.feature/solve-quiz/api';
-
-function GoalDetail({ goal, goalDescription }: { goal: string; goalDescription: string }) {
-	return (
-		<div className="flex flex-col">
-			<span className="text-slate text-small2 font-bold">{goal}</span>
-			<span className="mt-[4px] text-slate text-small1 font-regular">{goalDescription}</span>
-		</div>
-	);
-}
 
 interface Props {
 	quizId: number;
@@ -66,7 +58,7 @@ export default function CreateQuizScreen({ quizId, questionBookId, questionBookD
 				curPage={quizId}
 				pagesLength={questionBookData.questionList.length}
 				Description={
-					<GoalDetail goal={questionBookData.goalContent} goalDescription={questionBookData.questionBookContent} />
+					<GoalDetailTitle goal={questionBookData.goalContent} goalDescription={questionBookData.questionBookContent} />
 				}
 				backAlertModalOpen={() => setIsModalOpen(true)}
 			/>

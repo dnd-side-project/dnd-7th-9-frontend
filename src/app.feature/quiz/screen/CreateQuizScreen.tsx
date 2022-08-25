@@ -1,24 +1,15 @@
-import { useRouter } from 'next/router';
-import useCreateQuizStore from '@app.modules/store/quiz/createQuiz';
-import DeleteIcon from '@assets/iconoir_cancel.svg';
-import DefaultButton from '@app.component/button/DefaultButton';
-import PageController from '@app.component/pageController/PageController';
-
 import { useState } from 'react';
-import BackAlertModal from '@app.component/modal/BackAlertModal';
-import ProgressHeader from '@app.component/header/Progress';
+import { useRouter } from 'next/router';
 import Box from '@app.component/box';
-import ChoiceContainer from '../component/container/ChoiceContainer';
+import DeleteIcon from '@assets/iconoir_cancel.svg';
+import ProgressHeader from '@app.component/header/Progress';
+import DefaultButton from '@app.component/button/DefaultButton';
+import BackAlertModal from '@app.component/modal/BackAlertModal';
+import GoalDetailTitle from '@app.component/title/GoalDetailTitle';
+import useCreateQuizStore from '@app.modules/store/quiz/createQuiz';
+import PageController from '@app.component/pageController/PageController';
 import AnswerCheckButton from '../component/button/AnswerCheckButton';
 
-function GoalDetail() {
-	return (
-		<div className="flex flex-col">
-			<span className="text-slate text-small2 font-bold">1주차 목표</span>
-			<span className="mt-[4px] text-slate text-small1 font-regular">기본 동사 20개 암기하기</span>
-		</div>
-	);
-}
 interface Props {
 	quizIdx: number;
 	submitQuizHandler: () => void;
@@ -66,12 +57,13 @@ export default function CreateQuizScreen({ quizIdx, submitQuizHandler }: Props) 
 
 		router.push(`/create-quiz/${QUIZ_PAGE + 1}`);
 	};
+
 	return (
 		<div>
 			<ProgressHeader
 				curPage={QUIZ_PAGE}
 				pagesLength={quizzes.length}
-				Description={<GoalDetail />}
+				Description={<GoalDetailTitle goal="GOAL" goalDescription="GOAL DESCRIPTION" />}
 				backAlertModalOpen={() => setIsModalOpen(true)}
 			/>
 

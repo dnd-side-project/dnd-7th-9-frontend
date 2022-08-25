@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Router, { useRouter } from 'next/router';
 import { useQuery } from '@tanstack/react-query';
 import InitQuestionBookData from '@app.feature/solve-quiz/constant';
-import SolveQuizScreen from '@app.feature/quiz/screen/SolveQuizScreen';
+import SolveQuizScreen from '@app.feature/solve-quiz/screen/SolveQuizScreen';
 import { fetchGetQuestionBook } from '@app.feature/solve-quiz/api';
 
 import type { NextPage } from 'next';
