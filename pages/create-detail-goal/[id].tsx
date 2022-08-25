@@ -8,14 +8,75 @@ import CreateDetailGoalScreenByQuizCount from '@app.feature/create-detail-goal/s
 import CreateDetailGoalScreenBySolveQuiz from '@app.feature/create-detail-goal/screen/CreateDetailGoalScreenBySolveQuiz';
 import CreateDetailGoalScreenByCorrectCount from '@app.feature/create-detail-goal/screen/CreateDetailGoalScreenByCorrectCount';
 import CreateDetailGoalScreenByPassMember from '@app.feature/create-detail-goal/screen/CreateDetailGoalScreenByPassMember';
-import { useCreateDetailGoalStore } from '@app.modules/store/create-detail-goal/createDetailGoal';
+import useCreateDetailGoalStore, { useSetDetailGoalDateStore } from '@app.feature/create-detail-goal/store';
 
 const CreateDetailGoal: NextPage = () => {
 	const router = useRouter();
 	const { id } = router.query;
+	const STEPS_COUNT = 6;
+	const { groupStartMonth, groupStartDay, groupEndMonth, groupEndDay } = useSetDetailGoalDateStore();
+	const { detailGoal, setGoalStartDate, setGoalEndDate } = useCreateDetailGoalStore();
+	const CheckNameValidation = (): boolean => {
+		if (!detailGoal?.goalContent?.trim()) {
+			alert('세부목표를 적어 주세요.');
+			return false;
+		}
+		return true;
+	};
+	const DateFormatter = (month: string, day: string) => {
+		const date = new Date();
+		const curYear = date.getFullYear();
+		return `${curYear}-${month.length === 1 ? `0${month}` : month}-${day.length === 1 ? `0${day}` : day}`;
+	};
+	// TO DO : Util 함수로 분리하기
+	const CheckDateValidation = (): boolean => {
+		const startDate = DateFormatter(groupStartMonth, groupStartDay);
+		const endDate = DateFormatter(groupEndMonth, groupEndDay);
+
+		const today = new Date();
+		const todayParse = Date.parse(`${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`);
+		if (
+			// eslint-disable-next-line no-restricted-globals
+			isNaN(Date.parse(startDate))
+		) {
+			alert('유효한 시작 날짜를 입력해 주세요.');
+			return false; // 실패 조건 : 유효한 날짜 형식이 아님
+		}
+		if (
+			((groupEndMonth?.trim() || groupEndDay?.trim()) &&
+				// eslint-disable-next-line no-restricted-globals
+				(isNaN(Date.parse(endDate)) || todayParse > Date.parse(endDate))) ||
+			Date.parse(endDate) < Date.parse(startDate)
+		) {
+			alert('유효한 마무리 날짜를 입력해 주세요.');
+			return false; // 실패 조건: 유효한 날짜 형식이 아님,오늘 날짜보다 마무리 날짜가 이전임,시작 날짜보다 마무리 날짜가 이전임
+		}
+		setGoalStartDate(startDate);
+		setGoalEndDate(endDate);
+		return true;
+	};
+
+	const toPrevHandler = () => {
+		if (!id) return;
+		console.log(id);
+
+		if (+id <= 1) return;
+
+		Router.push(`/create-detail-goal/${+id - 1}`);
+	};
+
+	const toNextHandler = () => {
+		if (!id) return;
+
+		if (+id + 1 >= STEPS_COUNT) return;
+		if (+id === 1 && !CheckDateValidation()) return;
+		if (+id === 2 && !CheckNameValidation()) return;
+		// if (curPage === 3 && !CheckGoalValidation()) return;
+		Router.push(`/create-detail-goal/${Number(id) + 1}`);
+	};
 
 	// TO DO : 각 스크린에서 request 값 저장
-	const { request, resetRequest } = useCreateDetailGoalStore();
+	// const { request, resetRequest } = useCreateDetailGoalStore();
 
 	return (
 		<div>
@@ -35,15 +96,12 @@ const CreateDetailGoal: NextPage = () => {
 			<PageController
 				curPage={Number(id)}
 				pagesLength={6}
-				toPrevHandler={() => {
-					Router.push(`/create-detail-goal/${Number(id) - 1}`);
-				}}
-				toNextHandler={() => {
-					Router.push(`/create-detail-goal/${Number(id) + 1}`);
-				}}
+				toPrevHandler={toPrevHandler}
+				toNextHandler={toNextHandler}
 				finishHandler={() => {
 					// TO DO : API 연동
-					resetRequest();
+					// resetRequest();
+					console.log(detailGoal);
 				}}
 				finishWord="끝내기"
 			/>

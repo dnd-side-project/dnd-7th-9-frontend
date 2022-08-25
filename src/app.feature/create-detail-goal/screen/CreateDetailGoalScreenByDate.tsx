@@ -2,9 +2,11 @@ import React from 'react';
 import Box from '@app.component/box';
 import RequireMark from '@app.component/requireMark/RequireMark';
 import LayoutCreateDetailGoalByInput from '../component/layout/LayoutCreateDetailGoalByInput';
+import useCreateDetailGoalStore from '../store';
 
 /* id1 = 스터디 기간 */
 export default function CreateDetailObjectScreenByDate() {
+	const { detailGoal } = useCreateDetailGoalStore();
 	return (
 		<div>
 			<LayoutCreateDetailGoalByInput

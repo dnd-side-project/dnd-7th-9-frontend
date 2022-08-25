@@ -24,7 +24,7 @@ export default function Layout({ curPage, children, todo }: Props) {
 	const { study, setGroupStartDate, setGroupEndDate } = useCreateStudyStore();
 	const CheckNameValidation = (): boolean => {
 		if (!study?.groupCategory) {
-			alert('스터디 카텍리를 선택해 주세요.');
+			alert('스터디 카테고리를 선택해 주세요.');
 			return false;
 		}
 		if (!study?.groupName?.trim()) {
