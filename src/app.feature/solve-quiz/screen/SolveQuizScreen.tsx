@@ -110,7 +110,7 @@ export default function CreateQuizScreen({ quizId, questionBookId, questionBookD
 
 						Router.push({
 							pathname: '/complete/quiz-solve',
-							query: { addedRate, userTotalRate, questionBookPostRate, questionBookSolveRate, pass },
+							query: { addedRate, userTotalRate, questionBookPostRate, questionBookSolveRate, pass, questionBookId },
 						}); // TO DO : quiz-solve 에서 query 로 해당 정보들 받기
 					}
 				}}
