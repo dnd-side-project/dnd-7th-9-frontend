@@ -18,7 +18,8 @@ const CreateStudy: NextPage = () => {
 	const router = useRouter();
 	const { study, initStudy } = useCreateStudyStore();
 	const { mutate: postStudy } = useMutation(() => postStudyGroup(study), {
-		onSuccess: () => {
+		onSuccess: (res) => {
+			console.log(res);
 			router.push('/complete/invite-member');
 		},
 		onError: () => {

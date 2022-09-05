@@ -5,7 +5,6 @@ import ExamIcon from '@assets/study/Exam_icon.svg';
 import Box from '@app.component/box';
 import CreateStudyLayout from '@app.feature/create-study/component/layout';
 import RequireMark from '@app.component/requireMark/RequireMark';
-import { useEffect } from 'react';
 import useCreateStudyStore from '../store';
 import { Category } from '../types';
 

@@ -56,7 +56,7 @@ client.interceptors.response.use(
 				// 401로 요청 실패했던 요청 새로운 accessToken으로 재요청
 				return client(originalRequest);
 			} catch (refreshError) {
-				return null; // refresh token 문제로 access 토큰 갱신 실패, 로그인화면으로 이동
+				return Promise.reject(error); // refresh token 문제로 access 토큰 갱신 실패, 로그인화면으로 이동
 			}
 		}
 		return Promise.reject(error);
