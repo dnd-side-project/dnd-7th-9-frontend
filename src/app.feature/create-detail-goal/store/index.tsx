@@ -13,9 +13,18 @@ interface State {
 	setMinQuestionPerQuestionBook: (minQuestionPerQuestionBook: number) => void;
 	setMinPersonPerQuestionBook: (minPersonPerQuestionBook: number) => void;
 }
+
+const INIT_STATE = {
+	studyGroupId: 41,
+	minAnswerPerQuestionBook: 1,
+	minSolveQuestionBook: 1,
+	minQuestionPerQuestionBook: 1,
+	minPersonPerQuestionBook: 1,
+} as PostDetailGoalBody;
+
 const useCreateDetailGoalStore = create<State>((set) => ({
-	detailGoal: {} as PostDetailGoalBody,
-	initDetailGoal: () => set(() => ({ detailGoal: {} as PostDetailGoalBody })),
+	detailGoal: INIT_STATE,
+	initDetailGoal: () => set(() => ({ detailGoal: INIT_STATE })),
 	setStudyGroupId: (studyGroupId: number) => set((state) => ({ detailGoal: { ...state.detailGoal, studyGroupId } })),
 	setGoalContent: (goalContent: string) => set((state) => ({ detailGoal: { ...state.detailGoal, goalContent } })),
 	setGoalStartDate: (goalStartDate: string) => set((state) => ({ detailGoal: { ...state.detailGoal, goalStartDate } })),

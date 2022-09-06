@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NextPage } from 'next';
 import Router, { useRouter } from 'next/router';
 import PageController from '@app.component/pageController/PageController';
@@ -9,13 +9,35 @@ import CreateDetailGoalScreenBySolveQuiz from '@app.feature/create-detail-goal/s
 import CreateDetailGoalScreenByCorrectCount from '@app.feature/create-detail-goal/screen/CreateDetailGoalScreenByCorrectCount';
 import CreateDetailGoalScreenByPassMember from '@app.feature/create-detail-goal/screen/CreateDetailGoalScreenByPassMember';
 import useCreateDetailGoalStore, { useSetDetailGoalDateStore } from '@app.feature/create-detail-goal/store';
+import { useMutation } from '@tanstack/react-query';
+import Url from '@app.modules/constant/url';
+import { postDetailGoal } from '@app.feature/create-detail-goal/api';
 
 const CreateDetailGoal: NextPage = () => {
 	const router = useRouter();
 	const { id } = router.query;
 	const STEPS_COUNT = 6;
 	const { goalStartMonth, goalStartDay, goalEndMonth, goalEndDay } = useSetDetailGoalDateStore();
-	const { detailGoal, setGoalStartDate, setGoalEndDate } = useCreateDetailGoalStore();
+	const { detailGoal, setStudyGroupId, setGoalStartDate, setGoalEndDate, initDetailGoal } = useCreateDetailGoalStore();
+	const { mutate } = useMutation(() => postDetailGoal(detailGoal), {
+		onSuccess: (res) => {
+			console.log(res);
+		},
+		onError: () => {
+			alert('알 수 없는 에러가 발생했습니다.');
+		},
+		onSettled: () => {
+			// router.push(Url.home);
+			// initDetailGoal();
+		},
+	});
+	const submitHandler = () => {
+		//	if (!router?.query?.studyId) return;
+		console.log('asdfasdf', detailGoal);
+
+		mutate();
+	};
+
 	const CheckNameValidation = (): boolean => {
 		if (!detailGoal?.goalContent?.trim()) {
 			alert('세부목표를 적어 주세요.');
@@ -71,6 +93,7 @@ const CreateDetailGoal: NextPage = () => {
 		if (+id + 1 > STEPS_COUNT) return;
 		if (+id === 1 && !CheckDateValidation()) return;
 		if (+id === 2 && !CheckNameValidation()) return;
+
 		// if (curPage === 3 && !CheckGoalValidation()) return;
 		Router.push(`/create-detail-goal/${Number(id) + 1}`);
 	};
@@ -101,8 +124,7 @@ const CreateDetailGoal: NextPage = () => {
 				finishHandler={() => {
 					// TO DO : API 연동
 					// resetRequest();
-					router.push('/create-quiz/1'); // temp
-					console.log(detailGoal);
+					submitHandler();
 				}}
 				finishWord="시작하기"
 			/>
