@@ -11,8 +11,14 @@ const Template: ComponentStory<typeof UpdatedQuizCard> = (args) => <UpdatedQuizC
 
 export const Default = Template.bind({});
 Default.args = {
-	updateTime: 3000,
-	userName: '성명',
-	studyTitle: '스터디 이름',
-	week: 1,
+	className: '',
+	quizData: {
+		questionBookId: 1,
+		goalContent: '목표내용',
+		userNickName: '회원1',
+		userProfileImageUrl: null,
+		studyGroupName: '스터디 그룹 이름1',
+		questionCreatedAt: '22-09-05',
+		solved: false,
+	},
 };

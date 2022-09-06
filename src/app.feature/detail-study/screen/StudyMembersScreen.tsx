@@ -1,5 +1,4 @@
 import React from 'react';
-import Header from '@app.feature/detail-study/component/Header';
 import GoBackHeader from '@app.component/header/GoBack';
 
 interface Props {

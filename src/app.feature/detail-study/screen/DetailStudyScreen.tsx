@@ -1,4 +1,3 @@
-import DetailStudyHeader from '@app.feature/detail-study/component/Header';
 import PlusIcon from '@assets/study/plus_icon.svg';
 
 import DetailGoals from '@app.feature/detail-study/component/DetailGoals';
@@ -8,6 +7,7 @@ import { useRouter } from 'next/router';
 import MyCollection from '../component/MyCollection';
 import Collection from '../component/Collection';
 import DetailGoalProgress from '../component/DetailGoalProgress';
+import DetailStudyHeader from '../component/DetailStudyHeader';
 
 interface Props {
 	studyId: string;
