@@ -11,6 +11,6 @@ const Template: ComponentStory<typeof QuizSolveCompleteTitle> = (args) => <QuizS
 
 export const Default = Template.bind({});
 Default.args = {
-	score: 50,
-	addPercentageSolve: 50, // 증가한 목표달성율 퍼센티지 (문제 출제 ver) => 0 혹은 50
+	userTotalRate: 100,
+	addedRate: 30,
 };

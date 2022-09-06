@@ -6,7 +6,7 @@ import CategoryIcon from '@app.component/icon/CategoryIcon';
 import StudyGoalAccordionContent from '../component/accordionContent/StudyGoalAccordionContent';
 
 interface IGoalInfo {
-	type: 'certification' | 'company' | 'language' | 'test';
+	type: 'certification' | 'company' | 'language' | 'etc';
 	goalText: string;
 	status: string;
 	questionCount: number;
