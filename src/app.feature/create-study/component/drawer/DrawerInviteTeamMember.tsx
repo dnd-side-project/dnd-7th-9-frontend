@@ -2,27 +2,31 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import Input from '@app.component/input';
 import DefaultButton from '@app.component/button/DefaultButton';
+import useCreateStudyStore from '@app.feature/create-study/store';
 import ItemInvitedMember from '../item/ItemInvitedMember';
 
-export default function DrawerInviteTeamMember() {
+interface Props {
+	submitHandler: () => void;
+}
+export default function DrawerInviteTeamMember({ submitHandler }: Props) {
 	const router = useRouter();
 
 	const [isInviteDrawerOpen, setIsInviteDrawerOpen] = useState(false);
 	const [inputMember, setInputMember] = useState('');
-	const [invitedTeamMember, setInvitedTeamMember] = useState<string[]>([]);
 
+	const { study, setInvitedUserEmailList } = useCreateStudyStore();
 	const onChangeInputMember = (value: string) => {
 		setInputMember(value);
 	};
 
 	const handleInviteMember = () => {
-		if (inputMember.trim() === '' || invitedTeamMember.includes(inputMember)) return; // TO DO : 이미 목록에 있거나 유효하지 않은 유저에 대한 처리
-		setInvitedTeamMember((prev) => [...prev, inputMember]);
+		if (inputMember.trim() === '' || study?.invitedUserEmailList?.includes(inputMember)) return; // TO DO : 이미 목록에 있거나 유효하지 않은 유저에 대한 처리
+		setInvitedUserEmailList([...(study.invitedUserEmailList ?? []), inputMember]);
 		setInputMember('');
 	};
 
 	const handleOnDelete = (deleteIndex: number) => {
-		setInvitedTeamMember(invitedTeamMember.filter((_, index) => index !== deleteIndex));
+		setInvitedUserEmailList(study.invitedUserEmailList?.filter((_, index) => index !== deleteIndex));
 	};
 
 	return (
@@ -46,14 +50,14 @@ export default function DrawerInviteTeamMember() {
 			</div>
 			{isInviteDrawerOpen && (
 				<div className="overflow-auto h-[350px] mb-[10px] px-[-10px]">
-					{invitedTeamMember.map((member, index) => (
+					{study?.invitedUserEmailList?.map((member, index) => (
 						<ItemInvitedMember key={member} member={member} onDelete={() => handleOnDelete(index)} />
 					))}
 				</div>
 			)}
 
 			{/* TO DO : 스터디 그룹 생성 & 사용자 초대 API 연동 */}
-			<DefaultButton text="초대하기" onClick={() => router.push('/complete/invite-member')} />
+			<DefaultButton text="초대하기" onClick={submitHandler} />
 		</div>
 	);
 }

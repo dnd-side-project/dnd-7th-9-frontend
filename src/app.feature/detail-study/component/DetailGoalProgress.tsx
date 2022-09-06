@@ -8,13 +8,13 @@ import DocumentIcon from '@assets/study/fluent_document-edit-20-regular.svg';
 import PersonIcon from '@assets/complete/person.svg';
 
 const DUMMY_DATA1 = {
-	score: 80,
-	solveScore: 30, // 기존 문제 해결 점수
+	score: 0,
+	solveScore: 0, // 기존 문제 해결 점수
 	createScore: 0, // 기존 문제 작성 점수
-	addPercentageCreate: 50, // 증가한 목표달성율 퍼센티지 (문제 출제 ver) => 0 혹은 50
+	addPercentageCreate: 0, // 증가한 목표달성율 퍼센티지 (문제 출제 ver) => 0 혹은 50
 	addPercentageSolve: 0, // 증가한 목표달성율 퍼센티지 (문제 풀기 ver)
 	correctCount: 0, // 사용자가 맞춘 갯수
-	totalCount: 5, // 문제집 문제 전체 갯수
+	totalCount: 0, // 문제집 문제 전체 갯수
 };
 const chartCommonStyle = {
 	cutout: '85%',
@@ -69,7 +69,7 @@ export default function DetailGoalProgress() {
 						</p>
 					</div>
 					<div className=" grid place-items-center rounded-t-full w-[123.79px] h-[61.89px] drop-shadow-graph bg-[#EFF3F6]">
-						<span className="font-bold text-title2 text-black-400">60%</span>
+						<span className="font-bold text-title2 text-black-400">0%</span>
 					</div>
 				</div>
 			</div>

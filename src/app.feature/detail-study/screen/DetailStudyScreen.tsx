@@ -3,6 +3,7 @@ import PlusIcon from '@assets/study/plus_icon.svg';
 import DetailGoals from '@app.feature/detail-study/component/DetailGoals';
 import { useState } from 'react';
 
+import { useRouter } from 'next/router';
 import MyCollection from '../component/MyCollection';
 import Collection from '../component/Collection';
 import DetailGoalProgress from '../component/DetailGoalProgress';
@@ -13,6 +14,7 @@ interface Props {
 }
 // TO DO : layout 배치 mt 수정 용이하게 컴포넌트 props 개선 필요
 export default function DetailStudyScreen({ studyId }: Props) {
+	const router = useRouter();
 	type CollectionType = 'team' | 'personal';
 	const [collectionType, setCollectionType] = useState<CollectionType>('team'); // temp
 	return (
@@ -23,9 +25,9 @@ export default function DetailStudyScreen({ studyId }: Props) {
 				<div className="mt-[32.72px] flex items-start justify-between">
 					<div className="space-y-[3px] flex flex-col">
 						<span className="text-black-500 font-medium text-body2">스터디 문제집</span>
-						<span className="text-[#FF8300] font-regular text-caption">8문제집을 더 풀어야 해요!</span>
+						<span className="text-[#FF8300] font-regular text-caption" />
 					</div>
-					<button type="button">
+					<button onClick={() => router.push('/create-detail-goal/1')} type="button">
 						<PlusIcon />
 					</button>
 				</div>
@@ -52,13 +54,13 @@ export default function DetailStudyScreen({ studyId }: Props) {
 								<div className="space-y-[14px]  h-[357.83px] overflow-y-auto">
 									{collectionType === 'personal' ? (
 										<>
-											{[1, 1, 1, 1].map(() => (
+											{[].map(() => (
 												<MyCollection />
 											))}
 										</>
 									) : (
 										<>
-											{[1, 1].map((_, index) => (
+											{[].map((_, index) => (
 												<Collection isSolved={index === 0} />
 											))}
 										</>

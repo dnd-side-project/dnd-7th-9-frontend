@@ -5,6 +5,7 @@ import DeleteIcon from '@assets/iconoir_cancel.svg';
 import ProgressHeader from '@app.component/header/Progress';
 import DefaultButton from '@app.component/button/DefaultButton';
 import BackAlertModal from '@app.component/modal/BackAlertModal';
+
 import GoalDetailTitle from '@app.component/title/GoalDetailTitle';
 import useCreateQuizStore from '@app.modules/store/quiz/createQuiz';
 import PageController from '@app.component/pageController/PageController';
@@ -23,7 +24,7 @@ export default function CreateQuizScreen({ quizIdx, submitQuizHandler }: Props) 
 	const QUIZ_PAGE = quizIdx + 1;
 
 	const addChoiceHandler = () => {
-		if (quizzes[quizIdx].choices.length >= quizzes.length) {
+		if (quizzes[quizIdx].choices.length >= 5) {
 			alert('답안의 최대 개수는 5개입니다.');
 			return;
 		}
@@ -68,16 +69,16 @@ export default function CreateQuizScreen({ quizIdx, submitQuizHandler }: Props) 
 	return (
 		<div>
 			<ProgressHeader
-				curPage={QUIZ_PAGE}
-				pagesLength={quizzes.length}
-				Description={<GoalDetailTitle goal="GOAL" goalDescription="GOAL DESCRIPTION" />}
+				curPage={5}
+				pagesLength={5}
+				Description={<GoalDetailTitle goal="1주차 목표" goalDescription="자료구조 관련 학습하기" />}
 				backAlertModalOpen={() => setIsModalOpen(true)}
 			/>
 
 			<div className=" mt-[43px] mb-[120.07px]">
 				<input
 					placeholder="문제를 적어주세요"
-					value={quizzes[quizIdx].question}
+					value={quizzes[quizIdx]?.question ?? ''}
 					onChange={(event: React.ChangeEvent<HTMLInputElement>) => editQuestion(event.target.value, quizIdx)}
 					className="w-full  h-[88px]  px-[22.09px] outline-none rounded text-headline  font-medium drop-shadow-white"
 				/>
@@ -85,7 +86,7 @@ export default function CreateQuizScreen({ quizIdx, submitQuizHandler }: Props) 
 					답안을 작성하고 정답을 체크해주세요
 				</span>
 
-				{quizzes[quizIdx].choices.map((choice) => (
+				{quizzes[quizIdx]?.choices?.map((choice) => (
 					<Box key={choice.id} height="h-[64px]" className="pl-[22.09px] mb-[12px]">
 						<input
 							placeholder="답안을 작성해주세요."

@@ -4,20 +4,21 @@ import DefaultButton from '@app.component/button/DefaultButton';
 
 export default function DetailGoals() {
 	const [curGoalId, setCurGoalId] = useState<number>(0); // temp
+
 	return (
 		<>
 			<div className="flex justify-between items-center mt-[160.13px] ">
 				<div className="flex  items-center space-x-[9.25px]">
-					<span className="text-body2 text-black-400 font-medium ">전체 목표</span>
-					<span className=" text-body2 text-slate font-medium ">오픽 AL 달성</span>
+					<span className="text-body2 text-black-400 font-medium whitespace-nowrap ">전체 목표</span>
+					<span className=" text-body2 text-slate font-medium ">기술 면접 대비하고 개발 직무 취뽀</span>
 				</div>
 
-				{false && <DefaultButton text="달성완료" size="small" width="w-[109.77px]" />}
+				{true && <DefaultButton text="달성완료" size="small" width="w-[109.77px]" />}
 			</div>
 			<div className="mt-[19.87px]  pt-[36.72px] bg-background-white -mx-[20px] px-[20px] pb-[29.08px] ">
 				<span className="text-black-500 font-medium text-body2">세부 목표</span>
 				<div className="mt-[22px] flex items-center space-x-[12.2px] overflow-x-auto ">
-					{[1, 1, 1].map((_, index) => (
+					{[].map((_, index) => (
 						<button
 							type="button"
 							onClick={() => setCurGoalId(index)}
