@@ -7,6 +7,9 @@ export default {
 	component: DrawerInviteTeamMember,
 } as ComponentMeta<typeof DrawerInviteTeamMember>;
 
-const Template: ComponentStory<typeof DrawerInviteTeamMember> = () => <DrawerInviteTeamMember />;
+const Template: ComponentStory<typeof DrawerInviteTeamMember> = (args) => <DrawerInviteTeamMember {...args} />;
 
 export const Default = Template.bind({});
+Default.args = {
+	submitHandler: () => console.log('submit'),
+};
