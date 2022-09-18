@@ -17,18 +17,21 @@ import Url from '@app.modules/constant/url';
 const CreateStudy: NextPage = () => {
 	const router = useRouter();
 	const { study, initStudy } = useCreateStudyStore();
-	const { mutate: postStudy } = useMutation(() => postStudyGroup(study), {
+	const { mutate: postStudy, isLoading } = useMutation(() => postStudyGroup(study), {
 		onSuccess: (res) => {
 			console.log(res);
 			router.push('/complete/invite-member');
 		},
 		onError: () => {
-			initStudy();
 			alert('알 수 없는 에러가 발생했습니다.');
 			router.push(Url.home);
 		},
+		onSettled: () => {
+			initStudy();
+		},
 	});
 	const submitHandler = () => {
+		if (isLoading) return;
 		postStudy();
 	};
 
