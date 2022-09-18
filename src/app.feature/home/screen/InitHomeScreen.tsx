@@ -6,11 +6,9 @@ export default function InitHomeScreen() {
 	const router = useRouter();
 	return (
 		<div className="w-full ">
-			<h1 className="text-title2 font-bold text-black-400 mt-[72px] mb-[10px]">안녕하세요, 수정님</h1>
+			<h1 className="text-title2 font-bold text-black-400 mt-[72px] mb-[10px]"> </h1>
 			<h2 className="text-body2 font-medium text-slate ">
-				스터디 그룹을 만들어서
 				<br />
-				함께 원하는 목표를 달성해 봐요!
 			</h2>
 			<div className="flex flex-col items-center">
 				<div className="flex flex-col items-center mx-auto bg-white w-[209px]   mt-[98px] mb-[19.78px] rounded drop-shadow-white">
