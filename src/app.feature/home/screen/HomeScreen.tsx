@@ -14,6 +14,7 @@ export default function HomeScreen({ userStudyList }: Props) {
 	return (
 		<div>
 			<div className="flex justify-between mt-[40px] mb-[55px]">
+				{/* TO DO : 사용자 정보 가져오는 API 부재한 것 같음. 추후 수정 (이야기 드렸음) */}
 				<PageTitle title={`주희님,\n목표를 달성해보세요`} />
 				<BellIcon className="cursor-pointer" />
 			</div>

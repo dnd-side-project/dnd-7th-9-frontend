@@ -19,7 +19,6 @@ export default function StudyGoalAccordionContent({
 }: Props) {
 	const router = useRouter();
 
-	console.log(toSolveQuestionBookNum, groupId);
 	return (
 		<div>
 			<div className="flex justify-between">
