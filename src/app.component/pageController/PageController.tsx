@@ -4,10 +4,10 @@ import React from 'react';
 interface Props {
 	curPage: number;
 	pagesLength: number;
-	finishWord: '끝내기' | '제출하기' | '시작하기' | '';
+	finishWord: '끝내기' | '제출하기' | '시작하기' | '스터디 생성하기' | '';
 	toPrevHandler: () => void;
 	toNextHandler: () => void;
-	finishHandler: () => void;
+	finishHandler?: () => void;
 }
 export default function PageController({
 	curPage,

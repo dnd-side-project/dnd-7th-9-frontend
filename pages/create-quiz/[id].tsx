@@ -25,7 +25,7 @@ const CreateQuiz: NextPage = () => {
 		// TO DO : validation 체크 필요
 
 		const payload: ICreateQuestion = {
-			goalId: '넘어온 값', // TO DO : goalId query 값
+			goalId: '17', // TO DO : goalId query 값
 			questionBookName: '넘어온 값', // TO DO : questionBookName 값
 			questionBookQuestionNum: 5, // TO DO : 추후 5개 기본 값 사라지면 바꿀 예정
 			questionDtoList: quizzes.map((quiz) => {

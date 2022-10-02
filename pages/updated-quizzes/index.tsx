@@ -13,9 +13,11 @@ const UpdatedQuizzes: NextPage = () => {
 
 	const query = useQuery(['question-book', 'list', 'live'], fetchGetUpdatedQuizzes, {
 		onSuccess: (data) => {
+			console.log(data);
 			setUpdatedQuizData(data.filter((quiz) => quiz.solved === false));
 		},
-		onError: () => {
+		onError: (error) => {
+			console.log(error), 12345;
 			alert('알 수 없는 에러가 발생했습니다.');
 			Router.push('/');
 		},
