@@ -16,8 +16,7 @@ const UpdatedQuizzes: NextPage = () => {
 			console.log(data);
 			setUpdatedQuizData(data.filter((quiz) => quiz.solved === false));
 		},
-		onError: (error) => {
-			console.log(error), 12345;
+		onError: () => {
 			alert('알 수 없는 에러가 발생했습니다.');
 			Router.push('/');
 		},
