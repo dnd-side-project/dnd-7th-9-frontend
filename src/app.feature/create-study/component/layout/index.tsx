@@ -12,12 +12,12 @@ import useCreateStudyStore, { useSetStudyDateStore } from '../../store';
 interface Props {
 	children: React.ReactNode;
 	curPage: number;
-
 	todo: string;
+	finishHandler?: () => void;
 }
 
-export default function Layout({ curPage, children, todo }: Props) {
-	const STEPS_COUNT = 4;
+export default function Layout({ curPage, children, todo, finishHandler }: Props) {
+	const STEPS_COUNT = 3;
 	const router = useRouter();
 	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 	const { groupStartMonth, groupStartDay, groupEndMonth, groupEndDay } = useSetStudyDateStore();
@@ -73,7 +73,6 @@ export default function Layout({ curPage, children, todo }: Props) {
 		return true;
 	};
 
-	const finishHandler = () => null; // temp
 	const toPrevHandler = () => {
 		if (curPage <= 1) return;
 		router.push(`/create-study/${curPage - 1}`);
@@ -89,7 +88,7 @@ export default function Layout({ curPage, children, todo }: Props) {
 
 	return (
 		<div>
-			<ProgressHeader curPage={curPage} pagesLength={STEPS_COUNT - 1} backAlertModalOpen={() => setIsModalOpen(true)} />
+			<ProgressHeader curPage={curPage} pagesLength={STEPS_COUNT} backAlertModalOpen={() => setIsModalOpen(true)} />
 			<div className="mt-[64px] mb-[120.07px]">
 				<span className="block font-bold text-title2 text-black-400 mb-[30px]">{todo}</span>
 
@@ -102,7 +101,7 @@ export default function Layout({ curPage, children, todo }: Props) {
 				toPrevHandler={toPrevHandler}
 				toNextHandler={toNextHandler}
 				finishHandler={finishHandler}
-				finishWord=""
+				finishWord="스터디 생성하기"
 			/>
 		</div>
 	);

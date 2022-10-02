@@ -11,5 +11,5 @@ const Template: ComponentStory<typeof DrawerInviteTeamMember> = (args) => <Drawe
 
 export const Default = Template.bind({});
 Default.args = {
-	submitHandler: () => console.log('submit'),
+	inviteMemberHandler: () => console.log('invite member'),
 };
