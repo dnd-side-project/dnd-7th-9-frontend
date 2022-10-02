@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Router, { useRouter } from 'next/router';
+import { useQuery } from '@tanstack/react-query';
+import client from '@app.modules/api/client';
 import Accordion from '@app.component/accordion';
 import CategoryIcon from '@app.component/icon/CategoryIcon';
 import MyPageUserProfile from '../component/profile/MyPageUserProfile';
@@ -7,6 +9,7 @@ import MyPageStudyCategory from '../component/category/MyPageStudyCategory';
 import MyPageStudyStatusToggle from '../component/toggle/MyPageStudyStatusToggle';
 import MyPageStudyAccordionContent from '../component/accordian-content/MyPageStudyAccordionContent';
 import MyPageNoneStudyScreen from './MyPageNoneStudyScreen';
+import fetchGetMyPageStudyList from '../api';
 
 interface IStudyList {
 	groupId: number;
@@ -15,8 +18,9 @@ interface IStudyList {
 	groupEndDate: string;
 	groupGoal: string;
 	groupImageUrl: null | string;
-	groupCategory: 'language' | 'company' | 'certification' | 'etc';
-	groupStatus: 'proceeding' | 'complete';
+	groupCategory: 'EMPLOYMENT' | 'LANGUAGE' | 'CERTIFICATE' | 'ETC';
+	groupStatus: 'ACTIVE' | 'COMPLETE';
+	studyGroupRate: number;
 }
 
 interface IFilteringInput {
@@ -25,7 +29,10 @@ interface IFilteringInput {
 
 export default function MyPageScreen() {
 	const router = useRouter();
-	const { toggle = 'proceeding', category = 'all' } = router.query;
+	const { toggle = 'active', category = 'all' } = router.query;
+
+	const [userName, setUserName] = useState('');
+	const [studyList, setStudyList] = useState<IStudyList[]>([]);
 
 	const handleFilteringMyPage = (input: IFilteringInput) => {
 		Router.push({
@@ -34,54 +41,23 @@ export default function MyPageScreen() {
 		});
 	};
 
-	const username = '박수정'; // DUMMY
-
-	const studyList: IStudyList[] = [
-		// DUMMY
-		{
-			groupId: 1,
-			groupName: '중국어 스터디',
-			groupStartDate: '2022-08-15',
-			groupEndDate: '2022-12-15',
-			groupGoal: '중국어 능력 마스터하기',
-			groupImageUrl: null,
-			groupCategory: 'language',
-			groupStatus: 'proceeding',
+	const query = useQuery(['group', 'my'], () => fetchGetMyPageStudyList(toggle), {
+		retry: 1,
+		onSuccess: ({ data }) => {
+			setUserName(data?.result?.nickname);
+			setStudyList(data?.result?.studyGroupResponses);
 		},
-		{
-			groupId: 2,
-			groupName: 'GSAT 스터디',
-			groupStartDate: '2022-08-15',
-			groupEndDate: '2022-12-15',
-			groupGoal: '삼성 취뽀 하기',
-			groupImageUrl: null,
-			groupCategory: 'company',
-			groupStatus: 'proceeding',
+		onError: () => {
+			alert('알 수 없는 에러가 발생했습니다.');
 		},
-		{
-			groupId: 2,
-			groupName: '컴퓨터 자격증 스터디',
-			groupStartDate: '2022-08-15',
-			groupEndDate: '2022-12-15',
-			groupGoal: '컴퓨터 자격증 1달만에 취득하기',
-			groupImageUrl: null,
-			groupCategory: 'certification',
-			groupStatus: 'proceeding',
-		},
-	];
+	});
 
-	const filteredStudyList = studyList.filter(
-		(study) =>
-			(category !== 'all' && study.groupCategory === category && study.groupStatus === toggle) ||
-			(category === 'all' && study.groupStatus === toggle && study.groupStatus === toggle)
-	);
-
-	console.log(filteredStudyList);
+	const filteredStudy = category !== 'all' ? studyList.filter((study) => study.groupCategory === category) : studyList;
 
 	return (
 		<div>
 			{/* 프로필 영역 */}
-			<MyPageUserProfile username={username} />
+			<MyPageUserProfile username={userName} />
 
 			{/* 토글 영역 */}
 			<MyPageStudyStatusToggle toggle={toggle} handleFilteringMyPage={handleFilteringMyPage} />
@@ -91,16 +67,20 @@ export default function MyPageScreen() {
 
 			{/* 스터디 리스트 영역 */}
 			<section>
-				{filteredStudyList.length ? (
+				{filteredStudy.length ? (
 					<div>
-						{filteredStudyList.map((study) => (
+						{filteredStudy.map((study) => (
 							<Accordion
 								className="mb-[10px]"
 								icon={<CategoryIcon type={study.groupCategory} />}
 								text={study.groupName}
 								status={study.groupStatus}
 								content={
-									<MyPageStudyAccordionContent goal={study.groupGoal} groupId={study.groupId} achieveRate={80} />
+									<MyPageStudyAccordionContent
+										goal={study.groupGoal}
+										groupId={study.groupId}
+										achieveRate={study.studyGroupRate}
+									/>
 								}
 							/>
 						))}
