@@ -5,66 +5,41 @@ import Accordion from '@app.component/accordion';
 import CategoryIcon from '@app.component/icon/CategoryIcon';
 import StudyGoalAccordionContent from '../component/accordionContent/StudyGoalAccordionContent';
 
-interface IGoalInfo {
-	type: 'certification' | 'company' | 'language' | 'etc';
-	goalText: string;
-	status: string;
-	questionCount: number;
-	goal: string;
-	endGoal: string;
+interface Props {
+	// TO DO : 추후 수정
+	userStudyList: any;
 }
 
-export default function HomeScreen() {
-	const title = `${'주희'}님,\n목표를 달성해보세요`;
-	const DUMMY_ACCORDION_INFO: IGoalInfo[] = [
-		{
-			type: 'company',
-			goalText: '인적성 스터디',
-			status: '이번 목표 완료',
-			questionCount: 3,
-			goal: '인적성 문제 풀기',
-			endGoal: '취뽀하기',
-		},
-		{
-			type: 'certification',
-			goalText: '컴퓨터 자격증',
-			status: '진행 중',
-			questionCount: 3,
-			goal: '10페이지까지 문제 풀기',
-			endGoal: '컴퓨터 자격증 따기',
-		},
-		{
-			type: 'language',
-			goalText: '영어 회화 스터디',
-			status: '진행 중',
-			questionCount: 2,
-			goal: '스터디 참여하기',
-			endGoal: '원어민 친구 사귀기',
-		},
-	];
-
+export default function HomeScreen({ userStudyList }: Props) {
 	return (
 		<div>
 			<div className="flex justify-between mt-[40px] mb-[55px]">
-				<PageTitle title={title} />
+				{/* TO DO : 사용자 정보 가져오는 API 부재한 것 같음. 추후 수정 (이야기 드렸음) */}
+				<PageTitle title={`주희님,\n목표를 달성해보세요`} />
 				<BellIcon className="cursor-pointer" />
 			</div>
 
-			{DUMMY_ACCORDION_INFO.map((goalInfo) => (
-				<Accordion
-					className="mb-[10px]"
-					icon={<CategoryIcon type={goalInfo.type} />}
-					text={goalInfo.goalText}
-					status={goalInfo.status}
-					content={
-						<StudyGoalAccordionContent
-							questionCount={goalInfo.questionCount}
-							goal={goalInfo.goal}
-							endGoal={goalInfo.endGoal}
-						/>
-					}
-				/>
-			))}
+			{/* TO DO : 추후 수정 */}
+			{userStudyList
+				.filter((item: any) => item.activeGoalResponse)
+				.map((goalInfo: any) => (
+					<Accordion
+						// TO DO : 추후 수정
+						className="mb-[10px]"
+						icon={<CategoryIcon type="etc" />}
+						text={goalInfo.studyGroupListResponse.groupGoal}
+						status={goalInfo.activeGoalResponse.groupStatus}
+						content={
+							<StudyGoalAccordionContent
+								groupId={goalInfo.studyGroupListResponse.groupId}
+								toSolveQuestionBookNum={goalInfo.activeGoalResponse.toSolveQuestionBookNum}
+								questionCount={0}
+								goal={goalInfo.studyGroupListResponse.groupGoal}
+								endGoal={goalInfo.activeGoalResponse.goalContent}
+							/>
+						}
+					/>
+				))}
 		</div>
 	);
 }
