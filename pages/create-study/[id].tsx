@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import IntroduceStudyScreen from '@app.feature/create-study/screen/IntroduceStudyScreen';
 import StudyDateScreen from '@app.feature/create-study/screen/StudyDateScreen';
@@ -15,7 +15,7 @@ import Url from '@app.modules/constant/url';
 
 const CreateStudy: NextPage = () => {
 	const router = useRouter();
-	const { study, studyId, inviteLink, initStudy, setInviteLink, setStudyId, setMemberList } = useCreateStudyStore();
+	const { study, studyId, initStudy, setInviteLink, setStudyId, setMemberList } = useCreateStudyStore();
 	const { inviteMemberEmail, initInviteMemberEmail } = useInviteMemberEmailStore();
 	const { mutate: postStudy, isLoading: postStudyIsLoading } = useMutation(() => postStudyGroup(study), {
 		onSuccess: (res) => {

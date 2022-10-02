@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import React, { useState } from 'react';
 import Input from '@app.component/input';
 import DefaultButton from '@app.component/button/DefaultButton';
 import useCreateStudyStore, { useInviteMemberEmailStore } from '@app.feature/create-study/store';
@@ -7,23 +6,23 @@ import ItemInvitedMember from '../item/ItemInvitedMember';
 
 interface Props {
 	inviteMemberHandler: () => void;
-	submitHandler: () => void;
 }
-export default function DrawerInviteTeamMember({ inviteMemberHandler, submitHandler }: Props) {
-	const router = useRouter();
-
+export default function DrawerInviteTeamMember({ inviteMemberHandler }: Props) {
 	const [isInviteDrawerOpen, setIsInviteDrawerOpen] = useState(false);
 
 	const { setInviteMemberEmail, inviteMemberEmail } = useInviteMemberEmailStore();
-	const { memberList } = useCreateStudyStore();
-	/*
-	const handleOnDelete = (deleteIndex: number) => {
-		setInvitedUserEmailList(study.invitedUserEmailList?.filter((_, index) => index !== deleteIndex));
+	const { memberList, inviteLink } = useCreateStudyStore();
+	const handleCopyClipBoard = async () => {
+		if (!inviteLink) return;
+		try {
+			await navigator.clipboard.writeText(inviteLink);
+
+			alert('복사 성공!');
+		} catch (error) {
+			alert('복사 실패!');
+		}
 	};
-*/
-	useEffect(() => {
-		console.log(inviteMemberEmail);
-	}, [inviteMemberEmail]);
+
 	return (
 		<div className="absolute bottom-0 left-0 right-0 bg-background-white px-[10px] pt-[39px] pb-[33px] rounded-t-[20px]">
 			<p className="text-black-500 text-body2 font-medium mb-[20px]">이메일을 작성해 팀원들을 초대해주세요.</p>
@@ -52,7 +51,7 @@ export default function DrawerInviteTeamMember({ inviteMemberHandler, submitHand
 			)}
 
 			{/* 초대 링크 생성 */}
-			<DefaultButton text="링크 복사하기" onClick={() => null} />
+			<DefaultButton text="링크 복사하기" onClick={handleCopyClipBoard} />
 		</div>
 	);
 }

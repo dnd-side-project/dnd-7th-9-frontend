@@ -30,7 +30,7 @@ export default function CreateStudyLastScreen({ completeHandler, inviteMemberHan
 				<p className="text-black-400 text-headline font-medium mt-[8px]">{study.groupGoal}</p>
 			</div>
 
-			<DrawerInviteTeamMember submitHandler={() => null} inviteMemberHandler={inviteMemberHandler} />
+			<DrawerInviteTeamMember inviteMemberHandler={inviteMemberHandler} />
 		</div>
 	);
 }
