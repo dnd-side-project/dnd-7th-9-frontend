@@ -19,25 +19,16 @@ export default function HomeScreen({ userStudyList }: Props) {
 				<BellIcon className="cursor-pointer" />
 			</div>
 
-			{/* TO DO : 추후 수정 */}
 			{userStudyList
 				.filter((item: any) => item.activeGoalResponse)
 				.map((goalInfo: any) => (
 					<Accordion
-						// TO DO : 추후 수정
 						className="mb-[10px]"
-						icon={<CategoryIcon type="etc" />}
+						icon={<CategoryIcon type={goalInfo.studyGroupListResponse.groupCategory} />}
 						text={goalInfo.studyGroupListResponse.groupGoal}
-						status={goalInfo.activeGoalResponse.groupStatus}
-						content={
-							<StudyGoalAccordionContent
-								groupId={goalInfo.studyGroupListResponse.groupId}
-								toSolveQuestionBookNum={goalInfo.activeGoalResponse.toSolveQuestionBookNum}
-								questionCount={0}
-								goal={goalInfo.studyGroupListResponse.groupGoal}
-								endGoal={goalInfo.activeGoalResponse.goalContent}
-							/>
-						}
+						studyName="TEST DATA"
+						status={goalInfo.activeGoalResponse.goalStatus}
+						content={<StudyGoalAccordionContent groupId={goalInfo.studyGroupListResponse.groupId} />}
 					/>
 				))}
 		</div>

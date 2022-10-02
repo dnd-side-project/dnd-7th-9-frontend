@@ -6,35 +6,35 @@ import TestIcon from '@assets/category/test-icon.svg';
 
 interface Props {
 	className?: string;
-	type: 'certification' | 'company' | 'language' | 'etc';
+	type: 'CERTIFICATE' | 'EMPLOYMENT' | 'LANGUAGE' | 'ETC';
 	colored?: boolean;
 }
 
 export default function CategoryIcon({ className, type, colored = true }: Props) {
 	const baseStyle = `inline-block w-[34px] h-[34px] py-2.5 px-2 rounded ${className} `;
 	const categoryInfo = {
-		certification: {
+		CERTIFICATE: {
 			icon: (
 				<section className={`${colored ? 'bg-[#C4DDFF]' : 'bg-background-white'} ${baseStyle}`}>
 					<CertificationIcon className="m-auto" width="15px" height="15px" viewBox="0 0 30 30" />
 				</section>
 			),
 		},
-		company: {
+		EMPLOYMENT: {
 			icon: (
 				<section className={`${colored ? 'bg-[#E2EFFF]' : 'bg-background-white'} ${baseStyle}`}>
 					<CompanyIcon className="m-auto" width="15px" height="15px" viewBox="0 0 25 25" />
 				</section>
 			),
 		},
-		language: {
+		LANGUAGE: {
 			icon: (
 				<section className={`${colored ? 'bg-[#EFF3F6]' : 'bg-background-white'}  ${baseStyle}`}>
 					<LanguageIcon className="m-auto" width="20px" height="20px" viewBox="0 0 40 40" />
 				</section>
 			),
 		},
-		etc: {
+		ETC: {
 			icon: (
 				<section className={`${colored ? 'bg-[#F5F7F5]' : 'bg-background-white'} ${baseStyle}`}>
 					<TestIcon className="m-auto" width="20px" height="20px" viewBox="0 0 20 40" />
