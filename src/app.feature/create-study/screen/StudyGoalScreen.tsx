@@ -3,12 +3,15 @@ import CreateStudyLayout from '@app.feature/create-study/component/layout';
 import RequireMark from '@app.component/requireMark/RequireMark';
 import useCreateStudyStore from '../store';
 
-export default function StudyGoalScreen() {
+interface Props {
+	submitHandler: () => void;
+}
+export default function StudyGoalScreen({ submitHandler }: Props) {
 	const CUR_PAGE = 3;
 	const { study, setGroupGoal } = useCreateStudyStore();
 
 	return (
-		<CreateStudyLayout curPage={CUR_PAGE} todo="스터디 그룹의 목표를 적어 주세요">
+		<CreateStudyLayout curPage={CUR_PAGE} todo="스터디 그룹의 목표를 적어 주세요" finishHandler={submitHandler}>
 			<>
 				<span className="block mt-[12.39px]  text-slate text-small2 font-bold">최종 목표</span>
 

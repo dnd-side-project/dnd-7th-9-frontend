@@ -13,6 +13,7 @@ const UpdatedQuizzes: NextPage = () => {
 
 	const query = useQuery(['question-book', 'list', 'live'], fetchGetUpdatedQuizzes, {
 		onSuccess: (data) => {
+			console.log(data);
 			setUpdatedQuizData(data.filter((quiz) => quiz.solved === false));
 		},
 		onError: () => {
