@@ -9,7 +9,7 @@ import ItemInvitedCompleteMember from '../component/item/ItemInvitedCompleteMemb
 export default function InviteStudyMemberCompleteScreen() {
 	const router = useRouter();
 
-	const { study, initStudy } = useCreateStudyStore();
+	const { study, initStudy, memberList } = useCreateStudyStore();
 	const completeCreateStudyHandler = () => {
 		initStudy();
 		router.push('/');
@@ -22,7 +22,7 @@ export default function InviteStudyMemberCompleteScreen() {
 			<h1 className="text-black-400 text-title1 font-bold mt-[16px]">초대를 완료하셨어요</h1>
 			<p className="text-slate text-headline font-medium mt-[15px]">{study.groupName ?? ''}</p>
 			<div className="overflow-auto h-[58vh] mt-[30px] pb-[60px]">
-				{study.invitedUserEmailList?.map((email) => (
+				{memberList?.map((email) => (
 					<ItemInvitedCompleteMember email={email} />
 				))}
 			</div>

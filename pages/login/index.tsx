@@ -22,7 +22,7 @@ const Login: NextPage = () => {
 		setCookie('REFRESH_TOKEN', refreshToken, { path: '/', secure: true, sameSite: 'none' });
 
 		router.push('/');
-	}, [router]);
+	}, [router, client]);
 
 	return <LoginScreen />;
 };

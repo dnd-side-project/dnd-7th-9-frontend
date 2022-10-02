@@ -61,7 +61,7 @@ const CreateStudy: NextPage = () => {
 	};
 	const completeHandler = () => {
 		initStudy();
-		router.push(Url.home);
+		router.push('/complete/invite-member');
 	};
 	if (router.query.id === '1') return <IntroduceStudyScreen />;
 	if (router.query.id === '2') return <StudyDateScreen />;
