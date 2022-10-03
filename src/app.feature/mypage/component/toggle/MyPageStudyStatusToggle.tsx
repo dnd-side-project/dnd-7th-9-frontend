@@ -6,10 +6,17 @@ interface IFilteringInput {
 
 interface Props {
 	toggle: 'all' | 'EMPLOYMENT' | 'LANGUAGE' | 'CERTIFICATE' | 'ETC' | string | string[];
+	activeStudyCount: number;
+	completeStudyCount: number;
 	handleFilteringMyPage: (input: IFilteringInput) => void;
 }
 
-export default function MyPageStudyStatusToggle({ toggle, handleFilteringMyPage }: Props) {
+export default function MyPageStudyStatusToggle({
+	toggle,
+	activeStudyCount,
+	completeStudyCount,
+	handleFilteringMyPage,
+}: Props) {
 	return (
 		<div className="flex bg-background-white drop-shadow-white pt-[15px] mx-[-20px]">
 			<div
@@ -23,7 +30,7 @@ export default function MyPageStudyStatusToggle({ toggle, handleFilteringMyPage 
 					className={`${toggle === 'active' ? 'text-black-400' : 'text-slate'}
                     text-slate text-title1 font-bold`}
 				>
-					{/* TO DO : 갯수 API로 받아오기 */}0
+					{activeStudyCount}
 				</p>
 				<p
 					className={`${toggle === 'active' ? 'text-black-400' : 'text-slate'}
@@ -45,7 +52,7 @@ export default function MyPageStudyStatusToggle({ toggle, handleFilteringMyPage 
 					className={`${toggle === 'complete' ? 'text-black-400' : 'text-slate'}
                     text-slate text-title1 font-bold`}
 				>
-					{/* TO DO : 갯수 API로 받아오기 */}0
+					{completeStudyCount}
 				</p>
 				<p
 					className={`${toggle === 'complete' ? 'text-black-400' : 'text-slate'}
