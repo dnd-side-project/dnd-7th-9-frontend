@@ -26,7 +26,7 @@ export default function HomeScreen({ userStudyList }: Props) {
 					<Accordion
 						// TO DO : 추후 수정
 						className="mb-[10px]"
-						icon={<CategoryIcon type="etc" />}
+						icon={<CategoryIcon type="ETC" />}
 						text={goalInfo.studyGroupListResponse.groupGoal}
 						status={goalInfo.activeGoalResponse.groupStatus}
 						content={
