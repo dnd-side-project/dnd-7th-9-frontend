@@ -1,4 +1,5 @@
 import DefaultButton from '@app.component/button/DefaultButton';
+import { useRouter } from 'next/router';
 import React from 'react';
 
 interface Props {
@@ -8,6 +9,7 @@ interface Props {
 }
 
 export default function MyPageStudyAccordionContent({ goal, groupId, achieveRate }: Props) {
+	const router = useRouter();
 	return (
 		<div>
 			<div className="flex justify-between mb-[13px]">
@@ -26,7 +28,7 @@ export default function MyPageStudyAccordionContent({ goal, groupId, achieveRate
 				</div>
 			</div>
 			{/* TODO : 버튼 클릭시 스터디 자세히 보기 라우터 이동 */}
-			<DefaultButton text="자세히 보기" />
+			<DefaultButton text="자세히 보기" onClick={() => router.push(`/studies/${groupId}`)} />
 		</div>
 	);
 }

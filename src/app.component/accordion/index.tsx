@@ -6,7 +6,7 @@ interface Props {
 	className?: string;
 	icon: JSX.Element;
 	text: string;
-	status: string;
+	status: 'ACTIVE' | 'READY' | 'COMPLETE';
 	content: JSX.Element;
 }
 
@@ -14,6 +14,12 @@ export default function Accordion({ className, icon, text, status, content }: Pr
 	const [isOpenedAccordion, setIsOpenedAccordion] = useState(false);
 
 	const handleAccordion = () => setIsOpenedAccordion(!isOpenedAccordion);
+
+	const statusObj = {
+		ACTIVE: '활동중',
+		READY: '활동전',
+		COMPLETE: '활동완료',
+	};
 
 	return (
 		<div className={`${className} ${isOpenedAccordion && 'drop-shadow-white'}`}>
@@ -31,7 +37,7 @@ export default function Accordion({ className, icon, text, status, content }: Pr
 						<p className="text-body1 font-medium ml-3 self-center">{text}</p>
 					</div>
 					<div className="flex inline-block">
-						<p className="text-small font-bold text-brown self-center">{status}</p>
+						<p className="text-small font-bold text-brown self-center">{statusObj[status]}</p>
 						{isOpenedAccordion ? (
 							<ArrowTopIcon className="self-center ml-2" />
 						) : (

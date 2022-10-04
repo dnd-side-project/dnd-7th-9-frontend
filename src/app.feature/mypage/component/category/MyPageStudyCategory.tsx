@@ -9,7 +9,7 @@ interface IFilteringInput {
 }
 
 interface Props {
-	category: 'all' | 'company' | 'language' | 'certification' | 'etc' | string | string[];
+	category: 'all' | 'EMPLOYMENT' | 'LANGUAGE' | 'CERTIFICATE' | 'ETC' | string | string[];
 	handleFilteringMyPage: (input: IFilteringInput) => void;
 }
 
@@ -22,11 +22,13 @@ export default function MyPageStudyCategory({ category, handleFilteringMyPage }:
 		<div className="flex justify-between my-[29px]">
 			<div
 				role="button"
-				className={`${category === 'company' ? 'bg-green-100 text-background-white' : 'bg-background-white text-slate'}
+				className={`${
+					category === 'EMPLOYMENT' ? 'bg-green-100 text-background-white' : 'bg-background-white text-slate'
+				}
 				flex justify-between bg-background-white drop-shadow-white px-[11px] py-[4px] rounded-[20px]`}
 				tabIndex={0}
-				onClick={() => handleFilteringMyPage({ category: checkCategoryFiltering('company') })}
-				onKeyPress={() => handleFilteringMyPage({ category: checkCategoryFiltering('company') })}
+				onClick={() => handleFilteringMyPage({ category: checkCategoryFiltering('EMPLOYMENT') })}
+				onKeyPress={() => handleFilteringMyPage({ category: checkCategoryFiltering('EMPLOYMENT') })}
 			>
 				<div className="pt-[3px] mr-[10px]">
 					<CompanyIcon width="20" height="20" viewBox="0 0 30 30" />
@@ -36,11 +38,11 @@ export default function MyPageStudyCategory({ category, handleFilteringMyPage }:
 
 			<div
 				role="button"
-				className={`${category === 'language' ? 'bg-green-100 text-background-white' : 'bg-background-white text-slate'}
+				className={`${category === 'LANGUAGE' ? 'bg-green-100 text-background-white' : 'bg-background-white text-slate'}
 				flex justify-between bg-background-white drop-shadow-white px-[11px] py-[4px] rounded-[20px]`}
 				tabIndex={0}
-				onClick={() => handleFilteringMyPage({ category: checkCategoryFiltering('language') })}
-				onKeyPress={() => handleFilteringMyPage({ category: checkCategoryFiltering('language') })}
+				onClick={() => handleFilteringMyPage({ category: checkCategoryFiltering('LANGUAGE') })}
+				onKeyPress={() => handleFilteringMyPage({ category: checkCategoryFiltering('LANGUAGE') })}
 			>
 				<div className="pt-[2px] mr-[10px]">
 					<LanguageIcon width="20" height="20" viewBox="0 0 35 30" />
@@ -51,12 +53,12 @@ export default function MyPageStudyCategory({ category, handleFilteringMyPage }:
 			<div
 				role="button"
 				className={`${
-					category === 'certification' ? 'bg-green-100 text-background-white' : 'bg-background-white text-slate'
+					category === 'CERTIFICATE' ? 'bg-green-100 text-background-white' : 'bg-background-white text-slate'
 				}
 				flex justify-between bg-background-white drop-shadow-white px-[11px] py-[4px] rounded-[20px]`}
 				tabIndex={0}
-				onClick={() => handleFilteringMyPage({ category: checkCategoryFiltering('certification') })}
-				onKeyPress={() => handleFilteringMyPage({ category: checkCategoryFiltering('certification') })}
+				onClick={() => handleFilteringMyPage({ category: checkCategoryFiltering('CERTIFICATE') })}
+				onKeyPress={() => handleFilteringMyPage({ category: checkCategoryFiltering('CERTIFICATE') })}
 			>
 				<div className="pt-[3px] mr-[10px]">
 					<CertificationIcon width="20" height="20" viewBox="0 0 30 30" />
@@ -66,11 +68,11 @@ export default function MyPageStudyCategory({ category, handleFilteringMyPage }:
 
 			<div
 				role="button"
-				className={`${category === 'etc' ? 'bg-green-100 text-background-white' : 'bg-background-white text-slate'}
+				className={`${category === 'ETC' ? 'bg-green-100 text-background-white' : 'bg-background-white text-slate'}
 				flex justify-between bg-background-white drop-shadow-white px-[11px] py-[4px] rounded-[20px]`}
 				tabIndex={0}
-				onClick={() => handleFilteringMyPage({ category: checkCategoryFiltering('etc') })}
-				onKeyPress={() => handleFilteringMyPage({ category: checkCategoryFiltering('etc') })}
+				onClick={() => handleFilteringMyPage({ category: checkCategoryFiltering('ETC') })}
+				onKeyPress={() => handleFilteringMyPage({ category: checkCategoryFiltering('ETC') })}
 			>
 				<div className="pt-[1px] mr-[10px]">
 					<TestIcon width="20" height="20" viewBox="0 0 30 30" />

@@ -13,6 +13,6 @@ export const Default = Template.bind({});
 Default.args = {
 	className: '',
 	text: 'TEXT',
-	status: 'status',
+	status: 'ACTIVE',
 	content: <div>Content</div>,
 };
