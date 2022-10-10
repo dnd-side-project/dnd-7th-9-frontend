@@ -15,14 +15,23 @@ interface ILink {
 }
 export default function FooterNav({ curUrl }: Props) {
 	const fillColor = (iconUrl: string) => (curUrl === iconUrl ? '#24cd88' : '#677A90');
+
 	const LINKS: ILink[] = [
-		{ iconUrl: Url.home, Icon: <HomeIcon fill={fillColor(Url.home)} />, name: '홈' },
+		{
+			iconUrl: Url.home,
+			Icon: <HomeIcon fill={fillColor(Url.home)} />,
+			name: '홈',
+		},
 		{
 			iconUrl: Url.updatedQuizzes,
 			Icon: <QuizIcon fill={fillColor(Url.updatedQuizzes)} />,
 			name: '실시간 문제지',
 		},
-		{ iconUrl: Url.mypage, Icon: <UserIcon fill={fillColor(Url.mypage)} />, name: 'MY' },
+		{
+			iconUrl: Url.mypage,
+			Icon: <UserIcon fill={fillColor(Url.mypage)} />,
+			name: '히스토리',
+		},
 	];
 
 	return (
