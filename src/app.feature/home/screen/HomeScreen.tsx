@@ -4,10 +4,10 @@ import BellIcon from '@assets/main/eva_bell-outline.svg';
 import Accordion from '@app.component/accordion';
 import CategoryIcon from '@app.component/icon/CategoryIcon';
 import StudyGoalAccordionContent from '../component/accordionContent/StudyGoalAccordionContent';
+import { IUserList } from '../types';
 
 interface Props {
-	// TO DO : 추후 수정
-	userStudyList: any;
+	userStudyList: IUserList[];
 }
 
 export default function HomeScreen({ userStudyList }: Props) {
