@@ -6,7 +6,7 @@ import TestIcon from '@assets/category/test-icon.svg';
 
 interface Props {
 	className?: string;
-	type: 'CERTIFICATE' | 'EMPLOYMENT' | 'LANGUAGE' | 'ETC';
+	type: 'EMPLOYMENT' | 'LANGUAGE' | 'CERTIFICATE' | 'ETC';
 	colored?: boolean;
 }
 

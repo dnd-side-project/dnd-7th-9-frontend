@@ -12,5 +12,5 @@ const Template: ComponentStory<typeof CategoryIcon> = (args) => <CategoryIcon {.
 export const Default = Template.bind({});
 Default.args = {
 	className: '',
-	type: 'certification',
+	type: 'CERTIFICATE',
 };
