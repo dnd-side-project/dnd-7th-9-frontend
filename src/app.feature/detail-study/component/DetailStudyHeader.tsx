@@ -11,13 +11,13 @@ export default function DetailStudyHeader({ groupName, invitedUserNameList }: Pr
 			<GoBackHeader />
 			<div className="fixed top-[63.35px] left-0 right-0 w-full bg-background-gray">
 				<div className="flex justify-between items-center px-[16px] pb-[35.78px] border-b border-gray">
-					<span className="text-black-500 text-title1 font-bold">{groupName ?? ''}</span>
+					<span className="text-black-500 text-title1 font-bold">{groupName}</span>
 					<div className="flex space-x-2">
 						<div className="grid place-items-center border border-slate rounded-full w-[41.82px] h-[41.82px] bg-[#E2EFFF]">
 							<UserIcon />
 						</div>
 						<div className="grid place-items-center border border-slate rounded-full w-[41.82px] h-[41.82px] bg-[#E2EFFF]">
-							<span className="font-bold text-slate text-small">+{invitedUserNameList.length ?? 0}</span>
+							<span className="font-bold text-slate text-small">+{invitedUserNameList.length}</span>
 						</div>
 					</div>
 				</div>

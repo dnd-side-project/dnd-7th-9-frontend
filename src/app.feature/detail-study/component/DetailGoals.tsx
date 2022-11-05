@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import PlusIcon from '@assets/study/plus_icon.svg';
 import DefaultButton from '@app.component/button/DefaultButton';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 type DetailGoal = {
 	achieveRate: number;
@@ -12,10 +14,11 @@ type DetailGoal = {
 interface Props {
 	groupGoal: string;
 	detailGoals: DetailGoal[];
+	groupId: number;
 }
-export default function DetailGoals({ groupGoal, detailGoals }: Props) {
+export default function DetailGoals({ groupGoal, detailGoals, groupId }: Props) {
 	const [curGoalId, setCurGoalId] = useState<number>(0); // temp
-
+	const router = useRouter();
 	return (
 		<>
 			<div className="flex justify-between items-center mt-[160.13px] ">
@@ -57,12 +60,12 @@ export default function DetailGoals({ groupGoal, detailGoals }: Props) {
 							</span>
 						</button>
 					))}
-					<button
-						type="button"
+					<Link
+						href={`/create-detail-goal/1?groupId=${groupId}`}
 						className="rounded bg-[#EEEEEE]  grid place-items-center w-[135.2px]  min-w-[135.2px] h-[135.2px]  min-h-[135.2px]"
 					>
 						<PlusIcon />
-					</button>
+					</Link>
 				</div>
 			</div>
 		</>

@@ -28,6 +28,7 @@ export default function DetailStudyScreen({ studyDetail }: Props) {
 				<DetailGoals
 					groupGoal={studyDetail?.studyGroupDetailResponse?.groupGoal ?? ''}
 					detailGoals={studyDetail?.studyGroupDetailResponse?.studyGroupGoalResponseList ?? []}
+					groupId={studyDetail?.studyGroupDetailResponse?.groupId ?? 23}
 				/>
 				<div className="mt-[32.72px] flex items-start justify-between">
 					<div className="space-y-[3px] flex flex-col">
@@ -61,14 +62,15 @@ export default function DetailStudyScreen({ studyDetail }: Props) {
 								<div className="space-y-[14px]  h-[357.83px] overflow-y-auto">
 									{collectionType === 'personal' ? (
 										<>
-											{[].map(() => (
+											{(studyDetail?.studyGroupAndGoalDetailPersonalVerResponseList ?? []).map(() => (
 												<MyCollection />
 											))}
 										</>
 									) : (
 										<>
-											{[].map((_, index) => (
-												<Collection isSolved={index === 0} />
+											{(studyDetail?.studyGroupAndGoalDetailTeamVerResponseList ?? []).map((_: any, index: number) => (
+												// eslint-disable-next-line react/no-array-index-key
+												<Collection key={index} isSolved={index === 0} />
 											))}
 										</>
 									)}
