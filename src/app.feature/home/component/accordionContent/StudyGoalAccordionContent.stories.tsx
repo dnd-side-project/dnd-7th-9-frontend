@@ -11,7 +11,7 @@ const Template: ComponentStory<typeof StudyGoalAccordionContent> = (args) => <St
 
 export const Default = Template.bind({});
 Default.args = {
-	questionCount: 0,
-	goal: '이번주 목표',
-	endGoal: '최종 목표',
+	goalId: 1,
+	studyId: 1,
+	questionBookSubmitted: true,
 };
