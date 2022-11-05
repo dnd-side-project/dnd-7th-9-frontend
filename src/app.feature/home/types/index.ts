@@ -14,6 +14,7 @@ export interface IUserList {
 		groupEndDate: string; // YYYY-MM-DD
 	}[];
 	emptyGoalStudyGroup: {
+		studyGroupId: number;
 		studyGroupCategory: TGroupCategory;
 		studyGroupStatus: TGroupStatus;
 		studyGroupContent: string;

@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import ArrowBottomIcon from '@assets/main/arrow-bottom.svg';
 import ArrowTopIcon from '@assets/main/arrow-top.svg';
+import CautionIcon from '@assets/main/caution.svg';
 
 interface Props {
 	className?: string;
 	icon: JSX.Element;
 	text: string;
+	textType?: 'disable' | string;
 	studyName?: string;
 	status: 'READY' | 'ACTIVE' | 'COMPLETE';
 	content: JSX.Element;
 }
 
-export default function Accordion({ className, icon, text, studyName, status, content }: Props) {
+export default function Accordion({ className, icon, text, textType = 'default', studyName, status, content }: Props) {
 	const [isOpenedAccordion, setIsOpenedAccordion] = useState(false);
 	const handleAccordion = () => setIsOpenedAccordion(!isOpenedAccordion);
 
@@ -35,7 +37,14 @@ export default function Accordion({ className, icon, text, studyName, status, co
 					<div className="flex">
 						<div>{icon}</div>
 						<div className="ml-3 my-auto">
-							<p className="text-body1 font-medium self-center">{text}</p>
+							{textType === 'disable' ? (
+								<p className="flex text-slate text-body1 font-medium self-center">
+									{text}
+									<CautionIcon className="mt-1.5 ml-1" />
+								</p>
+							) : (
+								<p className="text-body1 font-medium self-center">{text}</p>
+							)}
 							<p className="text-small font-normal mt-1">{studyName}</p>
 						</div>
 					</div>
