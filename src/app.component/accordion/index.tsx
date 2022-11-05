@@ -1,23 +1,25 @@
 import React, { useState } from 'react';
 import ArrowBottomIcon from '@assets/main/arrow-bottom.svg';
 import ArrowTopIcon from '@assets/main/arrow-top.svg';
+import CautionIcon from '@assets/main/caution.svg';
 
 interface Props {
 	className?: string;
 	icon: JSX.Element;
 	text: string;
-	status: 'ACTIVE' | 'READY' | 'COMPLETE';
+	textType?: 'disable' | string;
+	studyName?: string;
+	status: 'READY' | 'ACTIVE' | 'COMPLETE';
 	content: JSX.Element;
 }
 
-export default function Accordion({ className, icon, text, status, content }: Props) {
+export default function Accordion({ className, icon, text, textType = 'default', studyName, status, content }: Props) {
 	const [isOpenedAccordion, setIsOpenedAccordion] = useState(false);
-
 	const handleAccordion = () => setIsOpenedAccordion(!isOpenedAccordion);
 
 	const statusObj = {
-		ACTIVE: '활동중',
 		READY: '활동전',
+		ACTIVE: '활동중',
 		COMPLETE: '활동완료',
 	};
 
@@ -33,15 +35,25 @@ export default function Accordion({ className, icon, text, status, content }: Pr
 					tabIndex={0}
 				>
 					<div className="flex">
-						{icon}
-						<p className="text-body1 font-medium ml-3 self-center">{text}</p>
+						<div>{icon}</div>
+						<div className="ml-3 my-auto">
+							{textType === 'disable' ? (
+								<p className="flex text-slate text-body1 font-medium self-center">
+									{text}
+									<CautionIcon className="mt-1.5 ml-1" />
+								</p>
+							) : (
+								<p className="text-body1 font-medium self-center">{text}</p>
+							)}
+							<p className="text-small font-normal mt-1">{studyName}</p>
+						</div>
 					</div>
-					<div className="flex inline-block">
+					<div className="flex">
 						<p className="text-small font-bold text-brown self-center">{statusObj[status]}</p>
 						{isOpenedAccordion ? (
-							<ArrowTopIcon className="self-center ml-2" />
+							<ArrowTopIcon className="self-center ml-3" />
 						) : (
-							<ArrowBottomIcon className="self-center ml-2" />
+							<ArrowBottomIcon className="self-center ml-3" />
 						)}
 					</div>
 				</div>
@@ -52,8 +64,7 @@ export default function Accordion({ className, icon, text, status, content }: Pr
 				w-full bg-background-white rounded-b 
 				`}
 			>
-				<hr className="text-[#D9D9D9] mb-[19px]" />
-				{content}
+				<div className="pt-[16px]">{content}</div>
 			</div>
 		</div>
 	);
