@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
-import UserIcon from '@assets/nav/ant-design_user-outlined.svg';
+import HistoryIcon from '@assets/nav/history-icon.svg';
 import HomeIcon from '@assets/nav/bx_home-alt-2.svg';
 import QuizIcon from '@assets/nav/material-symbols_quiz-outline.svg';
 import Url from '@app.modules/constant/url';
@@ -8,21 +8,32 @@ import Url from '@app.modules/constant/url';
 interface Props {
 	curUrl: string;
 }
+
 interface ILink {
 	iconUrl: string;
 	Icon: JSX.Element;
 	name: string;
 }
+
 export default function FooterNav({ curUrl }: Props) {
 	const fillColor = (iconUrl: string) => (curUrl === iconUrl ? '#24cd88' : '#677A90');
+
 	const LINKS: ILink[] = [
-		{ iconUrl: Url.home, Icon: <HomeIcon fill={fillColor(Url.home)} />, name: '홈' },
+		{
+			iconUrl: Url.home,
+			Icon: <HomeIcon fill={fillColor(Url.home)} />,
+			name: '홈',
+		},
 		{
 			iconUrl: Url.updatedQuizzes,
 			Icon: <QuizIcon fill={fillColor(Url.updatedQuizzes)} />,
 			name: '실시간 문제지',
 		},
-		{ iconUrl: Url.mypage, Icon: <UserIcon fill={fillColor(Url.mypage)} />, name: 'MY' },
+		{
+			iconUrl: Url.mypage,
+			Icon: <HistoryIcon fill={fillColor(Url.mypage)} />,
+			name: '히스토리',
+		},
 	];
 
 	return (
