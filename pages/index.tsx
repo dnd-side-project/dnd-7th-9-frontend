@@ -6,11 +6,51 @@ import fetchGetUserStudyList from '@app.feature/home/api';
 import { IUserList } from '@app.feature/home/types';
 
 const Home: NextPage = () => {
-	const { data = [], isLoading, error } = useQuery<IUserList[]>(['user', 'list'], fetchGetUserStudyList);
+	const DUMMY: IUserList = {
+		userNickname: '태연',
+		userGoalResponseList: [
+			{
+				studyGroupId: 21,
+				goalId: 8,
+				studyGroupCategory: 'EMPLOYMENT',
+				studyGroupStatus: 'ACTIVE',
+				goalStatus: 'READY',
+				goalContent: 'Test Goal',
+				studyGroupContent: 'DND 짱들',
+				questionBookSubmitted: false,
+				groupEndDate: '2022-10-22',
+			},
+			{
+				studyGroupId: 21,
+				goalId: 7,
+				studyGroupCategory: 'EMPLOYMENT',
+				studyGroupStatus: 'ACTIVE',
+				goalStatus: 'ACTIVE',
+				goalContent: 'Test Goal',
+				studyGroupContent: 'DND 짱들',
+				questionBookSubmitted: true,
+				groupEndDate: '2022-10-12',
+			},
+		],
+		emptyGoalStudyGroup: [
+			{
+				studyGroupCategory: 'ETC',
+				studyGroupStatus: 'ACTIVE',
+				studyGroupContent: 'DND 짱들',
+				studyGroupEndDate: '2022-12-15',
+			},
+		],
+	};
 
-	// TO DO : loading, error 상태 화면
+	const { data, isLoading, error } = useQuery(['user', 'list'], fetchGetUserStudyList);
 
-	return <div>{data.length ? <HomeScreen userStudyList={data} /> : <InitHomeScreen />}</div>;
+	if (isLoading) return <div> </div>;
+
+	return (
+		<div>
+			{data.result.userGoalResponseList.length ? <HomeScreen studyGoalData={data.result} /> : <InitHomeScreen />}
+		</div>
+	);
 };
 
 export default Home;
