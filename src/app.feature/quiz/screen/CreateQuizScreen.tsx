@@ -57,12 +57,6 @@ export default function CreateQuizScreen({ quizIdx, submitQuizHandler }: Props) 
 			return;
 		}
 
-		const answerCount = quizzes[quizIdx].choices.filter((choice) => choice.isChecked).length;
-		if (answerCount !== 1) {
-			alert('1개의 정답을 선택해야 합니다');
-			return;
-		}
-
 		router.push(`/create-quiz/${QUIZ_PAGE + 1}`);
 	};
 
