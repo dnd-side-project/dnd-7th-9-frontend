@@ -21,6 +21,9 @@ const Login: NextPage = () => {
 
 		setCookie('REFRESH_TOKEN', refreshToken, { path: '/', secure: true, sameSite: 'none' });
 
+		const isFirstLogin = params.get('new-user');
+		if (isFirstLogin === 'true') router.push('/first-login');
+
 		router.push('/');
 	}, [router, client]);
 
