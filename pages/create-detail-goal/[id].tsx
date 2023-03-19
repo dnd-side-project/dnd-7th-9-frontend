@@ -100,7 +100,9 @@ const CreateDetailGoal: NextPage = () => {
 
 	// TO DO : 각 스크린에서 request 값 저장
 	// const { request, resetRequest } = useCreateDetailGoalStore();
-
+	useEffect(() => {
+		console.log(router);
+	}, [router]);
 	return (
 		<div>
 			{/* 스터디 기간 */}

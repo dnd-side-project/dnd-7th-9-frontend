@@ -10,18 +10,26 @@ import DetailGoalProgress from '../component/DetailGoalProgress';
 import DetailStudyHeader from '../component/DetailStudyHeader';
 
 interface Props {
-	studyId: string;
+	studyDetail: any; // TODO:타입 명시하기
 }
 // TO DO : layout 배치 mt 수정 용이하게 컴포넌트 props 개선 필요
-export default function DetailStudyScreen({ studyId }: Props) {
+export default function DetailStudyScreen({ studyDetail }: Props) {
 	const router = useRouter();
 	type CollectionType = 'team' | 'personal';
 	const [collectionType, setCollectionType] = useState<CollectionType>('team'); // temp
+
 	return (
 		<div>
-			<DetailStudyHeader />
+			<DetailStudyHeader
+				groupName={studyDetail?.studyGroupDetailResponse?.groupName ?? ''}
+				invitedUserNameList={studyDetail?.studyGroupDetailResponse?.invitedUserNameList ?? []}
+			/>
 			<div className="z-40">
-				<DetailGoals />
+				<DetailGoals
+					groupGoal={studyDetail?.studyGroupDetailResponse?.groupGoal ?? ''}
+					detailGoals={studyDetail?.studyGroupDetailResponse?.studyGroupGoalResponseList ?? []}
+					groupId={studyDetail?.studyGroupDetailResponse?.groupId ?? 23}
+				/>
 				<div className="mt-[32.72px] flex items-start justify-between">
 					<div className="space-y-[3px] flex flex-col">
 						<span className="text-black-500 font-medium text-body2">스터디 문제집</span>
@@ -54,14 +62,15 @@ export default function DetailStudyScreen({ studyId }: Props) {
 								<div className="space-y-[14px]  h-[357.83px] overflow-y-auto">
 									{collectionType === 'personal' ? (
 										<>
-											{[].map(() => (
+											{(studyDetail?.studyGroupAndGoalDetailPersonalVerResponseList ?? []).map(() => (
 												<MyCollection />
 											))}
 										</>
 									) : (
 										<>
-											{[].map((_, index) => (
-												<Collection isSolved={index === 0} />
+											{(studyDetail?.studyGroupAndGoalDetailTeamVerResponseList ?? []).map((_: any, index: number) => (
+												// eslint-disable-next-line react/no-array-index-key
+												<Collection key={index} isSolved={index === 0} />
 											))}
 										</>
 									)}
